@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Schedule.Service.Application.Command\Schedule.Service.Application.Command.csproj" />
+    <ProjectReference Include="..\Schedule.Service.Application.Shared\Schedule.Service.Application.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
