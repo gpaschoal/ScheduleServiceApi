@@ -1,9 +1,8 @@
 ﻿using Schedule.Service.Domain.Model.Entities.Base;
-using Schedule.Service.Domain.Model.Keys;
 
 namespace Schedule.Service.Domain.Model.Entities;
 
-public class State : ActivableEntityBase<StateKey>
+public class State : ActivableEntityBase
 {
     public State()
     {
@@ -14,12 +13,12 @@ public class State : ActivableEntityBase<StateKey>
     {
         Name = name;
         StateCode = stateCode;
-        CountryId = new(countryId);
+        CountryId = countryId;
     }
 
     public string Name { get; private set; }
     public string StateCode { get; private set; }
-    public CountryKey CountryId { get; private set; }
+    public Guid CountryId { get; private set; }
     public virtual Country Country { get; private set; }
 
     public virtual ICollection<City> Cities { get; private set; }

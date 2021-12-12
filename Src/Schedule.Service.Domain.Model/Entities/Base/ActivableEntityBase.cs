@@ -1,9 +1,6 @@
-﻿using Schedule.Service.Domain.Model.Keys.Base;
+﻿namespace Schedule.Service.Domain.Model.Entities.Base;
 
-namespace Schedule.Service.Domain.Model.Entities.Base;
-
-public class ActivableEntityBase<TKey> : EntityBase<TKey>, IActivable
-    where TKey : struct, IKey
+public abstract class ActivableEntityBase : EntityBase, IActivable
 {
     public bool IsActive { get; private set; }
 

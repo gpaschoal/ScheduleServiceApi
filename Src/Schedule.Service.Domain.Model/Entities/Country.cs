@@ -1,18 +1,17 @@
 ﻿using Schedule.Service.Domain.Model.Entities.Base;
-using Schedule.Service.Domain.Model.Keys;
 
 namespace Schedule.Service.Domain.Model.Entities;
 
-public class Country : ActivableEntityBase<CountryKey>
+public class Country : ActivableEntityBase
 {
     public Country()
     {
         States = new List<State>();
+        Cities = new List<City>();
     }
 
     public Country(string name, string countryCode) : this()
     {
-        Id = new(Guid.NewGuid());
         Name = name;
         CountryCode = countryCode;
     }
@@ -21,4 +20,5 @@ public class Country : ActivableEntityBase<CountryKey>
     public string CountryCode { get; private set; }
 
     public virtual ICollection<State> States { get; private set; }
+    public virtual ICollection<City> Cities { get; private set; }
 }
