@@ -6,6 +6,8 @@ public class Country : ActivableEntityBase
 {
     public Country()
     {
+        Name = "";
+        CountryCode = "";
         States = new List<State>();
         Cities = new List<City>();
     }

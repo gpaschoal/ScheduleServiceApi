@@ -11,7 +11,7 @@ public abstract class EntityBase : IEquatable<EntityBase>
 
     public DateTime CreatedAt { get; private set; }
     public Guid UserCreateId { get; private set; }
-    public virtual User? UserCreate { get; }
+    public virtual User UserCreate { get; }
 
     public DateTime? UpdatedAt { get; private set; }
     public Guid? UserLastUpdateId { get; private set; }
