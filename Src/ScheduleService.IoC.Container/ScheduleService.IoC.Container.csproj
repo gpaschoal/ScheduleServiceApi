@@ -7,8 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ScheduleService.Application.Handler\ScheduleService.Application.Handler.csproj" />
     <ProjectReference Include="..\ScheduleService.Domain.Repository\ScheduleService.Domain.Repository.csproj" />
+    <ProjectReference Include="..\ScheduleService.Infrastructure.Context\ScheduleService.Infrastructure.Context.csproj" />
+    <ProjectReference Include="..\ScheduleService.Infrastructure.Repository\ScheduleService.Infrastructure.Repository.csproj" />
   </ItemGroup>
 
 </Project>

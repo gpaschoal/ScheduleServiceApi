@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="EasyValidation.Core" Version="1.0.0.7" />
-    <PackageReference Include="EasyValidation.DependencyInjection" Version="1.0.0.4" />
-  </ItemGroup>
-
 </Project>
