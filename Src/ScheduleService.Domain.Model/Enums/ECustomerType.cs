@@ -2,6 +2,6 @@
 
 public enum ECustomerType
 {
-  Company = 0,
-  Person = 1,
+    Company = 0,
+    Person = 1,
 }
