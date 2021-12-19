@@ -2,9 +2,9 @@
 
 public interface IActivable
 {
-  bool IsActive { get; }
-  DateTime IsActiveChangeDate { get; }
+    bool IsActive { get; }
+    DateTime IsActiveChangeDate { get; }
 
-  public void Activate();
-  public void Inactivate();
+    public void Activate();
+    public void Inactivate();
 }
