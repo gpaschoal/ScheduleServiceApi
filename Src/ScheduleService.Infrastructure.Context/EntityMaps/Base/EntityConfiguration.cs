@@ -1,17 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ScheduleService.Domain.Model.Entities.Base;
+using System.Linq.Expressions;
 
 namespace ScheduleService.Infrastructure.Context.EntityMaps.Base;
 
 public abstract class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
         where TEntity : EntityBase
 {
+    private EntityTypeBuilder<TEntity> _builder;
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
-        CustomConfiguration(builder);
+        _builder = builder;
+        CustomConfiguration();
 
+        builder.Property(x => x.Id);
         builder.HasKey(x => x.Id);
+        builder.HasIndex(x => x.Id);
 
         builder
             .HasOne(x => x.UserCreate).WithMany()
@@ -26,5 +31,13 @@ public abstract class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TE
             .HasForeignKey(x => x.UserDeleteId).OnDelete(DeleteBehavior.NoAction);
     }
 
-    public abstract void CustomConfiguration(EntityTypeBuilder<TEntity> builder);
+    public abstract void CustomConfiguration();
+
+    public PropertyBuilder<TProperty> Property<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression) => _builder.Property(propertyExpression);
+
+    public ReferenceNavigationBuilder<TEntity, TRelatedEntity> HasOne<TRelatedEntity>(Expression<Func<TEntity, TRelatedEntity?>>? navigationExpression = null) where TRelatedEntity : class
+        => _builder.HasOne(navigationExpression);
+
+    public virtual EntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(Expression<Func<TEntity, TRelatedEntity?>> navigationExpression, Action<OwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction) where TRelatedEntity : class
+        => _builder.OwnsOne(navigationExpression, buildAction);
 }

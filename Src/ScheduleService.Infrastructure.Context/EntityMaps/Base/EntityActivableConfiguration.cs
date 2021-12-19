@@ -4,30 +4,18 @@ using ScheduleService.Domain.Model.Entities.Base;
 
 namespace ScheduleService.Infrastructure.Context.EntityMaps.Base;
 
-public abstract class EntityActivableConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
+public abstract class EntityActivableConfiguration<TEntity> : EntityConfiguration<TEntity>
         where TEntity : ActivableEntityBase
 {
-    public virtual void Configure(EntityTypeBuilder<TEntity> builder)
+    public override void Configure(EntityTypeBuilder<TEntity> builder)
     {
-        CustomConfiguration(builder);
+        CustomConfiguration();
 
-        builder.HasKey(x => x.Id);
-
-        builder
-            .HasOne(x => x.UserCreate).WithMany()
-            .HasForeignKey(x => x.UserCreateId).OnDelete(DeleteBehavior.NoAction);
-
-        builder
-            .HasOne(x => x.UserUpdate).WithMany()
-            .HasForeignKey(x => x.UserUpdateId).OnDelete(DeleteBehavior.NoAction);
-
-        builder
-            .HasOne(x => x.UserDelete).WithMany()
-            .HasForeignKey(x => x.UserDeleteId).OnDelete(DeleteBehavior.NoAction);
+        base.Configure(builder);
 
         builder.Property(x => x.IsActive).IsRequired().HasColumnType("bit");
         builder.Property(x => x.IsActiveChangeDate).IsRequired().HasColumnType("Datetime");
     }
 
-    public abstract void CustomConfiguration(EntityTypeBuilder<TEntity> builder);
+    public override abstract void CustomConfiguration();
 }
