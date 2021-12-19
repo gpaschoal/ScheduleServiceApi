@@ -49,7 +49,7 @@ public class ScheduleServiceDbContext : DbContext
                 case EntityState.Modified:
                     {
                         auditBase.SetValue(x => x.UpdatedAt, DateTime.UtcNow);
-                        auditBase.SetValue(x => x.UserLastUpdateId, currentlyUser);
+                        auditBase.SetValue(x => x.UserUpdateId, currentlyUser);
                         Entry(auditBase).Property(p => p.CreatedAt).IsModified = false;
                         Entry(auditBase).Property(p => p.UserCreateId).IsModified = false;
                         break;
@@ -59,7 +59,7 @@ public class ScheduleServiceDbContext : DbContext
                     {
                         entityEntry.State = EntityState.Unchanged;
                         auditBase.SetValue(x => x.DeletedAt, DateTime.UtcNow);
-                        auditBase.SetValue(x => x.UserDeletedId, currentlyUser);
+                        auditBase.SetValue(x => x.UserDeleteId, currentlyUser);
                         Entry(auditBase).Property(p => p.CreatedAt).IsModified = false;
                         Entry(auditBase).Property(p => p.UserCreateId).IsModified = false;
                         break;
@@ -67,7 +67,7 @@ public class ScheduleServiceDbContext : DbContext
             }
 
             auditBase.SetValue(x => x.UpdatedAt, DateTime.UtcNow);
-            auditBase.SetValue(x => x.UserLastUpdateId, currentlyUser);
+            auditBase.SetValue(x => x.UserUpdateId, currentlyUser);
         }
 
         return await base.SaveChangesAsync(cancellationToken);

@@ -2,6 +2,11 @@
 
 public abstract class ActivableEntityBase : EntityBase, IActivable
 {
+    public ActivableEntityBase()
+    {
+        IsActiveChangeDate = DateTime.Now;
+    }
+
     public bool IsActive { get; private set; }
 
     public DateTime IsActiveChangeDate { get; private set; }

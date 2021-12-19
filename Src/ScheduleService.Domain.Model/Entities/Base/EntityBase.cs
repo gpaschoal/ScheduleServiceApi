@@ -14,11 +14,11 @@ public abstract class EntityBase : IEquatable<EntityBase>
     public virtual User UserCreate { get; }
 
     public DateTime? UpdatedAt { get; private set; }
-    public Guid? UserLastUpdateId { get; private set; }
-    public virtual User? UserLastUpdate { get; }
+    public Guid? UserUpdateId { get; private set; }
+    public virtual User? UserUpdate { get; }
 
     public DateTime? DeletedAt { get; private set; }
-    public Guid? UserDeletedId { get; private set; }
+    public Guid? UserDeleteId { get; private set; }
     public virtual User? UserDelete { get; }
 
     public bool Equals(EntityBase? other)
