@@ -14,7 +14,7 @@ public class Customer : ActivableEntityBase
     public Customer(
         string name,
         CpfValueObject cpf,
-        Guid cityId, Guid stateId, Guid countryId,
+        Guid cityId,
         PhoneNumberValueObject telephone1, PhoneNumberValueObject telephone2,
         PhoneNumberValueObject cellphone1, PhoneNumberValueObject cellphone2,
         AddressValueObject address) : this()
@@ -22,8 +22,6 @@ public class Customer : ActivableEntityBase
         Name = name;
         Cpf = cpf;
         CityId = cityId;
-        StateId = stateId;
-        CountryId = countryId;
         Telephone1 = telephone1;
         Telephone2 = telephone2;
         Cellphone1 = cellphone1;
@@ -35,7 +33,7 @@ public class Customer : ActivableEntityBase
     public Customer(
         string name,
         CnpjValueObject cnpj,
-        Guid cityId, Guid stateId, Guid countryId,
+        Guid cityId,
         PhoneNumberValueObject telephone1, PhoneNumberValueObject telephone2,
         PhoneNumberValueObject cellphone1, PhoneNumberValueObject cellphone2,
         AddressValueObject address) : this()
@@ -43,8 +41,6 @@ public class Customer : ActivableEntityBase
         Name = name;
         Cnpj = cnpj;
         CityId = cityId;
-        StateId = stateId;
-        CountryId = countryId;
         Telephone1 = telephone1;
         Telephone2 = telephone2;
         Cellphone1 = cellphone1;
@@ -60,10 +56,6 @@ public class Customer : ActivableEntityBase
 
     public Guid CityId { get; private set; }
     public virtual City City { get; }
-    public Guid StateId { get; private set; }
-    public virtual State State { get; }
-    public Guid CountryId { get; private set; }
-    public virtual Country Country { get; }
 
     public PhoneNumberValueObject Telephone1 { get; private set; }
     public PhoneNumberValueObject Telephone2 { get; private set; }

@@ -7,20 +7,18 @@ public class Country : ActivableEntityBase
     public Country()
     {
         Name = "";
-        CountryCode = "";
+        ExternalCode = "";
         States = new List<State>();
-        Cities = new List<City>();
     }
 
-    public Country(string name, string countryCode) : this()
+    public Country(string name, string externalCode) : this()
     {
         Name = name;
-        CountryCode = countryCode;
+        ExternalCode = externalCode;
     }
 
     public string Name { get; private set; }
-    public string CountryCode { get; private set; }
+    public string ExternalCode { get; private set; }
 
     public virtual ICollection<State> States { get; private set; }
-    public virtual ICollection<City> Cities { get; private set; }
 }

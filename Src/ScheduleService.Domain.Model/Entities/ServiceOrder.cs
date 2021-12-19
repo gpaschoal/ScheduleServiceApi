@@ -10,10 +10,9 @@ public class ServiceOrder : EntityBase
         ServiceOrderItems = new List<ServiceOrderItem>();
     }
 
-    public ServiceOrder(Guid customerId, Guid companyId, Guid companySubsidiaryId, Guid serviceTypeId) : this()
+    public ServiceOrder(Guid customerId, Guid companySubsidiaryId, Guid serviceTypeId) : this()
     {
         CustomerId = customerId;
-        CompanyId = companyId;
         CompanySubsidiaryId = companySubsidiaryId;
         ServiceTypeId = serviceTypeId;
         Status = EServiceOrderStatus.Opened;
@@ -21,9 +20,6 @@ public class ServiceOrder : EntityBase
 
     public virtual Guid CustomerId { get; private set; }
     public virtual Customer Customer { get; }
-
-    public virtual Guid CompanyId { get; private set; }
-    public virtual Company Company { get; }
 
     public virtual Guid CompanySubsidiaryId { get; private set; }
     public virtual CompanySubsidiary CompanySubsidiary { get; }

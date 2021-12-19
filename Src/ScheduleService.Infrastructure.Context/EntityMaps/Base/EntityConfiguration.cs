@@ -14,21 +14,17 @@ public abstract class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TE
         _builder = builder;
         CustomConfiguration();
 
-        builder.Property(x => x.Id);
         builder.HasKey(x => x.Id);
         builder.HasIndex(x => x.Id);
 
-        builder
-            .HasOne(x => x.UserCreate).WithMany()
+        HasOne(x => x.UserCreate).WithMany()
             .HasForeignKey(x => x.UserCreateId).OnDelete(DeleteBehavior.NoAction);
 
-        builder
-            .HasOne(x => x.UserUpdate).WithMany()
-            .HasForeignKey(x => x.UserUpdateId).OnDelete(DeleteBehavior.NoAction);
+        HasOne(x => x.UserUpdate).WithMany()
+           .HasForeignKey(x => x.UserUpdateId).OnDelete(DeleteBehavior.NoAction);
 
-        builder
-            .HasOne(x => x.UserDelete).WithMany()
-            .HasForeignKey(x => x.UserDeleteId).OnDelete(DeleteBehavior.NoAction);
+        HasOne(x => x.UserDelete).WithMany()
+           .HasForeignKey(x => x.UserDeleteId).OnDelete(DeleteBehavior.NoAction);
     }
 
     public abstract void CustomConfiguration();
@@ -37,6 +33,9 @@ public abstract class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TE
 
     public ReferenceNavigationBuilder<TEntity, TRelatedEntity> HasOne<TRelatedEntity>(Expression<Func<TEntity, TRelatedEntity?>>? navigationExpression = null) where TRelatedEntity : class
         => _builder.HasOne(navigationExpression);
+
+    public virtual CollectionNavigationBuilder<TEntity, TRelatedEntity> HasMany<TRelatedEntity>(Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>>? navigationExpression = null) where TRelatedEntity : class
+        => _builder.HasMany(navigationExpression);
 
     public virtual EntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(Expression<Func<TEntity, TRelatedEntity?>> navigationExpression, Action<OwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction) where TRelatedEntity : class
         => _builder.OwnsOne(navigationExpression, buildAction);
