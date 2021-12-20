@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Application
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Application.Handler", "Src\ScheduleService.Application.Handler\ScheduleService.Application.Handler.csproj", "{45CB5F1E-A7C8-4705-9D13-A113B8FC4D05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleService.Domain.Shared", "Src\ScheduleService.Domain.Shared\ScheduleService.Domain.Shared.csproj", "{B5CBAC87-0189-446E-B447-F639E5E77E02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Domain.Shared", "Src\ScheduleService.Domain.Shared\ScheduleService.Domain.Shared.csproj", "{B5CBAC87-0189-446E-B447-F639E5E77E02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -5,6 +5,9 @@ namespace ScheduleService.Domain.Model.Entities;
 
 public class User : ActivableEntityBase
 {
+    public User()
+    { }
+
     public User(
         string firstName,
         string lastName,
