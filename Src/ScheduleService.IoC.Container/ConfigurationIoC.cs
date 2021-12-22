@@ -26,13 +26,11 @@ public class ConfigurationIoC
 
         services.AddHttpContextAccessor();
 
-        services.AddEntityFrameworkNpgsql()
-             .AddDbContext<ScheduleServiceDbContext>((sp, options )=>
-                {
-                    options.UseNpgsql(configuration.GetConnectionString("DbConn"));
-                    options.EnableDetailedErrors();
-                    options.UseInternalServiceProvider(sp);
-                });
+        services.AddDbContext<ScheduleServiceDbContext>(options =>
+        {
+            options.UseSqlServer(configuration.GetConnectionString("DbConn"));
+            options.EnableDetailedErrors();
+        });
 
         IoCRepositories.Configure(services, configuration);
 
