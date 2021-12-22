@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -111,7 +112,6 @@ namespace ScheduleService.Infrastructure.Context.Migrations
                     MinPrice = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
                     MaxPrice = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
                     ServiceTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceTypeId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserCreateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -127,11 +127,6 @@ namespace ScheduleService.Infrastructure.Context.Migrations
                     table.ForeignKey(
                         name: "FK_ServiceItem_ServiceType_ServiceTypeId",
                         column: x => x.ServiceTypeId,
-                        principalTable: "ServiceType",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ServiceItem_ServiceType_ServiceTypeId1",
-                        column: x => x.ServiceTypeId1,
                         principalTable: "ServiceType",
                         principalColumn: "Id");
                 });
@@ -199,21 +194,21 @@ namespace ScheduleService.Infrastructure.Context.Migrations
                     LastName = table.Column<string>(type: "char(150)", maxLength: 150, nullable: false),
                     UserName = table.Column<string>(type: "char(50)", maxLength: 50, nullable: false),
                     Password = table.Column<string>(type: "char(100)", maxLength: 100, nullable: false),
-                    Cpf = table.Column<string>(type: "char(11)", maxLength: 11, nullable: true),
+                    Cpf = table.Column<string>(type: "char(11)", maxLength: 11, nullable: false),
                     CityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Telephone1_CodeArea = table.Column<string>(type: "char(3)", maxLength: 3, nullable: true),
-                    Telephone1_PhoneNumber = table.Column<string>(type: "char(10)", maxLength: 10, nullable: true),
-                    Telephone2_CodeArea = table.Column<string>(type: "char(3)", maxLength: 3, nullable: true),
-                    Telephone2_PhoneNumber = table.Column<string>(type: "char(10)", maxLength: 10, nullable: true),
-                    Cellphone1_CodeArea = table.Column<string>(type: "char(3)", maxLength: 3, nullable: true),
-                    Cellphone1_PhoneNumber = table.Column<string>(type: "char(11)", maxLength: 11, nullable: true),
-                    Cellphone2_CodeArea = table.Column<string>(type: "char(3)", maxLength: 3, nullable: true),
-                    Cellphone2_PhoneNumber = table.Column<string>(type: "char(11)", maxLength: 11, nullable: true),
-                    Address_Street = table.Column<string>(type: "char(100)", maxLength: 100, nullable: true),
-                    Address_Neighborhood = table.Column<string>(type: "char(60)", maxLength: 60, nullable: true),
-                    Address_LocalReference = table.Column<string>(type: "char(150)", maxLength: 150, nullable: true),
-                    Address_ZipCode = table.Column<string>(type: "char(10)", maxLength: 10, nullable: true),
-                    Address_Number = table.Column<string>(type: "char(10)", maxLength: 10, nullable: true),
+                    Telephone1_CodeArea = table.Column<string>(type: "char(3)", maxLength: 3, nullable: false),
+                    Telephone1_PhoneNumber = table.Column<string>(type: "char(10)", maxLength: 10, nullable: false),
+                    Telephone2_CodeArea = table.Column<string>(type: "char(3)", maxLength: 3, nullable: false),
+                    Telephone2_PhoneNumber = table.Column<string>(type: "char(10)", maxLength: 10, nullable: false),
+                    Cellphone1_CodeArea = table.Column<string>(type: "char(3)", maxLength: 3, nullable: false),
+                    Cellphone1_PhoneNumber = table.Column<string>(type: "char(11)", maxLength: 11, nullable: false),
+                    Cellphone2_CodeArea = table.Column<string>(type: "char(3)", maxLength: 3, nullable: false),
+                    Cellphone2_PhoneNumber = table.Column<string>(type: "char(11)", maxLength: 11, nullable: false),
+                    Address_Street = table.Column<string>(type: "char(100)", maxLength: 100, nullable: false),
+                    Address_Neighborhood = table.Column<string>(type: "char(60)", maxLength: 60, nullable: false),
+                    Address_LocalReference = table.Column<string>(type: "char(150)", maxLength: 150, nullable: false),
+                    Address_ZipCode = table.Column<string>(type: "char(10)", maxLength: 10, nullable: false),
+                    Address_Number = table.Column<string>(type: "char(10)", maxLength: 10, nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserCreateId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -526,11 +521,6 @@ namespace ScheduleService.Infrastructure.Context.Migrations
                 name: "IX_ServiceItem_ServiceTypeId",
                 table: "ServiceItem",
                 column: "ServiceTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ServiceItem_ServiceTypeId1",
-                table: "ServiceItem",
-                column: "ServiceTypeId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServiceItem_UserCreateId",

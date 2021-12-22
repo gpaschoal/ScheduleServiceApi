@@ -329,9 +329,6 @@ namespace ScheduleService.Infrastructure.Context.Migrations
                     b.Property<Guid>("ServiceTypeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ServiceTypeId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
@@ -349,8 +346,6 @@ namespace ScheduleService.Infrastructure.Context.Migrations
                     b.HasIndex("Id");
 
                     b.HasIndex("ServiceTypeId");
-
-                    b.HasIndex("ServiceTypeId1");
 
                     b.HasIndex("UserCreateId");
 
@@ -1047,14 +1042,10 @@ namespace ScheduleService.Infrastructure.Context.Migrations
             modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceItem", b =>
                 {
                     b.HasOne("ScheduleService.Domain.Model.Entities.ServiceType", "ServiceType")
-                        .WithMany()
+                        .WithMany("ServiceItems")
                         .HasForeignKey("ServiceTypeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.HasOne("ScheduleService.Domain.Model.Entities.ServiceType", null)
-                        .WithMany("ServiceItems")
-                        .HasForeignKey("ServiceTypeId1");
 
                     b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
                         .WithMany()
@@ -1401,19 +1392,25 @@ namespace ScheduleService.Infrastructure.Context.Migrations
                                 .HasForeignKey("UserId");
                         });
 
-                    b.Navigation("Address");
+                    b.Navigation("Address")
+                        .IsRequired();
 
-                    b.Navigation("Cellphone1");
+                    b.Navigation("Cellphone1")
+                        .IsRequired();
 
-                    b.Navigation("Cellphone2");
+                    b.Navigation("Cellphone2")
+                        .IsRequired();
 
                     b.Navigation("City");
 
-                    b.Navigation("Cpf");
+                    b.Navigation("Cpf")
+                        .IsRequired();
 
-                    b.Navigation("Telephone1");
+                    b.Navigation("Telephone1")
+                        .IsRequired();
 
-                    b.Navigation("Telephone2");
+                    b.Navigation("Telephone2")
+                        .IsRequired();
 
                     b.Navigation("UserCreate");
 
