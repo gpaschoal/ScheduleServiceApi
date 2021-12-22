@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ScheduleService.Domain.Model.Entities.Base;
 
 namespace ScheduleService.Infrastructure.Context.EntityMaps.Base;
