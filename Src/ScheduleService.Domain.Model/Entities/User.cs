@@ -13,13 +13,13 @@ public class User : ActivableEntityBase
         string lastName,
         string userName,
         string password,
-        CpfValueObject cpf,
-        Guid cityId,
-        PhoneNumberValueObject telephone1,
-        PhoneNumberValueObject telephone2,
-        PhoneNumberValueObject cellphone1,
-        PhoneNumberValueObject cellphone2,
-        AddressValueObject address)
+        CpfValueObject? cpf,
+        Guid? cityId,
+        PhoneNumberValueObject? telephone1,
+        PhoneNumberValueObject? telephone2,
+        PhoneNumberValueObject? cellphone1,
+        PhoneNumberValueObject? cellphone2,
+        AddressValueObject? address)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -40,16 +40,16 @@ public class User : ActivableEntityBase
     public string UserName { get; private set; }
     public string Password { get; private set; }
 
-    public CpfValueObject Cpf { get; private set; }
+    public CpfValueObject? Cpf { get; private set; }
 
-    public Guid CityId { get; private set; }
-    public virtual City City { get; }
+    public Guid? CityId { get; private set; }
+    public virtual City? City { get; }
 
-    public PhoneNumberValueObject Telephone1 { get; private set; }
-    public PhoneNumberValueObject Telephone2 { get; private set; }
-    public PhoneNumberValueObject Cellphone1 { get; private set; }
-    public PhoneNumberValueObject Cellphone2 { get; private set; }
-    public AddressValueObject Address { get; private set; }
+    public PhoneNumberValueObject? Telephone1 { get; private set; }
+    public PhoneNumberValueObject? Telephone2 { get; private set; }
+    public PhoneNumberValueObject? Cellphone1 { get; private set; }
+    public PhoneNumberValueObject? Cellphone2 { get; private set; }
+    public AddressValueObject? Address { get; private set; }
 
     public string FullName { get => $"{FirstName} {LastName}"; }
 }
