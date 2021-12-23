@@ -1,6 +1,6 @@
 ﻿using EasyValidation.DependencyInjection;
 
-namespace ScheduleService.Application.Handler;
+namespace ScheduleService.Application.Handler.Handlers;
 
 public class HandlerBus : IHandlerBus
 {

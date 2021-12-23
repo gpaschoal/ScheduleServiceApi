@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using ScheduleService.Application.Handler;
+using ScheduleService.Application.Handler.Handlers;
 using ScheduleService.Application.Shared;
 using ScheduleService.Domain.Model.Services;
 using ScheduleService.Domain.Model.Services.Models;
