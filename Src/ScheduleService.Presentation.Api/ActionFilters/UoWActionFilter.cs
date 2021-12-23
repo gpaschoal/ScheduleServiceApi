@@ -1,7 +1,7 @@
 ﻿using EasyValidation.Core.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using ScheduleService.Domain.Core.Repository;
+using ScheduleService.Domain.Repository;
 
 namespace ScheduleService.Presentation.Api.ActionFilters;
 

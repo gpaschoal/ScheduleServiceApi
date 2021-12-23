@@ -1,6 +1,6 @@
 ﻿using ScheduleService.Domain.Core.Entities.Base;
 
-namespace ScheduleService.Domain.Core.Repository;
+namespace ScheduleService.Domain.Repository;
 
 public interface IRepository<TEntity> where TEntity : EntityBase
 {
