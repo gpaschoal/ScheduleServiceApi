@@ -1,5 +1,5 @@
 ﻿namespace ScheduleService.Application.Command.Commands.Cities;
 
-public class CityDelete : ICommandExecution
+public class CityCreateCommand : ICommandExecution<Guid>
 {
 }

@@ -1,5 +1,5 @@
 ﻿namespace ScheduleService.Application.Command.Commands.States;
 
-public class StateDelete : ICommandExecution
+public class StateUpdateCommand : ICommandExecution
 {
 }

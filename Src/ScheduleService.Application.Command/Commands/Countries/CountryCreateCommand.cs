@@ -1,5 +1,5 @@
 ﻿namespace ScheduleService.Application.Command.Commands.Countries;
 
-public class CountryDelete : ICommandExecution
+public class CountryCreateCommand : ICommandExecution<Guid>
 {
 }
