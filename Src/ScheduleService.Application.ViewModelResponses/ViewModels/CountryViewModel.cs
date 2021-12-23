@@ -1,6 +1,6 @@
 ﻿namespace ScheduleService.Application.ViewModelResponses.ViewModels;
 
-public class CountryVielModel : IViewModelBase
+public class CountryViewModel : IViewModelBase
 {
     public Guid Id { get; set; }
 }
