@@ -1,4 +1,4 @@
-﻿namespace ScheduleService.Domain.Core.Services.Models;
+﻿namespace ScheduleService.Application.Handler.Services.Models;
 
 public class EncryptionModel
 {

@@ -1,15 +1,14 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using ScheduleService.Application.Handler.Services.Models;
+using ScheduleService.Application.Handler.Services.Responses;
 using ScheduleService.Domain.Core.Entities;
-using ScheduleService.Domain.Core.Services;
-using ScheduleService.Domain.Core.Services.Models;
-using ScheduleService.Domain.Core.Services.Responses;
 using ScheduleService.Domain.Shared.Constants;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace TwitterClone.Application.Services;
+namespace ScheduleService.Application.Handler.Services;
 
 public class TokenService : ITokenService
 {

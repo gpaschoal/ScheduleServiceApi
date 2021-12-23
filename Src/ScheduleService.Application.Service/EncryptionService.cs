@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
-using ScheduleService.Domain.Core.Services;
-using ScheduleService.Domain.Core.Services.Models;
+using ScheduleService.Application.Handler.Services.Models;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace TwitterClone.Application.Services;
+namespace ScheduleService.Application.Handler.Services;
 
 public class EncryptionService : IEncryptionService
 {

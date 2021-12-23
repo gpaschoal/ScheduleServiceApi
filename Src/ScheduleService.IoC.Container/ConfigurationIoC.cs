@@ -8,12 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using ScheduleService.Application.Handler.Handlers;
+using ScheduleService.Application.Handler.Services;
+using ScheduleService.Application.Handler.Services.Models;
 using ScheduleService.Application.Shared;
-using ScheduleService.Domain.Core.Services;
-using ScheduleService.Domain.Core.Services.Models;
 using ScheduleService.Infrastructure.Context.Contexts;
 using System.Text;
-using TwitterClone.Application.Services;
 
 namespace ScheduleService.IoC.Container;
 

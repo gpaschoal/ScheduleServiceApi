@@ -1,4 +1,4 @@
-﻿namespace ScheduleService.Domain.Core.Services.Responses;
+﻿namespace ScheduleService.Application.Handler.Services.Responses;
 
 public class TokenResponse
 {

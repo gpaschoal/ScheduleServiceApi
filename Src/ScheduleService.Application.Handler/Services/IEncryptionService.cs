@@ -1,4 +1,4 @@
-﻿namespace ScheduleService.Domain.Core.Services;
+﻿namespace ScheduleService.Application.Handler.Services;
 
 public interface IEncryptionService
 {
