@@ -7,13 +7,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using ScheduleService.Application.Handler;
+using ScheduleService.Application.Handler.Handlers;
+using ScheduleService.Application.Handler.Services;
+using ScheduleService.Application.Handler.Services.Models;
 using ScheduleService.Application.Shared;
-using ScheduleService.Domain.Model.Services;
-using ScheduleService.Domain.Model.Services.Models;
 using ScheduleService.Infrastructure.Context.Contexts;
 using System.Text;
-using TwitterClone.Application.Services;
 
 namespace ScheduleService.IoC.Container;
 
@@ -26,12 +25,11 @@ public class ConfigurationIoC
 
         services.AddHttpContextAccessor();
 
-        services.AddEntityFrameworkNpgsql()
-             .AddDbContext<ScheduleServiceDbContext>(options =>
-                {
-                    options.UseNpgsql(configuration.GetConnectionString("DbConn"));
-                    options.EnableDetailedErrors();
-                });
+        services.AddDbContext<ScheduleServiceDbContext>(options =>
+        {
+            options.UseSqlServer(configuration.GetConnectionString("DbConn"));
+            options.EnableDetailedErrors();
+        });
 
         IoCRepositories.Configure(services, configuration);
 

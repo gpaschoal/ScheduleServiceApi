@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using ScheduleService.Domain.Core.Entities;
+using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Presentation.Api.Controllers
 {
@@ -6,21 +8,24 @@ namespace ScheduleService.Presentation.Api.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
+        ScheduleServiceDbContext _context;
         private static readonly string[] Summaries = new[]
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, ScheduleServiceDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
+            _context.Set<User>();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),

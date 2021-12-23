@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using ScheduleService.Domain.Model.Entities.Base;
+using ScheduleService.Domain.Core.Entities.Base;
 using ScheduleService.Domain.Shared.Constants;
 using System.Security.Claims;
 
@@ -16,6 +16,9 @@ public class ScheduleServiceDbContext : DbContext
     {
         _httpContextAccessor = httpContextAccessor;
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        => modelBuilder.ApplyConfigurationsFromAssembly(typeof(ScheduleServiceDbContext).Assembly);
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

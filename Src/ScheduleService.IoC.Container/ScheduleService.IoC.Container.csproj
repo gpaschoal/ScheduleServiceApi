@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ScheduleService.Application.Handler\ScheduleService.Application.Handler.csproj" />
+    <ProjectReference Include="..\ScheduleService.Application.Repository\ScheduleService.Application.Repository.csproj" />
+    <ProjectReference Include="..\ScheduleService.Application.Service\ScheduleService.Application.Service.csproj" />
     <ProjectReference Include="..\ScheduleService.Domain.Repository\ScheduleService.Domain.Repository.csproj" />
     <ProjectReference Include="..\ScheduleService.Infrastructure.Context\ScheduleService.Infrastructure.Context.csproj" />
     <ProjectReference Include="..\ScheduleService.Infrastructure.Repository\ScheduleService.Infrastructure.Repository.csproj" />

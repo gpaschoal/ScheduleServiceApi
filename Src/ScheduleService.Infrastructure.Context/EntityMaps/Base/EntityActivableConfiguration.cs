@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ScheduleService.Domain.Model.Entities.Base;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ScheduleService.Domain.Core.Entities.Base;
 
 namespace ScheduleService.Infrastructure.Context.EntityMaps.Base;
 
@@ -9,13 +8,13 @@ public abstract class EntityActivableConfiguration<TEntity> : EntityConfiguratio
 {
     public override void Configure(EntityTypeBuilder<TEntity> builder)
     {
-        CustomConfiguration();
+        CustomConfiguration(builder);
 
         base.Configure(builder);
 
-        builder.Property(x => x.IsActive).IsRequired().HasColumnType("bit");
-        builder.Property(x => x.IsActiveChangeDate).IsRequired().HasColumnType("Datetime");
+        builder.Property(x => x.IsActive).IsRequired();
+        builder.Property(x => x.IsActiveChangeDate).IsRequired();
     }
 
-    public override abstract void CustomConfiguration();
+    public override abstract void CustomConfiguration(EntityTypeBuilder<TEntity> builder);
 }

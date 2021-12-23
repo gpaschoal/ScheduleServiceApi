@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ScheduleService.Domain.Model.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Infrastructure.Context.EntityMaps.Base;
 
 namespace ScheduleService.Infrastructure.Context.EntityMaps;
 
 public class CompanyMap : EntityActivableConfiguration<Company>
 {
-    public override void CustomConfiguration()
+    public override void CustomConfiguration(EntityTypeBuilder<Company> builder)
     {
-        Property(x => x.Name).IsRequired().HasColumnType("char").HasMaxLength(100);
+        builder.Property(x => x.Name).IsRequired().HasColumnType("char").HasMaxLength(100);
 
-        HasMany(x => x.CompanySubsidiaries).WithOne(x => x.Company).HasForeignKey(x => x.CompanyId);
+        builder.HasMany(x => x.CompanySubsidiaries).WithOne(x => x.Company).HasForeignKey(x => x.CompanyId);
     }
 }
