@@ -2,6 +2,6 @@
 
 namespace ScheduleService.Application.Handler.Repositories.Cities;
 
-public interface ICityDeleteRepository : IHandlerRepository<City>
+public interface ICityDeleteRepository : IDeleteRepository<City>
 {
 }
