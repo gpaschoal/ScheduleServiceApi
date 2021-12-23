@@ -11,1453 +11,1453 @@ using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Infrastructure.Context.Migrations
 {
-    [DbContext(typeof(ScheduleServiceDbContext))]
-    [Migration("20211222010235_FirstMigration")]
-    partial class FirstMigration
+  [DbContext(typeof(ScheduleServiceDbContext))]
+  [Migration("20211222010235_FirstMigration")]
+  partial class FirstMigration
+  {
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.1")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+      modelBuilder
+          .HasAnnotation("ProductVersion", "6.0.1")
+          .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+      SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.City", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.City", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("ExternalCode")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("char(50)");
+            b.Property<string>("ExternalCode")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("char(50)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+            b.Property<bool>("IsActive")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("IsActiveChangeDate")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("IsActiveChangeDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("char(50)");
+            b.Property<string>("Name")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("char(50)");
 
-                    b.Property<Guid>("StateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("StateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("StateId");
+            b.HasIndex("StateId");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("City");
-                });
+            b.ToTable("City");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.Company", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.Company", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+            b.Property<bool>("IsActive")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("IsActiveChangeDate")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("IsActiveChangeDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("char(100)");
+            b.Property<string>("Name")
+                      .IsRequired()
+                      .HasMaxLength(100)
+                      .HasColumnType("char(100)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("Company");
-                });
+            b.ToTable("Company");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.CompanySubsidiary", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.CompanySubsidiary", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("CompanyId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+            b.Property<bool>("IsActive")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("IsActiveChangeDate")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("IsActiveChangeDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("char(150)");
+            b.Property<string>("Name")
+                      .IsRequired()
+                      .HasMaxLength(150)
+                      .HasColumnType("char(150)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
+            b.HasIndex("CompanyId");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("CompanySubsidiary");
-                });
+            b.ToTable("CompanySubsidiary");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.Country", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.Country", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("ExternalCode")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("char(50)");
+            b.Property<string>("ExternalCode")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("char(50)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+            b.Property<bool>("IsActive")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("IsActiveChangeDate")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("IsActiveChangeDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("char(50)");
+            b.Property<string>("Name")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("char(50)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("Country");
-                });
+            b.ToTable("Country");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.Customer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.Customer", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CityId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("CityId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<int>("CustomerType")
-                        .HasColumnType("int");
+            b.Property<int>("CustomerType")
+                      .HasColumnType("int");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+            b.Property<bool>("IsActive")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("IsActiveChangeDate")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("IsActiveChangeDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("char(150)");
+            b.Property<string>("Name")
+                      .IsRequired()
+                      .HasMaxLength(150)
+                      .HasColumnType("char(150)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("CityId");
+            b.HasIndex("CityId");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("Customer");
-                });
+            b.ToTable("Customer");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceItem", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceItem", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("char(150)");
+            b.Property<string>("Description")
+                      .IsRequired()
+                      .HasMaxLength(150)
+                      .HasColumnType("char(150)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+            b.Property<bool>("IsActive")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("IsActiveChangeDate")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("IsActiveChangeDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<decimal>("MaxPrice")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
+            b.Property<decimal>("MaxPrice")
+                      .HasPrecision(10, 2)
+                      .HasColumnType("decimal(10,2)");
 
-                    b.Property<decimal>("MinPrice")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
+            b.Property<decimal>("MinPrice")
+                      .HasPrecision(10, 2)
+                      .HasColumnType("decimal(10,2)");
 
-                    b.Property<string>("ServiceName")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("char(150)");
+            b.Property<string>("ServiceName")
+                      .IsRequired()
+                      .HasMaxLength(150)
+                      .HasColumnType("char(150)");
 
-                    b.Property<Guid>("ServiceTypeId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("ServiceTypeId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("ServiceTypeId");
+            b.HasIndex("ServiceTypeId");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("ServiceItem");
-                });
+            b.ToTable("ServiceItem");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceOrder", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceOrder", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CompanySubsidiaryId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("CompanySubsidiaryId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CustomerId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("CustomerId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ServiceTypeId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("ServiceTypeId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
+            b.Property<int>("Status")
+                      .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("CompanySubsidiaryId");
+            b.HasIndex("CompanySubsidiaryId");
 
-                    b.HasIndex("CustomerId");
+            b.HasIndex("CustomerId");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("ServiceTypeId");
+            b.HasIndex("ServiceTypeId");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("ServiceOrder");
-                });
+            b.ToTable("ServiceOrder");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceOrderItem", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceOrderItem", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<int>("Quantity")
-                        .HasPrecision(10)
-                        .HasColumnType("int");
+            b.Property<int>("Quantity")
+                      .HasPrecision(10)
+                      .HasColumnType("int");
 
-                    b.Property<Guid>("ServiceItemId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("ServiceItemId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ServiceOrderId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("ServiceOrderId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("ServicePrice")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
+            b.Property<decimal>("ServicePrice")
+                      .HasPrecision(10, 2)
+                      .HasColumnType("decimal(10,2)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("ServiceItemId");
+            b.HasIndex("ServiceItemId");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("ServiceOrderItem");
-                });
+            b.ToTable("ServiceOrderItem");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceType", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+            b.Property<bool>("IsActive")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("IsActiveChangeDate")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("IsActiveChangeDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("ServiceName")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("char(150)");
+            b.Property<string>("ServiceName")
+                      .IsRequired()
+                      .HasMaxLength(150)
+                      .HasColumnType("char(150)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("ServiceType");
-                });
+            b.ToTable("ServiceType");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.State", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.State", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CountryId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("CountryId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("ExternalCode")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("char(50)");
+            b.Property<string>("ExternalCode")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("char(50)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+            b.Property<bool>("IsActive")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("IsActiveChangeDate")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("IsActiveChangeDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("char(50)");
+            b.Property<string>("Name")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("char(50)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("CountryId");
+            b.HasIndex("CountryId");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("State");
-                });
+            b.ToTable("State");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.User", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CityId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("CityId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("CreatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("DeletedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("char(150)");
+            b.Property<string>("FirstName")
+                      .IsRequired()
+                      .HasMaxLength(150)
+                      .HasColumnType("char(150)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+            b.Property<bool>("IsActive")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("IsActiveChangeDate")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("IsActiveChangeDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("char(150)");
+            b.Property<string>("LastName")
+                      .IsRequired()
+                      .HasMaxLength(150)
+                      .HasColumnType("char(150)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("char(100)");
+            b.Property<string>("Password")
+                      .IsRequired()
+                      .HasMaxLength(100)
+                      .HasColumnType("char(100)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime?>("UpdatedAt")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserCreateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("UserCreateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("UserDeleteId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserDeleteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("char(50)");
+            b.Property<string>("UserName")
+                      .IsRequired()
+                      .HasMaxLength(50)
+                      .HasColumnType("char(50)");
 
-                    b.Property<Guid?>("UserUpdateId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("UserUpdateId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("CityId");
+            b.HasIndex("CityId");
 
-                    b.HasIndex("Id");
+            b.HasIndex("Id");
 
-                    b.HasIndex("UserCreateId");
+            b.HasIndex("UserCreateId");
 
-                    b.HasIndex("UserDeleteId");
+            b.HasIndex("UserDeleteId");
 
-                    b.HasIndex("UserUpdateId");
+            b.HasIndex("UserUpdateId");
 
-                    b.ToTable("User");
-                });
+            b.ToTable("User");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.City", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.State", "State")
-                        .WithMany("Cities")
-                        .HasForeignKey("StateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.City", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.State", "State")
+                      .WithMany("Cities")
+                      .HasForeignKey("StateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("State");
+            b.Navigation("State");
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.Company", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.Company", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.CompanySubsidiary", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.Company", "Company")
-                        .WithMany("CompanySubsidiaries")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.CompanySubsidiary", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.Company", "Company")
+                      .WithMany("CompanySubsidiaries")
+                      .HasForeignKey("CompanyId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.AddressValueObject", "Address", b1 =>
-                        {
-                            b1.Property<Guid>("CompanySubsidiaryId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.AddressValueObject", "Address", b1 =>
+                      {
+                    b1.Property<Guid>("CompanySubsidiaryId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("LocalReference")
-                                .IsRequired()
-                                .HasMaxLength(150)
-                                .HasColumnType("char(150)");
+                    b1.Property<string>("LocalReference")
+                              .IsRequired()
+                              .HasMaxLength(150)
+                              .HasColumnType("char(150)");
 
-                            b1.Property<string>("Neighborhood")
-                                .IsRequired()
-                                .HasMaxLength(60)
-                                .HasColumnType("char(60)");
+                    b1.Property<string>("Neighborhood")
+                              .IsRequired()
+                              .HasMaxLength(60)
+                              .HasColumnType("char(60)");
 
-                            b1.Property<string>("Number")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("char(10)");
+                    b1.Property<string>("Number")
+                              .IsRequired()
+                              .HasMaxLength(10)
+                              .HasColumnType("char(10)");
 
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("char(100)");
+                    b1.Property<string>("Street")
+                              .IsRequired()
+                              .HasMaxLength(100)
+                              .HasColumnType("char(100)");
 
-                            b1.Property<string>("ZipCode")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("char(10)");
+                    b1.Property<string>("ZipCode")
+                              .IsRequired()
+                              .HasMaxLength(10)
+                              .HasColumnType("char(10)");
 
-                            b1.HasKey("CompanySubsidiaryId");
+                    b1.HasKey("CompanySubsidiaryId");
 
-                            b1.ToTable("CompanySubsidiary");
+                    b1.ToTable("CompanySubsidiary");
 
-                            b1.WithOwner()
-                                .HasForeignKey("CompanySubsidiaryId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("CompanySubsidiaryId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.CnpjValueObject", "Cnpj", b1 =>
-                        {
-                            b1.Property<Guid>("CompanySubsidiaryId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.CnpjValueObject", "Cnpj", b1 =>
+                      {
+                    b1.Property<Guid>("CompanySubsidiaryId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(14)
-                                .HasColumnType("char(14)")
-                                .HasColumnName("Cnpj");
+                    b1.Property<string>("Value")
+                              .IsRequired()
+                              .HasMaxLength(14)
+                              .HasColumnType("char(14)")
+                              .HasColumnName("Cnpj");
 
-                            b1.HasKey("CompanySubsidiaryId");
+                    b1.HasKey("CompanySubsidiaryId");
 
-                            b1.ToTable("CompanySubsidiary");
+                    b1.ToTable("CompanySubsidiary");
 
-                            b1.WithOwner()
-                                .HasForeignKey("CompanySubsidiaryId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("CompanySubsidiaryId");
+                  });
 
-                    b.Navigation("Address")
-                        .IsRequired();
+            b.Navigation("Address")
+                      .IsRequired();
 
-                    b.Navigation("Cnpj")
-                        .IsRequired();
+            b.Navigation("Cnpj")
+                      .IsRequired();
 
-                    b.Navigation("Company");
+            b.Navigation("Company");
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.Country", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.Country", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.Customer", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.Customer", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.City", "City")
+                      .WithMany()
+                      .HasForeignKey("CityId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.AddressValueObject", "Address", b1 =>
-                        {
-                            b1.Property<Guid>("CustomerId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.AddressValueObject", "Address", b1 =>
+                      {
+                    b1.Property<Guid>("CustomerId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("LocalReference")
-                                .IsRequired()
-                                .HasMaxLength(150)
-                                .HasColumnType("char(150)");
+                    b1.Property<string>("LocalReference")
+                              .IsRequired()
+                              .HasMaxLength(150)
+                              .HasColumnType("char(150)");
 
-                            b1.Property<string>("Neighborhood")
-                                .IsRequired()
-                                .HasMaxLength(60)
-                                .HasColumnType("char(60)");
+                    b1.Property<string>("Neighborhood")
+                              .IsRequired()
+                              .HasMaxLength(60)
+                              .HasColumnType("char(60)");
 
-                            b1.Property<string>("Number")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("char(10)");
+                    b1.Property<string>("Number")
+                              .IsRequired()
+                              .HasMaxLength(10)
+                              .HasColumnType("char(10)");
 
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("char(100)");
+                    b1.Property<string>("Street")
+                              .IsRequired()
+                              .HasMaxLength(100)
+                              .HasColumnType("char(100)");
 
-                            b1.Property<string>("ZipCode")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("char(10)");
+                    b1.Property<string>("ZipCode")
+                              .IsRequired()
+                              .HasMaxLength(10)
+                              .HasColumnType("char(10)");
 
-                            b1.HasKey("CustomerId");
+                    b1.HasKey("CustomerId");
 
-                            b1.ToTable("Customer");
+                    b1.ToTable("Customer");
 
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("CustomerId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.PhoneNumberValueObject", "Cellphone1", b1 =>
-                        {
-                            b1.Property<Guid>("CustomerId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.PhoneNumberValueObject", "Cellphone1", b1 =>
+                      {
+                    b1.Property<Guid>("CustomerId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("CodeArea")
-                                .IsRequired()
-                                .HasMaxLength(3)
-                                .HasColumnType("char(3)");
+                    b1.Property<string>("CodeArea")
+                              .IsRequired()
+                              .HasMaxLength(3)
+                              .HasColumnType("char(3)");
 
-                            b1.Property<string>("PhoneNumber")
-                                .IsRequired()
-                                .HasMaxLength(11)
-                                .HasColumnType("char(11)");
+                    b1.Property<string>("PhoneNumber")
+                              .IsRequired()
+                              .HasMaxLength(11)
+                              .HasColumnType("char(11)");
 
-                            b1.HasKey("CustomerId");
+                    b1.HasKey("CustomerId");
 
-                            b1.ToTable("Customer");
+                    b1.ToTable("Customer");
 
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("CustomerId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.PhoneNumberValueObject", "Cellphone2", b1 =>
-                        {
-                            b1.Property<Guid>("CustomerId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.PhoneNumberValueObject", "Cellphone2", b1 =>
+                      {
+                    b1.Property<Guid>("CustomerId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("CodeArea")
-                                .IsRequired()
-                                .HasMaxLength(3)
-                                .HasColumnType("char(3)");
+                    b1.Property<string>("CodeArea")
+                              .IsRequired()
+                              .HasMaxLength(3)
+                              .HasColumnType("char(3)");
 
-                            b1.Property<string>("PhoneNumber")
-                                .IsRequired()
-                                .HasMaxLength(11)
-                                .HasColumnType("char(11)");
+                    b1.Property<string>("PhoneNumber")
+                              .IsRequired()
+                              .HasMaxLength(11)
+                              .HasColumnType("char(11)");
 
-                            b1.HasKey("CustomerId");
+                    b1.HasKey("CustomerId");
 
-                            b1.ToTable("Customer");
+                    b1.ToTable("Customer");
 
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("CustomerId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.CnpjValueObject", "Cnpj", b1 =>
-                        {
-                            b1.Property<Guid>("CustomerId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.CnpjValueObject", "Cnpj", b1 =>
+                      {
+                    b1.Property<Guid>("CustomerId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(14)
-                                .HasColumnType("char(14)")
-                                .HasColumnName("Cnpj");
+                    b1.Property<string>("Value")
+                              .IsRequired()
+                              .HasMaxLength(14)
+                              .HasColumnType("char(14)")
+                              .HasColumnName("Cnpj");
 
-                            b1.HasKey("CustomerId");
+                    b1.HasKey("CustomerId");
 
-                            b1.ToTable("Customer");
+                    b1.ToTable("Customer");
 
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("CustomerId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.CpfValueObject", "Cpf", b1 =>
-                        {
-                            b1.Property<Guid>("CustomerId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.CpfValueObject", "Cpf", b1 =>
+                      {
+                    b1.Property<Guid>("CustomerId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(11)
-                                .HasColumnType("char(11)")
-                                .HasColumnName("Cpf");
+                    b1.Property<string>("Value")
+                              .IsRequired()
+                              .HasMaxLength(11)
+                              .HasColumnType("char(11)")
+                              .HasColumnName("Cpf");
 
-                            b1.HasKey("CustomerId");
+                    b1.HasKey("CustomerId");
 
-                            b1.ToTable("Customer");
+                    b1.ToTable("Customer");
 
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("CustomerId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.PhoneNumberValueObject", "Telephone1", b1 =>
-                        {
-                            b1.Property<Guid>("CustomerId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.PhoneNumberValueObject", "Telephone1", b1 =>
+                      {
+                    b1.Property<Guid>("CustomerId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("CodeArea")
-                                .IsRequired()
-                                .HasMaxLength(3)
-                                .HasColumnType("char(3)");
+                    b1.Property<string>("CodeArea")
+                              .IsRequired()
+                              .HasMaxLength(3)
+                              .HasColumnType("char(3)");
 
-                            b1.Property<string>("PhoneNumber")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("char(10)");
+                    b1.Property<string>("PhoneNumber")
+                              .IsRequired()
+                              .HasMaxLength(10)
+                              .HasColumnType("char(10)");
 
-                            b1.HasKey("CustomerId");
+                    b1.HasKey("CustomerId");
 
-                            b1.ToTable("Customer");
+                    b1.ToTable("Customer");
 
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("CustomerId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.PhoneNumberValueObject", "Telephone2", b1 =>
-                        {
-                            b1.Property<Guid>("CustomerId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.PhoneNumberValueObject", "Telephone2", b1 =>
+                      {
+                    b1.Property<Guid>("CustomerId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("CodeArea")
-                                .IsRequired()
-                                .HasMaxLength(3)
-                                .HasColumnType("char(3)");
+                    b1.Property<string>("CodeArea")
+                              .IsRequired()
+                              .HasMaxLength(3)
+                              .HasColumnType("char(3)");
 
-                            b1.Property<string>("PhoneNumber")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("char(10)");
+                    b1.Property<string>("PhoneNumber")
+                              .IsRequired()
+                              .HasMaxLength(10)
+                              .HasColumnType("char(10)");
 
-                            b1.HasKey("CustomerId");
+                    b1.HasKey("CustomerId");
 
-                            b1.ToTable("Customer");
+                    b1.ToTable("Customer");
 
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("CustomerId");
+                  });
 
-                    b.Navigation("Address")
-                        .IsRequired();
+            b.Navigation("Address")
+                      .IsRequired();
 
-                    b.Navigation("Cellphone1")
-                        .IsRequired();
+            b.Navigation("Cellphone1")
+                      .IsRequired();
 
-                    b.Navigation("Cellphone2")
-                        .IsRequired();
+            b.Navigation("Cellphone2")
+                      .IsRequired();
 
-                    b.Navigation("City");
+            b.Navigation("City");
 
-                    b.Navigation("Cnpj")
-                        .IsRequired();
+            b.Navigation("Cnpj")
+                      .IsRequired();
 
-                    b.Navigation("Cpf")
-                        .IsRequired();
+            b.Navigation("Cpf")
+                      .IsRequired();
 
-                    b.Navigation("Telephone1")
-                        .IsRequired();
+            b.Navigation("Telephone1")
+                      .IsRequired();
 
-                    b.Navigation("Telephone2")
-                        .IsRequired();
+            b.Navigation("Telephone2")
+                      .IsRequired();
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceItem", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.ServiceType", "ServiceType")
-                        .WithMany("ServiceItems")
-                        .HasForeignKey("ServiceTypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceItem", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.ServiceType", "ServiceType")
+                      .WithMany("ServiceItems")
+                      .HasForeignKey("ServiceTypeId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("ServiceType");
+            b.Navigation("ServiceType");
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceOrder", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.CompanySubsidiary", "CompanySubsidiary")
-                        .WithMany()
-                        .HasForeignKey("CompanySubsidiaryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceOrder", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.CompanySubsidiary", "CompanySubsidiary")
+                      .WithMany()
+                      .HasForeignKey("CompanySubsidiaryId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.Customer", "Customer")
-                        .WithMany("ServiceOrders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.Customer", "Customer")
+                      .WithMany("ServiceOrders")
+                      .HasForeignKey("CustomerId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.ServiceType", "ServiceType")
-                        .WithMany("ServiceOrders")
-                        .HasForeignKey("ServiceTypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.ServiceType", "ServiceType")
+                      .WithMany("ServiceOrders")
+                      .HasForeignKey("ServiceTypeId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("CompanySubsidiary");
+            b.Navigation("CompanySubsidiary");
 
-                    b.Navigation("Customer");
+            b.Navigation("Customer");
 
-                    b.Navigation("ServiceType");
+            b.Navigation("ServiceType");
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceOrderItem", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.ServiceItem", "ServiceItem")
-                        .WithMany("ServiceOrderItems")
-                        .HasForeignKey("ServiceItemId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceOrderItem", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.ServiceItem", "ServiceItem")
+                      .WithMany("ServiceOrderItems")
+                      .HasForeignKey("ServiceItemId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.ServiceOrder", "ServiceOrder")
-                        .WithMany("ServiceOrderItems")
-                        .HasForeignKey("ServiceItemId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.ServiceOrder", "ServiceOrder")
+                      .WithMany("ServiceOrderItems")
+                      .HasForeignKey("ServiceItemId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("ServiceItem");
+            b.Navigation("ServiceItem");
 
-                    b.Navigation("ServiceOrder");
+            b.Navigation("ServiceOrder");
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceType", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceType", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.State", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.Country", "Country")
-                        .WithMany("States")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.State", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.Country", "Country")
+                      .WithMany("States")
+                      .HasForeignKey("CountryId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("Country");
+            b.Navigation("Country");
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.User", b =>
-                {
-                    b.HasOne("ScheduleService.Domain.Model.Entities.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.NoAction);
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.User", b =>
+          {
+            b.HasOne("ScheduleService.Domain.Core.Entities.City", "City")
+                      .WithMany()
+                      .HasForeignKey("CityId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserCreate")
-                        .WithMany()
-                        .HasForeignKey("UserCreateId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserCreate")
+                      .WithMany()
+                      .HasForeignKey("UserCreateId")
+                      .OnDelete(DeleteBehavior.NoAction)
+                      .IsRequired();
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserDelete")
-                        .WithMany()
-                        .HasForeignKey("UserDeleteId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserDelete")
+                      .WithMany()
+                      .HasForeignKey("UserDeleteId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("ScheduleService.Domain.Model.Entities.User", "UserUpdate")
-                        .WithMany()
-                        .HasForeignKey("UserUpdateId")
-                        .OnDelete(DeleteBehavior.NoAction);
+            b.HasOne("ScheduleService.Domain.Core.Entities.User", "UserUpdate")
+                      .WithMany()
+                      .HasForeignKey("UserUpdateId")
+                      .OnDelete(DeleteBehavior.NoAction);
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.AddressValueObject", "Address", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.AddressValueObject", "Address", b1 =>
+                      {
+                    b1.Property<Guid>("UserId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("LocalReference")
-                                .IsRequired()
-                                .HasMaxLength(150)
-                                .HasColumnType("char(150)");
+                    b1.Property<string>("LocalReference")
+                              .IsRequired()
+                              .HasMaxLength(150)
+                              .HasColumnType("char(150)");
 
-                            b1.Property<string>("Neighborhood")
-                                .IsRequired()
-                                .HasMaxLength(60)
-                                .HasColumnType("char(60)");
+                    b1.Property<string>("Neighborhood")
+                              .IsRequired()
+                              .HasMaxLength(60)
+                              .HasColumnType("char(60)");
 
-                            b1.Property<string>("Number")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("char(10)");
+                    b1.Property<string>("Number")
+                              .IsRequired()
+                              .HasMaxLength(10)
+                              .HasColumnType("char(10)");
 
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasMaxLength(100)
-                                .HasColumnType("char(100)");
+                    b1.Property<string>("Street")
+                              .IsRequired()
+                              .HasMaxLength(100)
+                              .HasColumnType("char(100)");
 
-                            b1.Property<string>("ZipCode")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("char(10)");
+                    b1.Property<string>("ZipCode")
+                              .IsRequired()
+                              .HasMaxLength(10)
+                              .HasColumnType("char(10)");
 
-                            b1.HasKey("UserId");
+                    b1.HasKey("UserId");
 
-                            b1.ToTable("User");
+                    b1.ToTable("User");
 
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("UserId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.PhoneNumberValueObject", "Cellphone1", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.PhoneNumberValueObject", "Cellphone1", b1 =>
+                      {
+                    b1.Property<Guid>("UserId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("CodeArea")
-                                .IsRequired()
-                                .HasMaxLength(3)
-                                .HasColumnType("char(3)");
+                    b1.Property<string>("CodeArea")
+                              .IsRequired()
+                              .HasMaxLength(3)
+                              .HasColumnType("char(3)");
 
-                            b1.Property<string>("PhoneNumber")
-                                .IsRequired()
-                                .HasMaxLength(11)
-                                .HasColumnType("char(11)");
+                    b1.Property<string>("PhoneNumber")
+                              .IsRequired()
+                              .HasMaxLength(11)
+                              .HasColumnType("char(11)");
 
-                            b1.HasKey("UserId");
+                    b1.HasKey("UserId");
 
-                            b1.ToTable("User");
+                    b1.ToTable("User");
 
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("UserId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.PhoneNumberValueObject", "Cellphone2", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.PhoneNumberValueObject", "Cellphone2", b1 =>
+                      {
+                    b1.Property<Guid>("UserId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("CodeArea")
-                                .IsRequired()
-                                .HasMaxLength(3)
-                                .HasColumnType("char(3)");
+                    b1.Property<string>("CodeArea")
+                              .IsRequired()
+                              .HasMaxLength(3)
+                              .HasColumnType("char(3)");
 
-                            b1.Property<string>("PhoneNumber")
-                                .IsRequired()
-                                .HasMaxLength(11)
-                                .HasColumnType("char(11)");
+                    b1.Property<string>("PhoneNumber")
+                              .IsRequired()
+                              .HasMaxLength(11)
+                              .HasColumnType("char(11)");
 
-                            b1.HasKey("UserId");
+                    b1.HasKey("UserId");
 
-                            b1.ToTable("User");
+                    b1.ToTable("User");
 
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("UserId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.CpfValueObject", "Cpf", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.CpfValueObject", "Cpf", b1 =>
+                      {
+                    b1.Property<Guid>("UserId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasMaxLength(11)
-                                .HasColumnType("char(11)")
-                                .HasColumnName("Cpf");
+                    b1.Property<string>("Value")
+                              .IsRequired()
+                              .HasMaxLength(11)
+                              .HasColumnType("char(11)")
+                              .HasColumnName("Cpf");
 
-                            b1.HasKey("UserId");
+                    b1.HasKey("UserId");
 
-                            b1.ToTable("User");
+                    b1.ToTable("User");
 
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("UserId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.PhoneNumberValueObject", "Telephone1", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.PhoneNumberValueObject", "Telephone1", b1 =>
+                      {
+                    b1.Property<Guid>("UserId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("CodeArea")
-                                .IsRequired()
-                                .HasMaxLength(3)
-                                .HasColumnType("char(3)");
+                    b1.Property<string>("CodeArea")
+                              .IsRequired()
+                              .HasMaxLength(3)
+                              .HasColumnType("char(3)");
 
-                            b1.Property<string>("PhoneNumber")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("char(10)");
+                    b1.Property<string>("PhoneNumber")
+                              .IsRequired()
+                              .HasMaxLength(10)
+                              .HasColumnType("char(10)");
 
-                            b1.HasKey("UserId");
+                    b1.HasKey("UserId");
 
-                            b1.ToTable("User");
+                    b1.ToTable("User");
 
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("UserId");
+                  });
 
-                    b.OwnsOne("ScheduleService.Domain.Model.ValueObjects.PhoneNumberValueObject", "Telephone2", b1 =>
-                        {
-                            b1.Property<Guid>("UserId")
-                                .HasColumnType("uniqueidentifier");
+            b.OwnsOne("ScheduleService.Domain.Core.ValueObjects.PhoneNumberValueObject", "Telephone2", b1 =>
+                      {
+                    b1.Property<Guid>("UserId")
+                              .HasColumnType("uniqueidentifier");
 
-                            b1.Property<string>("CodeArea")
-                                .IsRequired()
-                                .HasMaxLength(3)
-                                .HasColumnType("char(3)");
+                    b1.Property<string>("CodeArea")
+                              .IsRequired()
+                              .HasMaxLength(3)
+                              .HasColumnType("char(3)");
 
-                            b1.Property<string>("PhoneNumber")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("char(10)");
+                    b1.Property<string>("PhoneNumber")
+                              .IsRequired()
+                              .HasMaxLength(10)
+                              .HasColumnType("char(10)");
 
-                            b1.HasKey("UserId");
+                    b1.HasKey("UserId");
 
-                            b1.ToTable("User");
+                    b1.ToTable("User");
 
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
+                    b1.WithOwner()
+                              .HasForeignKey("UserId");
+                  });
 
-                    b.Navigation("Address")
-                        .IsRequired();
+            b.Navigation("Address")
+                      .IsRequired();
 
-                    b.Navigation("Cellphone1")
-                        .IsRequired();
+            b.Navigation("Cellphone1")
+                      .IsRequired();
 
-                    b.Navigation("Cellphone2")
-                        .IsRequired();
+            b.Navigation("Cellphone2")
+                      .IsRequired();
 
-                    b.Navigation("City");
+            b.Navigation("City");
 
-                    b.Navigation("Cpf")
-                        .IsRequired();
+            b.Navigation("Cpf")
+                      .IsRequired();
 
-                    b.Navigation("Telephone1")
-                        .IsRequired();
+            b.Navigation("Telephone1")
+                      .IsRequired();
 
-                    b.Navigation("Telephone2")
-                        .IsRequired();
+            b.Navigation("Telephone2")
+                      .IsRequired();
 
-                    b.Navigation("UserCreate");
+            b.Navigation("UserCreate");
 
-                    b.Navigation("UserDelete");
+            b.Navigation("UserDelete");
 
-                    b.Navigation("UserUpdate");
-                });
+            b.Navigation("UserUpdate");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.Company", b =>
-                {
-                    b.Navigation("CompanySubsidiaries");
-                });
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.Company", b =>
+          {
+            b.Navigation("CompanySubsidiaries");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.Country", b =>
-                {
-                    b.Navigation("States");
-                });
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.Country", b =>
+          {
+            b.Navigation("States");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.Customer", b =>
-                {
-                    b.Navigation("ServiceOrders");
-                });
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.Customer", b =>
+          {
+            b.Navigation("ServiceOrders");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceItem", b =>
-                {
-                    b.Navigation("ServiceOrderItems");
-                });
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceItem", b =>
+          {
+            b.Navigation("ServiceOrderItems");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceOrder", b =>
-                {
-                    b.Navigation("ServiceOrderItems");
-                });
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceOrder", b =>
+          {
+            b.Navigation("ServiceOrderItems");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.ServiceType", b =>
-                {
-                    b.Navigation("ServiceItems");
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.ServiceType", b =>
+          {
+            b.Navigation("ServiceItems");
 
-                    b.Navigation("ServiceOrders");
-                });
+            b.Navigation("ServiceOrders");
+          });
 
-            modelBuilder.Entity("ScheduleService.Domain.Model.Entities.State", b =>
-                {
-                    b.Navigation("Cities");
-                });
+      modelBuilder.Entity("ScheduleService.Domain.Core.Entities.State", b =>
+          {
+            b.Navigation("Cities");
+          });
 #pragma warning restore 612, 618
-        }
     }
+  }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using ScheduleService.Domain.Model.Entities.Base;
+using ScheduleService.Domain.Core.Entities.Base;
 using ScheduleService.Domain.Shared.Constants;
 using System.Security.Claims;
 

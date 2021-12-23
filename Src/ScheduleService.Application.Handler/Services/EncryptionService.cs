@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
-using ScheduleService.Domain.Model.Services;
-using ScheduleService.Domain.Model.Services.Models;
+using ScheduleService.Domain.Core.Services;
+using ScheduleService.Domain.Core.Services.Models;
 using System.Security.Cryptography;
 using System.Text;
 

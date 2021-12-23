@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using ScheduleService.Domain.Model.Entities;
+using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Presentation.Api.Controllers

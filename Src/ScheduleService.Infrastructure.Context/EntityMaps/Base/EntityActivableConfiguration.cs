@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ScheduleService.Domain.Model.Entities.Base;
+using ScheduleService.Domain.Core.Entities.Base;
 
 namespace ScheduleService.Infrastructure.Context.EntityMaps.Base;
 

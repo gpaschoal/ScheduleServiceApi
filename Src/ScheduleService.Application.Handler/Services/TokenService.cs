@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using ScheduleService.Domain.Model.Entities;
-using ScheduleService.Domain.Model.Services;
-using ScheduleService.Domain.Model.Services.Models;
-using ScheduleService.Domain.Model.Services.Responses;
+using ScheduleService.Domain.Core.Entities;
+using ScheduleService.Domain.Core.Services;
+using ScheduleService.Domain.Core.Services.Models;
+using ScheduleService.Domain.Core.Services.Responses;
 using ScheduleService.Domain.Shared.Constants;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

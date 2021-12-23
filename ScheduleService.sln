@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IoC", "IoC", "{57ECF0FA-2E9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Domain.Repository", "Src\ScheduleService.Domain.Repository\ScheduleService.Domain.Repository.csproj", "{26A53ADD-7125-4860-99CB-2F3B230832FA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Domain.Model", "Src\ScheduleService.Domain.Model\ScheduleService.Domain.Model.csproj", "{9689CD9A-DD66-4B5E-BEF8-97A074615F78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Domain.Core", "Src\ScheduleService.Domain.Core\ScheduleService.Domain.Core.csproj", "{9689CD9A-DD66-4B5E-BEF8-97A074615F78}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Infrastructure.Repository", "Src\ScheduleService.Infrastructure.Repository\ScheduleService.Infrastructure.Repository.csproj", "{48F14FDF-36A2-42F3-989B-DFA7B1C90CE0}"
 EndProject

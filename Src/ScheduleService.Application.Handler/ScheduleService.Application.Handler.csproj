@@ -13,7 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ScheduleService.Application.Validator\ScheduleService.Application.Validator.csproj" />
-    <ProjectReference Include="..\ScheduleService.Domain.Model\ScheduleService.Domain.Model.csproj" />
+    <ProjectReference Include="..\ScheduleService.Domain.Core\ScheduleService.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>
