@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Src\ScheduleService.Application.Validator\ScheduleService.Application.Validator.csproj" />
     <ProjectReference Include="..\ScheduleService.TestBase\ScheduleService.TestBase.csproj" />
   </ItemGroup>
 
