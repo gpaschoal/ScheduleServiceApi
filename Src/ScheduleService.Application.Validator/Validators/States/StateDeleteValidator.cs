@@ -10,6 +10,6 @@ public class StateDeleteValidator : Validation<StateDeleteCommand>
     public override void Validate()
     {
         ForMember(x => x.Id)
-            .IsRequired(ValidationResource.IsRequired);
+            .IsNotEmpty(ValidationResource.IsRequired);
     }
 }

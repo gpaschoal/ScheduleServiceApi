@@ -11,9 +11,9 @@ public class CountryCreateValidator : Validation<CountryCreateCommand>
     {
         ForMember(x => x.Name)
             .IsRequired(ValidationResource.IsRequired)
-            .HasLenght(50, ValidationResource.ShouldHaveMaxLenght);
+            .HasMaxLenght(50, ValidationResource.ShouldHaveMaxLenght);
         ForMember(x => x.ExternalCode)
             .IsRequired(ValidationResource.IsRequired)
-            .HasLenght(50, ValidationResource.ShouldHaveMaxLenght);
+            .HasMaxLenght(50, ValidationResource.ShouldHaveMaxLenght);
     }
 }

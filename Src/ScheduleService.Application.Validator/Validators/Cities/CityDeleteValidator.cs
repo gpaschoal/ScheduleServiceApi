@@ -10,6 +10,6 @@ public class CityDeleteValidator : Validation<CityDeleteCommand>
     public override void Validate()
     {
         ForMember(x => x.Id)
-            .IsRequired(ValidationResource.IsRequired);
+            .IsNotEmpty(ValidationResource.IsRequired);
     }
 }

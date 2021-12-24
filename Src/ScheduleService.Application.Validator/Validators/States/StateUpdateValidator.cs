@@ -10,12 +10,12 @@ public class StateUpdateValidator : Validation<StateUpdateCommand>
     public override void Validate()
     {
         ForMember(x => x.Id)
-            .IsRequired(ValidationResource.IsRequired);
+            .IsNotEmpty(ValidationResource.IsRequired);
         ForMember(x => x.Name)
             .IsRequired(ValidationResource.IsRequired)
-            .HasLenght(50, ValidationResource.ShouldHaveMaxLenght);
+            .HasMaxLenght(50, ValidationResource.ShouldHaveMaxLenght);
         ForMember(x => x.ExternalCode)
             .IsRequired(ValidationResource.IsRequired)
-            .HasLenght(50, ValidationResource.ShouldHaveMaxLenght);
+            .HasMaxLenght(50, ValidationResource.ShouldHaveMaxLenght);
     }
 }

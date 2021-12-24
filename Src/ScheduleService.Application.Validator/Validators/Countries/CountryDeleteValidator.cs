@@ -10,6 +10,6 @@ public class CountryDeleteValidator : Validation<CountryDeleteCommand>
     public override void Validate()
     {
         ForMember(x => x.Id)
-            .IsRequired(ValidationResource.IsRequired);
+            .IsNotEmpty(ValidationResource.IsRequired);
     }
 }
