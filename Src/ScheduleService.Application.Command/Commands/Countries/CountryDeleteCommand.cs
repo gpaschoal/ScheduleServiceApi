@@ -2,4 +2,5 @@
 
 public class CountryDeleteCommand : ICommandExecution
 {
+    public Guid Id { get; set; }
 }

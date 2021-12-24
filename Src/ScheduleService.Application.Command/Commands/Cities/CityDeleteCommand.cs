@@ -2,4 +2,5 @@
 
 public class CityDeleteCommand : ICommandExecution
 {
+    public Guid Id { get; set; }
 }
