@@ -35,7 +35,7 @@ public class RedisCacheRepository : ICacheRepository
         return value;
     }
 
-    public async  ValueTask<T> TryGetAsync<T>(string cacheKey)
+    public async ValueTask<T> TryGetAsync<T>(string cacheKey)
     {
         var client = await _manager.GetClientAsync();
 
