@@ -12,6 +12,7 @@ using ScheduleService.Application.Handler.Services;
 using ScheduleService.Application.Handler.Services.Models;
 using ScheduleService.Application.Validator.Validators.Cities;
 using ScheduleService.Infrastructure.Context.Contexts;
+using ServiceStack.Redis;
 using System.Text;
 
 namespace ScheduleService.IoC.Container;
@@ -30,6 +31,7 @@ public class ConfigurationIoC
             options.UseSqlServer(configuration.GetConnectionString("DbConn"));
             options.EnableDetailedErrors();
         });
+        services.AddSingleton<IRedisClientsManagerAsync>(c => new RedisManagerPool(configuration.GetConnectionString("RedisConn")));
 
         IoCRepositories.Configure(services, configuration);
         IoCRepositoriesApplication.Configure(services, configuration);
