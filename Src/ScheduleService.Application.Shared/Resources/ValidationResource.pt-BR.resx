@@ -120,4 +120,7 @@
   <data name="IsRequired" xml:space="preserve">
     <value>É obrigatório</value>
   </data>
+  <data name="ShouldHaveMaxLenght" xml:space="preserve">
+    <value>Deve ter no máximo {0} dígitos</value>
+  </data>
 </root>

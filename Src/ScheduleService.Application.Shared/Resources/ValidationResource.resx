@@ -100,4 +100,7 @@
   <data name="IsRequired" xml:space="preserve">
     <value>Is required</value>
   </data>
+  <data name="ShouldHaveMaxLenght" xml:space="preserve">
+    <value>Should have {0} max digits</value>
+  </data>
 </root>

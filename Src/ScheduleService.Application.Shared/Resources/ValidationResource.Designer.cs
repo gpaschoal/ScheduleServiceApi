@@ -68,5 +68,14 @@ namespace ScheduleService.Application.Shared.Resources {
                 return ResourceManager.GetString("IsRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Should have {0} max digits.
+        /// </summary>
+        public static string ShouldHaveMaxLenght {
+            get {
+                return ResourceManager.GetString("ShouldHaveMaxLenght", resourceCulture);
+            }
+        }
     }
 }
