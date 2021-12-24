@@ -13,6 +13,7 @@ public class UserMap : EntityActivableConfiguration<User>
         builder.Property(x => x.LastName).HasColumnType("char").HasMaxLength(150);
         builder.Property(x => x.UserName).HasColumnType("char").HasMaxLength(50);
         builder.Property(x => x.Password).HasColumnType("char").HasMaxLength(100);
+        builder.Property(x => x.Email).HasColumnType("char").HasMaxLength(100);
 
         builder.HasOne(x => x.City).WithMany().HasForeignKey(x => x.CityId).OnDelete(DeleteBehavior.NoAction);
 

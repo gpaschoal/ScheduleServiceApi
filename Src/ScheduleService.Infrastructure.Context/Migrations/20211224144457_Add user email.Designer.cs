@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ScheduleService.Infrastructure.Context.Contexts;
 
@@ -11,9 +12,10 @@ using ScheduleService.Infrastructure.Context.Contexts;
 namespace ScheduleService.Infrastructure.Context.Migrations
 {
     [DbContext(typeof(ScheduleServiceDbContext))]
-    partial class ScheduleServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211224144457_Add user email")]
+    partial class Adduseremail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
