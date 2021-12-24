@@ -17,4 +17,14 @@ public class CountryCreateRepository : ICountryCreateRepository
     {
         return _repository.AddAsync(data);
     }
+
+    public bool ExistsCountryWithExternalCode(string externalCode)
+    {
+        return _repository.ExistsCountryWithExternalCode(externalCode);
+    }
+
+    public bool ExistsCountryWithName(string name)
+    {
+        return _repository.ExistsCountryWithName(name);
+    }
 }

@@ -30,7 +30,7 @@ public class RedisCacheRepository : ICacheRepository
     {
         var client = await _manager.GetClientAsync();
 
-        await client.SetAsync(cacheKey, value, TimeSpan.FromMinutes(_cacheConfig.SlidingExpirationInMinutes * 1000));
+        await client.SetAsync(cacheKey, value, TimeSpan.FromMinutes(_cacheConfig.SlidingExpirationInMinutes * 100000));
 
         return value;
     }

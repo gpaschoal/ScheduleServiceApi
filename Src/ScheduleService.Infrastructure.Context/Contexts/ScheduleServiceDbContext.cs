@@ -38,39 +38,44 @@ public class ScheduleServiceDbContext : DbContext
 
         foreach (var entityEntry in entries)
         {
-            var auditBase = (EntityBase)entityEntry.Entity;
+            EntityBase auditBase = (EntityBase)entityEntry.Entity;
+            DateTime now = DateTime.UtcNow;
 
             switch (entityEntry.State)
             {
                 case EntityState.Added:
                     {
-                        auditBase.SetValue(x => x.CreatedAt, DateTime.UtcNow);
-                        auditBase.SetValue(x => x.UserCreateId, currentlyUser);
+                        auditBase.CreatedAt = now;
+                        auditBase.UserCreateId = currentlyUser;
+                        Entry(auditBase).Property(p => p.UpdatedAt).IsModified = false;
+                        Entry(auditBase).Property(p => p.UserUpdateId).IsModified = false;
+                        Entry(auditBase).Property(p => p.DeletedAt).IsModified = false;
+                        Entry(auditBase).Property(p => p.UserDeleteId).IsModified = false;
                         break;
                     }
 
                 case EntityState.Modified:
                     {
-                        auditBase.SetValue(x => x.UpdatedAt, DateTime.UtcNow);
-                        auditBase.SetValue(x => x.UserUpdateId, currentlyUser);
+                        auditBase.UpdatedAt = now;
+                        auditBase.UserUpdateId = currentlyUser;
                         Entry(auditBase).Property(p => p.CreatedAt).IsModified = false;
                         Entry(auditBase).Property(p => p.UserCreateId).IsModified = false;
+                        Entry(auditBase).Property(p => p.DeletedAt).IsModified = false;
+                        Entry(auditBase).Property(p => p.UserDeleteId).IsModified = false;
                         break;
                     }
 
                 case EntityState.Deleted:
                     {
-                        entityEntry.State = EntityState.Unchanged;
-                        auditBase.SetValue(x => x.DeletedAt, DateTime.UtcNow);
-                        auditBase.SetValue(x => x.UserDeleteId, currentlyUser);
+                        auditBase.DeletedAt = now;
+                        auditBase.UserDeleteId = currentlyUser;
                         Entry(auditBase).Property(p => p.CreatedAt).IsModified = false;
                         Entry(auditBase).Property(p => p.UserCreateId).IsModified = false;
+                        Entry(auditBase).Property(p => p.UpdatedAt).IsModified = false;
+                        Entry(auditBase).Property(p => p.UserUpdateId).IsModified = false;
                         break;
                     }
             }
-
-            auditBase.SetValue(x => x.UpdatedAt, DateTime.UtcNow);
-            auditBase.SetValue(x => x.UserUpdateId, currentlyUser);
         }
 
         return await base.SaveChangesAsync(cancellationToken);

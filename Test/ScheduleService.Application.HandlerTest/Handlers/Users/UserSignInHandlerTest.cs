@@ -8,10 +8,7 @@ using ScheduleService.Application.Handler.Services;
 using ScheduleService.Application.Handler.Services.Responses;
 using ScheduleService.Domain.Core.Entities;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.HandlerTest.Handlers.Users;

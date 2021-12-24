@@ -106,4 +106,13 @@
   <data name="UserNotFound" xml:space="preserve">
     <value>User not found</value>
   </data>
+  <data name="AlreadyExistsACountryWithThisName" xml:space="preserve">
+    <value>Already exists a Country with this name</value>
+  </data>
+  <data name="AlreadyExistsACountryWithThisExternalCode" xml:space="preserve">
+    <value>Already exists a Country with this external code</value>
+  </data>
+  <data name="EntityNotFound" xml:space="preserve">
+    <value>Entity not found</value>
+  </data>
 </root>

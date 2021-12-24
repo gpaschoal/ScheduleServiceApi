@@ -8,7 +8,7 @@ namespace ScheduleService.Infrastructure.Repository;
 public abstract class RepositoryBase<TEntity>
     : IRepository<TEntity> where TEntity : EntityBase
 {
-    private readonly ScheduleServiceDbContext _context;
+    protected readonly ScheduleServiceDbContext Context;
     private readonly ICacheRepository _cacheRepository;
     protected readonly DbSet<TEntity> Queryable;
 
@@ -16,21 +16,21 @@ public abstract class RepositoryBase<TEntity>
         ScheduleServiceDbContext context,
         ICacheRepository cacheRepository)
     {
-        _context = context;
+        Context = context;
         _cacheRepository = cacheRepository;
-        Queryable = _context.Set<TEntity>();
+        Queryable = Context.Set<TEntity>();
     }
 
     public async ValueTask AddAsync(TEntity data)
     {
-        await _context.AddAsync(data);
+        await Context.AddAsync(data);
         await _cacheRepository.SetAsync(data.Id.ToString(), data);
     }
 
     public async ValueTask DeleteAsync(Guid id)
     {
         var entity = GetByIdAsync(id);
-        _context.Remove(entity);
+        Context.Remove(entity);
         await _cacheRepository.RemoveAsync(id.ToString());
     }
 
@@ -50,7 +50,13 @@ public abstract class RepositoryBase<TEntity>
 
     public async ValueTask UpdateAsync(TEntity data)
     {
-        _context.Update(data);
+        Context.Update(data);
         await _cacheRepository.RemoveAsync(data.Id.ToString());
+    }
+
+    public ValueTask<bool> CheckIfExistByIdAsync(Guid id)
+    {
+        var result = Queryable.Any(x => x.Id.Equals(id));
+        return ValueTask.FromResult(result);
     }
 }

@@ -21,4 +21,10 @@ public class Country : ActivableEntityBase
     public string ExternalCode { get; private set; }
 
     public virtual ICollection<State> States { get; private set; }
+
+    public void Update(string name, string externalCode)
+    {
+        Name = name;
+        ExternalCode = externalCode;
+    }
 }

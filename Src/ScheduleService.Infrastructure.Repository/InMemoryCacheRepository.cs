@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using ScheduleService.Domain.Repository;
 
 namespace ScheduleService.Infrastructure.Repository;
@@ -10,15 +11,15 @@ public class InMemoryCacheRepository : ICacheRepository
 
     public InMemoryCacheRepository(
         IMemoryCache memoryCache,
-        CacheConfiguration cacheConfig)
+        IOptions<CacheConfiguration> cacheConfig)
     {
         _memoryCache = memoryCache;
 
         _cacheOptions = new MemoryCacheEntryOptions
         {
-            AbsoluteExpiration = DateTime.Now.AddHours(cacheConfig.AbsoluteExpirationInHours),
+            AbsoluteExpiration = DateTime.Now.AddHours(cacheConfig.Value.AbsoluteExpirationInHours),
             Priority = CacheItemPriority.High,
-            SlidingExpiration = TimeSpan.FromMinutes(cacheConfig.SlidingExpirationInMinutes)
+            SlidingExpiration = TimeSpan.FromMinutes(cacheConfig.Value.SlidingExpirationInMinutes)
         };
     }
 
@@ -35,9 +36,8 @@ public class InMemoryCacheRepository : ICacheRepository
 
     public ValueTask<T> TryGetAsync<T>(string cacheKey)
     {
-        return default;
-        //_memoryCache.TryGetValue(cacheKey, out var value);
+        _memoryCache.TryGetValue<T>(cacheKey, out var value);
 
-        //return ValueTask.FromResult(value is not null);
+        return ValueTask.FromResult(value);
     }
 }

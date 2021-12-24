@@ -13,6 +13,11 @@ public class StateUpdateRepository : IStateUpdateRepository
         _repository = repository;
     }
 
+    public ValueTask<State?> GetByIdAsync(Guid id)
+    {
+        return _repository.GetByIdAsync(id);
+    }
+
     public ValueTask UpdateAsync(State data)
     {
         return _repository.UpdateAsync(data);

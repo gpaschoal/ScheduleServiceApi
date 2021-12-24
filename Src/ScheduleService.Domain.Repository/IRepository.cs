@@ -8,4 +8,5 @@ public interface IRepository<TEntity> where TEntity : EntityBase
     ValueTask AddAsync(TEntity data);
     ValueTask UpdateAsync(TEntity data);
     ValueTask DeleteAsync(Guid id);
+    ValueTask<bool> CheckIfExistByIdAsync(Guid id);
 }

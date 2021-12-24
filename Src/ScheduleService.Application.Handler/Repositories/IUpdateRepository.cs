@@ -5,4 +5,5 @@ namespace ScheduleService.Application.Handler.Repositories;
 public interface IUpdateRepository<TEntity> : IHandlerRepository<TEntity> where TEntity : EntityBase
 {
     ValueTask UpdateAsync(TEntity data);
+    ValueTask<TEntity?> GetByIdAsync(Guid id);
 }

@@ -13,6 +13,11 @@ public class CityUpdateRepository : ICityUpdateRepository
         _repository = repository;
     }
 
+    public ValueTask<City?> GetByIdAsync(Guid id)
+    {
+        return _repository.GetByIdAsync(id);
+    }
+
     public ValueTask UpdateAsync(City data)
     {
         return _repository.UpdateAsync(data);

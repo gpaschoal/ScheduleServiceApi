@@ -9,7 +9,7 @@ public abstract class HandlerBase<TRequest, TResponse> : IRequestHandler<TReques
     private readonly IHandlerBus _handlerBus;
     private readonly TResponse _response;
     public bool IsValid { get => _response.IsValid; }
-    public bool IsInvalid { get => _response.IsInvalid; }
+    public bool IsInvalid { get => !IsValid; }
 
     public HandlerBase(IHandlerBus handlerBus)
     {

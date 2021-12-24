@@ -13,6 +13,21 @@ public class CountryUpdateRepository : ICountryUpdateRepository
         _repository = repository;
     }
 
+    public bool ExistsCountryWithExternalCode(Guid id, string externalCode)
+    {
+        return _repository.ExistsCountryWithExternalCode(id, externalCode);
+    }
+
+    public bool ExistsCountryWithName(Guid id, string name)
+    {
+        return _repository.ExistsCountryWithName(id, name);
+    }
+
+    public ValueTask<Country?> GetByIdAsync(Guid id)
+    {
+        return _repository.GetByIdAsync(id);
+    }
+
     public ValueTask UpdateAsync(Country data)
     {
         return _repository.UpdateAsync(data);

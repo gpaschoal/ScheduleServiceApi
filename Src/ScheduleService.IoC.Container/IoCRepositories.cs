@@ -15,6 +15,7 @@ internal class IoCRepositories
                 /* Cache Repositories */
                 .AddMemoryCache()
                 .AddScoped<ICacheRepository, RedisCacheRepository>()
+                //.AddScoped<ICacheRepository, InMemoryCacheRepository>()
 
                 /* UoW Repository */
                 .AddScoped<IUnitOfWork, UnitOfWork>()
