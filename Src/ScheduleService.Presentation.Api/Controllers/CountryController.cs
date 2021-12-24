@@ -16,7 +16,7 @@ public class CountryController : ControllerBase
         _mediator = mediator;
     }
 
-    [AllowAnonymous, HttpPost, Route("Create")]
+    [Authorize, HttpPost, Route("Create")]
     public async Task<IActionResult> Create(
        [FromBody] CountryCreateCommand command)
     {
@@ -27,7 +27,7 @@ public class CountryController : ControllerBase
         return BadRequest(response);
     }
 
-    [AllowAnonymous, HttpPost, Route("Update")]
+    [Authorize, HttpPost, Route("Update")]
     public async Task<IActionResult> Update(
         [FromBody] CountryUpdateCommand command)
     {
@@ -38,7 +38,7 @@ public class CountryController : ControllerBase
         return BadRequest(response);
     }
 
-    [AllowAnonymous, HttpPost, Route("Delete")]
+    [Authorize, HttpPost, Route("Delete")]
     public async Task<IActionResult> Delete(
         [FromBody] CountryDeleteCommand command)
     {
