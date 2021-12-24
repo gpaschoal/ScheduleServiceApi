@@ -27,7 +27,7 @@ public class CountryController : ControllerBase
         return BadRequest(response);
     }
 
-    [Authorize, HttpPost, Route("Update")]
+    [Authorize, HttpPut, Route("Update")]
     public async Task<IActionResult> Update(
         [FromBody] CountryUpdateCommand command)
     {
@@ -38,7 +38,7 @@ public class CountryController : ControllerBase
         return BadRequest(response);
     }
 
-    [Authorize, HttpPost, Route("Delete")]
+    [Authorize, HttpDelete, Route("Delete")]
     public async Task<IActionResult> Delete(
         [FromBody] CountryDeleteCommand command)
     {
