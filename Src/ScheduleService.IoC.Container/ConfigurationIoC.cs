@@ -32,6 +32,7 @@ public class ConfigurationIoC
         });
 
         IoCRepositories.Configure(services, configuration);
+        IoCRepositoriesApplication.Configure(services, configuration);
 
         services.AddEasyValidationValidators(typeof(CityCreateValidator).Assembly);
         services.AddMediatR(typeof(IHandlerBus).Assembly);
