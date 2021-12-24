@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Src\ScheduleService.Application.Handler\ScheduleService.Application.Handler.csproj" />
     <ProjectReference Include="..\ScheduleService.TestBase\ScheduleService.TestBase.csproj" />
   </ItemGroup>
 
