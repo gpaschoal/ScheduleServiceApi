@@ -9,4 +9,11 @@ public class UserRepository : RepositoryBase<User>, IUserRepository
 {
     public UserRepository(ScheduleServiceDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
     { }
+
+    public User GetUserByEmailAndPassword(string email, string password)
+    {
+        User result = Queryable.FirstOrDefault(x => x.Email == email && x.Password == password);
+
+        return result;
+    }
 }

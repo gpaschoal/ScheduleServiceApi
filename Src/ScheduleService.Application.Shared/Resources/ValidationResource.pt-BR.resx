@@ -123,4 +123,7 @@
   <data name="ShouldHaveMaxLenght" xml:space="preserve">
     <value>Deve ter no máximo {0} dígitos</value>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Usuário não encontrado</value>
+  </data>
 </root>
