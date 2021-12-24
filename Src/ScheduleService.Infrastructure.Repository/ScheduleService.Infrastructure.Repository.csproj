@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ServiceStack.Redis" Version="5.13.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ScheduleService.Domain.Repository\ScheduleService.Domain.Repository.csproj" />
     <ProjectReference Include="..\ScheduleService.Infrastructure.Context\ScheduleService.Infrastructure.Context.csproj" />
   </ItemGroup>

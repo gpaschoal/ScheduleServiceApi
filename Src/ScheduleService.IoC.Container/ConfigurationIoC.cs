@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using ScheduleService.Application.Handler.Handlers;
 using ScheduleService.Application.Handler.Services;
 using ScheduleService.Application.Handler.Services.Models;
-using ScheduleService.Application.Shared;
+using ScheduleService.Application.Validator.Validators.Cities;
 using ScheduleService.Infrastructure.Context.Contexts;
 using System.Text;
 
@@ -33,8 +33,8 @@ public class ConfigurationIoC
 
         IoCRepositories.Configure(services, configuration);
 
-        services.AddEasyValidationValidators(typeof(CustomResultData).Assembly);
-        services.AddMediatR(typeof(CustomResultData).Assembly);
+        services.AddEasyValidationValidators(typeof(CityCreateValidator).Assembly);
+        services.AddMediatR(typeof(IHandlerBus).Assembly);
 
         /* Handler Bus */
         services.AddScoped<IHandlerBus, HandlerBus>();

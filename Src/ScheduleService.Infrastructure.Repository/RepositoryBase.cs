@@ -36,7 +36,7 @@ public abstract class RepositoryBase<TEntity>
 
     public async ValueTask<TEntity?> GetByIdAsync(Guid id)
     {
-        _ = await _cacheRepository.TryGetAsync(id.ToString(), out TEntity? result);
+        var result = await _cacheRepository.TryGetAsync<TEntity?>(id.ToString());
 
         if (result is not null)
             return result;

@@ -4,6 +4,7 @@ using ScheduleService.Domain.Repository;
 using ScheduleService.Domain.Repository.Repositories;
 using ScheduleService.Infrastructure.Repository;
 using ScheduleService.Infrastructure.Repository.Repositories;
+using ServiceStack.Redis;
 
 namespace ScheduleService.IoC.Container;
 
@@ -14,7 +15,8 @@ internal class IoCRepositories
         _ = services
                 /* Cache Repositories */
                 .AddMemoryCache()
-                .AddScoped<ICacheRepository, InMemoryCacheRepository>()
+                .AddScoped<ICacheRepository, RedisCacheRepository>()
+                .AddSingleton<IRedisClientsManagerAsync>(c => new RedisManagerPool("localhost:6379"))
 
                 /* UoW Repository */
                 .AddScoped<IUnitOfWork, UnitOfWork>()

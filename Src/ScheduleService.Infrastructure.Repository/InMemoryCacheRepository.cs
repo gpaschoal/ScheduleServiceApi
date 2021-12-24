@@ -33,10 +33,11 @@ public class InMemoryCacheRepository : ICacheRepository
         return ValueTask.FromResult(_memoryCache.Set(cacheKey, value, _cacheOptions));
     }
 
-    public ValueTask<bool> TryGetAsync<T>(string cacheKey, out T value)
+    public ValueTask<T> TryGetAsync<T>(string cacheKey)
     {
-        _memoryCache.TryGetValue(cacheKey, out value);
+        return default;
+        //_memoryCache.TryGetValue(cacheKey, out var value);
 
-        return ValueTask.FromResult(value is not null);
+        //return ValueTask.FromResult(value is not null);
     }
 }
