@@ -42,7 +42,7 @@ public class UserSignInHandler : HandlerBase<UserSignInCommand, CustomResultData
         UserSignInResponse loginResponse = new()
         {
             Email = user.Email.Trim(),
-            Name = user.FullName.Trim(),
+            FullName = user.FullName.Trim(),
             CreatedAt = DateTime.Now,
             Token = tokenResponse.Token,
             ExpireAt = tokenResponse.ExpirationDate

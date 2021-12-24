@@ -55,5 +55,5 @@ public class User : ActivableEntityBase
     public PhoneNumberValueObject Cellphone2 { get; private set; }
     public AddressValueObject Address { get; private set; }
 
-    public string FullName { get => $"{FirstName} {LastName}"; }
+    public string FullName { get => $"{FirstName.Trim()} {LastName.Trim()}"; }
 }
