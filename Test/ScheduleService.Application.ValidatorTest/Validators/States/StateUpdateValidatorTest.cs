@@ -88,4 +88,36 @@ public class StateUpdateValidatorTest
         var invalidSut = MakeSut(externalCode: "".PadLeft(49, 'x'));
         invalidSut.HasErrors.Should().Be(false);
     }
+
+    [Fact(DisplayName = "Should not be valid when name is empty")]
+    public void Should_not_be_valid_when_name_is_empty()
+    {
+        var invalidSut = MakeSut(name: "");
+        invalidSut.HasErrors.Should().Be(true);
+        invalidSut.ResultData.FieldErrors.Single().Key.Should().Be("Name");
+    }
+
+    [Fact(DisplayName = "Should not be valid when externalCode is empty")]
+    public void Should_not_be_valid_when_externalCode_is_empty()
+    {
+        var invalidSut = MakeSut(externalCode: "");
+        invalidSut.HasErrors.Should().Be(true);
+        invalidSut.ResultData.FieldErrors.Single().Key.Should().Be("ExternalCode");
+    }
+
+    [Fact(DisplayName = "Should not be valid when name is only white space")]
+    public void Should_not_be_valid_when_name_is_only_white_space()
+    {
+        var invalidSut = MakeSut(name: "                  ");
+        invalidSut.HasErrors.Should().Be(true);
+        invalidSut.ResultData.FieldErrors.Single().Key.Should().Be("Name");
+    }
+
+    [Fact(DisplayName = "Should not be valid when externalCode is only white space")]
+    public void Should_not_be_valid_when_externalCode_is_only_white_space()
+    {
+        var invalidSut = MakeSut(externalCode: "                 ");
+        invalidSut.HasErrors.Should().Be(true);
+        invalidSut.ResultData.FieldErrors.Single().Key.Should().Be("ExternalCode");
+    }
 }
