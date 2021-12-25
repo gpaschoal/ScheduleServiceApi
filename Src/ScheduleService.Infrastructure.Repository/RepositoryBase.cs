@@ -29,7 +29,8 @@ public abstract class RepositoryBase<TEntity>
 
     public async ValueTask DeleteAsync(Guid id)
     {
-        var entity = GetByIdAsync(id);
+        var entity = await GetByIdAsync(id);
+        ArgumentNullException.ThrowIfNull(entity);
         Context.Remove(entity);
         await _cacheRepository.RemoveAsync(id.ToString());
     }

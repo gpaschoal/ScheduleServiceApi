@@ -73,6 +73,7 @@ public class ScheduleServiceDbContext : DbContext
                         Entry(auditBase).Property(p => p.UserCreateId).IsModified = false;
                         Entry(auditBase).Property(p => p.UpdatedAt).IsModified = false;
                         Entry(auditBase).Property(p => p.UserUpdateId).IsModified = false;
+                        Entry(auditBase).State = EntityState.Modified;
                         break;
                     }
             }
