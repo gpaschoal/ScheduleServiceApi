@@ -19,7 +19,7 @@ public class StateDeleteHandler : HandlerBase<StateDeleteCommand, CustomResultDa
     public async override Task<CustomResultData> HandleExecution(StateDeleteCommand request, CancellationToken cancellationToken)
     {
         if (!await _repository.CheckIfExistByIdAsync(request.Id))
-            AddError(nameof(request.Id), ValidationResource.EntityNotFound);
+            AddError(ValidationResource.EntityNotFound);
 
         if (await _repository.CheckIfIsUsedByCity(request.Id))
             AddError(ValidationResource.ThereAreCitiesUsingThisState);

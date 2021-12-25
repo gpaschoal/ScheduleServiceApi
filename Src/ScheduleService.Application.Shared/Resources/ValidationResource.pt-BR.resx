@@ -147,4 +147,10 @@
   <data name="ThereAreCitiesUsingThisState" xml:space="preserve">
     <value>Existem cidades usando este estado</value>
   </data>
+  <data name="AlreadyExistsACityWithThisName" xml:space="preserve">
+    <value>Já existe uma cidade com esse nome</value>
+  </data>
+  <data name="AlreadyExistsACityWithThisExternalCode" xml:space="preserve">
+    <value>Já existe uma cidade com esse código externo</value>
+  </data>
 </root>

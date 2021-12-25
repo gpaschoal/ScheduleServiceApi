@@ -61,6 +61,24 @@ namespace ScheduleService.Application.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Already exists a city with this external code.
+        /// </summary>
+        public static string AlreadyExistsACityWithThisExternalCode {
+            get {
+                return ResourceManager.GetString("AlreadyExistsACityWithThisExternalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already exists a city with this name.
+        /// </summary>
+        public static string AlreadyExistsACityWithThisName {
+            get {
+                return ResourceManager.GetString("AlreadyExistsACityWithThisName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Already exists a country with this external code.
         /// </summary>
         public static string AlreadyExistsACountryWithThisExternalCode {

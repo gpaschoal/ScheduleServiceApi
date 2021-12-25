@@ -17,4 +17,14 @@ public class CityCreateRepository : ICityCreateRepository
     {
         return _repository.AddAsync(data);
     }
+
+    public bool ExistsCityWithExternalCode(string externalCode)
+    {
+        return _repository.ExistsCityWithExternalCode(externalCode);
+    }
+
+    public bool ExistsCityWithName(string name)
+    {
+        return _repository.ExistsCityWithName(name);
+    }
 }

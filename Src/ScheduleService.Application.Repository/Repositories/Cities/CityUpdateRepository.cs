@@ -13,6 +13,16 @@ public class CityUpdateRepository : ICityUpdateRepository
         _repository = repository;
     }
 
+    public bool ExistsCityWithExternalCode(Guid id, string externalCode)
+    {
+        return _repository.ExistsCityWithExternalCode(id, externalCode);
+    }
+
+    public bool ExistsCityWithName(Guid id, string name)
+    {
+        return _repository.ExistsCityWithName(id, name);
+    }
+
     public ValueTask<City?> GetByIdAsync(Guid id)
     {
         return _repository.GetByIdAsync(id);
