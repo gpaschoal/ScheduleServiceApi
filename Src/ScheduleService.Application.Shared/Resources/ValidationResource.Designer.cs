@@ -61,7 +61,7 @@ namespace ScheduleService.Application.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Already exists a Country with this external code.
+        ///   Looks up a localized string similar to Already exists a country with this external code.
         /// </summary>
         public static string AlreadyExistsACountryWithThisExternalCode {
             get {
@@ -70,11 +70,29 @@ namespace ScheduleService.Application.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Already exists a Country with this name.
+        ///   Looks up a localized string similar to Already exists a country with this name.
         /// </summary>
         public static string AlreadyExistsACountryWithThisName {
             get {
                 return ResourceManager.GetString("AlreadyExistsACountryWithThisName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already exists a state with this external code.
+        /// </summary>
+        public static string AlreadyExistsAStateWithThisExternalCode {
+            get {
+                return ResourceManager.GetString("AlreadyExistsAStateWithThisExternalCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Already exists a state with this name.
+        /// </summary>
+        public static string AlreadyExistsAStateWithThisName {
+            get {
+                return ResourceManager.GetString("AlreadyExistsAStateWithThisName", resourceCulture);
             }
         }
         
@@ -102,6 +120,15 @@ namespace ScheduleService.Application.Shared.Resources {
         public static string ShouldHaveMaxLenght {
             get {
                 return ResourceManager.GetString("ShouldHaveMaxLenght", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are cities using this country.
+        /// </summary>
+        public static string ThereAreCitiesUsingThisState {
+            get {
+                return ResourceManager.GetString("ThereAreCitiesUsingThisState", resourceCulture);
             }
         }
         

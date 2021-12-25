@@ -1,15 +1,39 @@
 ﻿using ScheduleService.Application.Command.Commands.States;
+using ScheduleService.Application.Handler.Repositories.States;
 using ScheduleService.Application.Shared;
+using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Domain.Core.Entities;
 
 namespace ScheduleService.Application.Handler.Handlers.States;
 
 public class StateCreateHandler : HandlerBase<StateCreateCommand, CustomResultData<Guid>>
 {
-    public StateCreateHandler(IHandlerBus handlerBus) : base(handlerBus)
-    { }
+    private readonly IStateCreateRepository _repository;
+
+    public StateCreateHandler(
+        IHandlerBus handlerBus,
+        IStateCreateRepository repository) : base(handlerBus)
+    {
+        _repository = repository;
+    }
 
     public override Task<CustomResultData<Guid>> HandleExecution(StateCreateCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        if (_repository.ExistsStateWithName(name: request.Name))
+            AddError(nameof(request.Name), ValidationResource.AlreadyExistsAStateWithThisName);
+
+        if (_repository.ExistsStateWithExternalCode(externalCode: request.ExternalCode))
+            AddError(nameof(request.ExternalCode), ValidationResource.AlreadyExistsAStateWithThisExternalCode);
+
+        if (IsInvalid)
+            return InvalidResponse();
+
+        State entity = new(request.Name, request.ExternalCode, request.CountryId);
+
+        _repository.AddAsync(entity);
+
+        CustomResultData<Guid> response = new(entity.Id);
+
+        return ValidResponse(response);
     }
 }

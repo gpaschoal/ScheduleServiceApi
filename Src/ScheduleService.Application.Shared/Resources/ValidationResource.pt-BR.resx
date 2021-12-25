@@ -138,4 +138,13 @@
   <data name="ThereAreStatesUsingThisCountry" xml:space="preserve">
     <value>Existem estados usando este país</value>
   </data>
+  <data name="AlreadyExistsAStateWithThisName" xml:space="preserve">
+    <value>Já existe um estado com esse nome</value>
+  </data>
+  <data name="AlreadyExistsAStateWithThisExternalCode" xml:space="preserve">
+    <value>Já existe um estado com esse código externo</value>
+  </data>
+  <data name="ThereAreCitiesUsingThisState" xml:space="preserve">
+    <value>Existem cidades usando este estado</value>
+  </data>
 </root>

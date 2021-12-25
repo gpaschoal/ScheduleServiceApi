@@ -107,15 +107,24 @@
     <value>User not found</value>
   </data>
   <data name="AlreadyExistsACountryWithThisName" xml:space="preserve">
-    <value>Already exists a Country with this name</value>
+    <value>Already exists a country with this name</value>
   </data>
   <data name="AlreadyExistsACountryWithThisExternalCode" xml:space="preserve">
-    <value>Already exists a Country with this external code</value>
+    <value>Already exists a country with this external code</value>
   </data>
   <data name="EntityNotFound" xml:space="preserve">
     <value>Entity not found</value>
   </data>
   <data name="ThereAreStatesUsingThisCountry" xml:space="preserve">
     <value>There are states using this country</value>
+  </data>
+  <data name="AlreadyExistsAStateWithThisName" xml:space="preserve">
+    <value>Already exists a state with this name</value>
+  </data>
+  <data name="AlreadyExistsAStateWithThisExternalCode" xml:space="preserve">
+    <value>Already exists a state with this external code</value>
+  </data>
+  <data name="ThereAreCitiesUsingThisState" xml:space="preserve">
+    <value>There are cities using this country</value>
   </data>
 </root>

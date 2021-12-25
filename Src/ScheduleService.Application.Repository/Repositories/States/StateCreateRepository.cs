@@ -17,4 +17,14 @@ public class StateCreateRepository : IStateCreateRepository
     {
         return _repository.AddAsync(data);
     }
+
+    public bool ExistsStateWithExternalCode(string externalCode)
+    {
+        return _repository.ExistsStateWithExternalCode(externalCode);
+    }
+
+    public bool ExistsStateWithName(string name)
+    {
+        return _repository.ExistsStateWithName(name);
+    }
 }

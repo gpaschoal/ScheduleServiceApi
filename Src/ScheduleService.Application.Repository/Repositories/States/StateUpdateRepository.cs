@@ -13,6 +13,16 @@ public class StateUpdateRepository : IStateUpdateRepository
         _repository = repository;
     }
 
+    public bool ExistsStateWithExternalCode(Guid id, string externalCode)
+    {
+        return _repository.ExistsStateWithExternalCode(id, externalCode);
+    }
+
+    public bool ExistsStateWithName(Guid id, string name)
+    {
+        return _repository.ExistsStateWithName(id, name);
+    }
+
     public ValueTask<State?> GetByIdAsync(Guid id)
     {
         return _repository.GetByIdAsync(id);

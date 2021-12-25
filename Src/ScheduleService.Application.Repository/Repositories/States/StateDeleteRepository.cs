@@ -18,6 +18,11 @@ public class StateDeleteRepository : IStateDeleteRepository
         return _repository.CheckIfExistByIdAsync(id);
     }
 
+    public ValueTask<bool> CheckIfIsUsedByCity(Guid id)
+    {
+        return _repository.CheckIfIsUsedByCity(id);
+    }
+
     public ValueTask DeleteAsync(Guid id)
     {
         return _repository.DeleteAsync(id);
