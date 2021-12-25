@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyValidation.Core" Version="1.0.0.7" />
-    <PackageReference Include="EasyValidation.DependencyInjection" Version="1.0.0.4" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ScheduleService.Application.Command\ScheduleService.Application.Command.csproj" />
     <ProjectReference Include="..\ScheduleService.Application.Shared\ScheduleService.Application.Shared.csproj" />
   </ItemGroup>

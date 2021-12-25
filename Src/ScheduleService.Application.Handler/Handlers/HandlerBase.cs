@@ -34,6 +34,11 @@ public abstract class HandlerBase<TRequest, TResponse> : IRequestHandler<TReques
 
     public abstract Task<TResponse> HandleExecution(TRequest request, CancellationToken cancellationToken);
 
+    public void AddError(string message)
+    {
+        _response.AddMessageError(message);
+    }
+
     public void AddError(string key, string message)
     {
         _response.AddFieldError(key, message);

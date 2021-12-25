@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyValidation.Core" Version="1.0.0.7" />
-    <PackageReference Include="EasyValidation.DependencyInjection" Version="1.0.0.4" />
+    <PackageReference Include="EasyValidation.Core" Version="1.0.0.8" />
+    <PackageReference Include="EasyValidation.DependencyInjection" Version="1.0.0.5" />
     <PackageReference Include="MediatR" Version="9.0.0" />
   </ItemGroup>
 
