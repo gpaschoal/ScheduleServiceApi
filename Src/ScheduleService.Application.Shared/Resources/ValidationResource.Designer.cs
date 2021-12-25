@@ -106,6 +106,15 @@ namespace ScheduleService.Application.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are states using this country.
+        /// </summary>
+        public static string ThereAreStatesUsingThisCountry {
+            get {
+                return ResourceManager.GetString("ThereAreStatesUsingThisCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User not found.
         /// </summary>
         public static string UserNotFound {

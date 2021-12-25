@@ -21,8 +21,8 @@ public class CountryDeleteHandler : HandlerBase<CountryDeleteCommand, CustomResu
         if (!await _repository.CheckIfExistByIdAsync(request.Id))
             AddError(nameof(request.Id), ValidationResource.EntityNotFound);
 
-        if (!await _repository.CheckIfIsUsedByState(request.Id))
-            AddError(nameof(request.Id), ValidationResource.EntityNotFound);
+        if (await _repository.CheckIfIsUsedByState(request.Id))
+            AddError(ValidationResource.ThereAreStatesUsingThisCountry);
 
         if (IsInvalid)
             return InvalidResponseAsync();

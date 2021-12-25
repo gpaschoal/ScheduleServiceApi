@@ -115,4 +115,7 @@
   <data name="EntityNotFound" xml:space="preserve">
     <value>Entity not found</value>
   </data>
+  <data name="ThereAreStatesUsingThisCountry" xml:space="preserve">
+    <value>There are states using this country</value>
+  </data>
 </root>

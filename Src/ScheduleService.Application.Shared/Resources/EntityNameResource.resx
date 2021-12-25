@@ -115,4 +115,10 @@
   <data name="CountryPlural" xml:space="preserve">
     <value>Countries</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="UserPlural" xml:space="preserve">
+    <value>Users</value>
+  </data>
 </root>

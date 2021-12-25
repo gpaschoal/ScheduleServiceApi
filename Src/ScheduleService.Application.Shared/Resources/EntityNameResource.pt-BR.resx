@@ -135,4 +135,10 @@
   <data name="StatePlural" xml:space="preserve">
     <value>Estados</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>Usuário</value>
+  </data>
+  <data name="UserPlural" xml:space="preserve">
+    <value>Usuários</value>
+  </data>
 </root>
