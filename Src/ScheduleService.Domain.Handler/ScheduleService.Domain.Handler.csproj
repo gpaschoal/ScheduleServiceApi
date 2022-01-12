@@ -7,13 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ScheduleService.Domain.Command\ScheduleService.Domain.Command.csproj" />
     <ProjectReference Include="..\ScheduleService.Domain.Core\ScheduleService.Domain.Core.csproj" />
     <ProjectReference Include="..\ScheduleService.Domain.Repository\ScheduleService.Domain.Repository.csproj" />
     <ProjectReference Include="..\ScheduleService.Domain.Shared\ScheduleService.Domain.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Handlers\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using ScheduleService.Application.Command.Commands.Countries;
 using ScheduleService.Application.Validator.Validators.Countries;
+using ScheduleService.Domain.Command.Commands.Countries;
 using System.Linq;
 using Xunit;
 

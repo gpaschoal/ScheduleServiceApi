@@ -2,6 +2,7 @@
 using ScheduleService.Application.Handler.Repositories.States;
 using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.States;
 

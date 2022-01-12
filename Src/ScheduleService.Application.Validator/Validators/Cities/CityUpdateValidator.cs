@@ -1,7 +1,7 @@
 ﻿using EasyValidation.Core;
 using EasyValidation.Core.Extensions;
-using ScheduleService.Application.Command.Commands.Cities;
 using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Domain.Command.Commands.Cities;
 
 namespace ScheduleService.Application.Validator.Validators.Cities;
 

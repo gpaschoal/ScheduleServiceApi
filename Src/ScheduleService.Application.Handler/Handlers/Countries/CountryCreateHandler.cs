@@ -1,8 +1,9 @@
-﻿using ScheduleService.Application.Command.Commands.Countries;
-using ScheduleService.Application.Handler.Repositories.Countries;
+﻿using ScheduleService.Application.Handler.Repositories.Countries;
 using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Domain.Command.Commands.Countries;
 using ScheduleService.Domain.Core.Entities;
+using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.Countries;
 

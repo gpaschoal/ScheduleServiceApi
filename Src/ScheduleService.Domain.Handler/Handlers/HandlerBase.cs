@@ -1,7 +1,7 @@
 ﻿using EasyValidation.Core.Results;
-using ScheduleService.Application.Command.Commands;
+using ScheduleService.Domain.Command.Commands;
 
-namespace ScheduleService.Application.Handler.Handlers;
+namespace ScheduleService.Domain.Handler.Handlers;
 public abstract class HandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
     where TResponse : IResultData, new()

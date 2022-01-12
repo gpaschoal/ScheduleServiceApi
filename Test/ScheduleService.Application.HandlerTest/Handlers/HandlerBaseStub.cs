@@ -1,6 +1,6 @@
-﻿using ScheduleService.Application.Command.Commands;
-using ScheduleService.Application.Handler.Handlers;
-using ScheduleService.Application.Shared;
+﻿using ScheduleService.Application.Shared;
+using ScheduleService.Domain.Command.Commands;
+using ScheduleService.Domain.Handler.Handlers;
 using System.Threading;
 using System.Threading.Tasks;
 

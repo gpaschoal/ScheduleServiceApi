@@ -1,7 +1,8 @@
-﻿using ScheduleService.Application.Command.Commands.Cities;
-using ScheduleService.Application.Handler.Repositories.Cities;
+﻿using ScheduleService.Application.Handler.Repositories.Cities;
 using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Domain.Command.Commands.Cities;
+using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.Cities;
 

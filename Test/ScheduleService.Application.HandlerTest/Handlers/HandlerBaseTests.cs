@@ -1,8 +1,8 @@
 ﻿using EasyValidation.DependencyInjection;
 using FluentAssertions;
 using Moq;
-using ScheduleService.Application.Handler.Handlers;
 using ScheduleService.Application.Shared;
+using ScheduleService.Domain.Handler.Handlers;
 using System.Linq;
 using Xunit;
 
