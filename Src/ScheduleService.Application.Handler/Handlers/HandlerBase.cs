@@ -1,5 +1,5 @@
 ﻿using EasyValidation.Core.Results;
-using MediatR;
+using ScheduleService.Application.Command.Commands;
 
 namespace ScheduleService.Application.Handler.Handlers;
 public abstract class HandlerBase<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>

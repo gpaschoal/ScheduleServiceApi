@@ -1,5 +1,4 @@
 ﻿using EasyValidation.DependencyInjection;
-using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -37,7 +36,6 @@ public class ConfigurationIoC
         IoCRepositoriesApplication.Configure(services, configuration);
 
         services.AddEasyValidationValidators(typeof(CityCreateValidator).Assembly);
-        services.AddMediatR(typeof(IHandlerBus).Assembly);
 
         /* Handler Bus */
         services.AddScoped<IHandlerBus, HandlerBus>();
