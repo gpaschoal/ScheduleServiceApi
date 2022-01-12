@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using ScheduleService.Application.Handler;
 using ScheduleService.Application.Handler.Services;
 using ScheduleService.Application.Handler.Services.Models;
 using ScheduleService.Application.Repository;
@@ -38,11 +39,9 @@ public class ConfigurationIoC
 
         IoCRepositories.Configure(services);
         IoCRepositoriesApplication.AddApplicationRepository(services);
+        IoCHandlersApplication.AddApplicationHandler(services);
 
         services.AddEasyValidationValidators(typeof(CityCreateValidator).Assembly);
-
-        /* Handler Bus */
-        services.AddScoped<IHandlerBus, HandlerBus>();
 
         ConfigureEncryptation(services, configuration);
         ConfigureJWT(services, configuration);

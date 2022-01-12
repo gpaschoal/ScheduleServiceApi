@@ -3,6 +3,7 @@ using ScheduleService.Application.Shared.Resources;
 using ScheduleService.Domain.Command.Commands.States;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Handler.Handlers;
+using ScheduleService.Domain.Handler.Handlers.States;
 using ScheduleService.Domain.Handler.Repositories.States;
 
 namespace ScheduleService.Application.Handler.Handlers.States;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ScheduleService.Application.Handler.Handlers.States;
 using ScheduleService.Domain.Command.Commands.States;
+using ScheduleService.Domain.Handler.Handlers.States;
 
 namespace ScheduleService.Presentation.Api.Controllers;
 
