@@ -4,7 +4,7 @@ using ScheduleService.Domain.Repository.Repositories;
 
 namespace ScheduleService.Application.Repository.Repositories.Users;
 
-public class UserSignInRepository : IUserSignInRepository
+internal class UserSignInRepository : IUserSignInRepository
 {
     private readonly IUserRepository _repository;
 

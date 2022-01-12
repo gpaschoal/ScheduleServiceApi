@@ -4,7 +4,7 @@ using ScheduleService.Domain.Repository.Repositories;
 
 namespace ScheduleService.Application.Repository.Repositories.States;
 
-public class StateUpdateRepository : IStateUpdateRepository
+internal class StateUpdateRepository : IStateUpdateRepository
 {
     private readonly IStateRepository _repository;
 

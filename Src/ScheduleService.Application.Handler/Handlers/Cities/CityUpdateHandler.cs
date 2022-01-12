@@ -6,7 +6,7 @@ using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.Cities;
 
-public class CityUpdateHandler : HandlerBase<CityUpdateCommand, CustomResultData>
+internal class CityUpdateHandler : HandlerBase<CityUpdateCommand, CustomResultData>, ICityUpdateHandler
 {
     private readonly ICityUpdateRepository _repository;
 

@@ -6,7 +6,7 @@ using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.States;
 
-public class StateDeleteHandler : HandlerBase<StateDeleteCommand, CustomResultData>
+internal class StateDeleteHandler : HandlerBase<StateDeleteCommand, CustomResultData>, IStateDeleteHandler
 {
     private readonly IStateDeleteRepository _repository;
 

@@ -9,7 +9,7 @@ using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.Users;
 
-public class UserSignInHandler : HandlerBase<UserSignInCommand, CustomResultData<UserSignInResponse>>
+internal class UserSignInHandler : HandlerBase<UserSignInCommand, CustomResultData<UserSignInResponse>>, IUserSignInHandler
 {
     private readonly IUserSignInRepository _repository;
     private readonly IEncryptionService _encryptionService;

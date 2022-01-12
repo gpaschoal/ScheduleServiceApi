@@ -6,7 +6,7 @@ using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.States;
 
-public class StateUpdateHandler : HandlerBase<StateUpdateCommand, CustomResultData>
+internal class StateUpdateHandler : HandlerBase<StateUpdateCommand, CustomResultData>, IStateUpdateHandler
 {
     private readonly IStateUpdateRepository _repository;
 

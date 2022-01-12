@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using ScheduleService.Application.Handler.Repositories.Cities;
 using ScheduleService.Application.Handler.Repositories.Countries;
 using ScheduleService.Application.Handler.Repositories.States;
@@ -9,11 +8,11 @@ using ScheduleService.Application.Repository.Repositories.Countries;
 using ScheduleService.Application.Repository.Repositories.States;
 using ScheduleService.Application.Repository.Repositories.Users;
 
-namespace ScheduleService.IoC.Container;
+namespace ScheduleService.Application.Repository;
 
-internal class IoCRepositoriesApplication
+public static class IoCRepositoriesApplication
 {
-    public static void Configure(IServiceCollection services, IConfiguration configuration)
+    public static void AddApplicationRepository(IServiceCollection services)
     {
         _ = services
                 /* City */

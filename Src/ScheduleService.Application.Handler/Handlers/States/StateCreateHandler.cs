@@ -7,7 +7,7 @@ using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.States;
 
-public class StateCreateHandler : HandlerBase<StateCreateCommand, CustomResultData<Guid>>
+internal class StateCreateHandler : HandlerBase<StateCreateCommand, CustomResultData<Guid>>, IStateCreateHandler
 {
     private readonly IStateCreateRepository _repository;
 

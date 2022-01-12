@@ -7,7 +7,7 @@ using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.Countries;
 
-public class CountryCreateHandler : HandlerBase<CountryCreateCommand, CustomResultData<Guid>>
+internal class CountryCreateHandler : HandlerBase<CountryCreateCommand, CustomResultData<Guid>>, ICountryCreateHandler
 {
     private readonly ICountryCreateRepository _repository;
 

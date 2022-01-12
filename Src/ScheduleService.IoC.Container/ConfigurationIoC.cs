@@ -8,9 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using ScheduleService.Application.Handler.Services;
 using ScheduleService.Application.Handler.Services.Models;
+using ScheduleService.Application.Repository;
 using ScheduleService.Application.Validator.Validators.Cities;
 using ScheduleService.Domain.Handler.Handlers;
 using ScheduleService.Infrastructure.Context.Contexts;
+using ScheduleService.Infrastructure.Repository;
 using ServiceStack.Redis;
 using System.Text;
 
@@ -30,23 +32,34 @@ public class ConfigurationIoC
             options.UseSqlServer(configuration.GetConnectionString("DbConn"));
             options.EnableDetailedErrors();
         });
-        services.AddSingleton<IRedisClientsManagerAsync>(c => new RedisManagerPool(configuration.GetConnectionString("RedisConn")));
 
-        IoCRepositories.Configure(services, configuration);
-        IoCRepositoriesApplication.Configure(services, configuration);
+        services.AddSingleton<IRedisClientsManagerAsync>(c => new RedisManagerPool(configuration.GetConnectionString("RedisConn")));
+        _ = services.Configure<CacheConfiguration>(configuration.GetSection("CacheConfiguration"));
+
+        IoCRepositories.Configure(services);
+        IoCRepositoriesApplication.AddApplicationRepository(services);
 
         services.AddEasyValidationValidators(typeof(CityCreateValidator).Assembly);
 
         /* Handler Bus */
         services.AddScoped<IHandlerBus, HandlerBus>();
 
+        ConfigureEncryptation(services, configuration);
+        ConfigureJWT(services, configuration);
+    }
+
+    private static void ConfigureEncryptation(IServiceCollection services, ConfigurationManager configuration)
+    {
         /* Encrypt Service */
         services.AddScoped<IEncryptionService, EncryptionService>();
         services.AddScoped<ITokenService, TokenService>();
 
         /* Encrypt Service Model */
         services.Configure<EncryptionModel>(configuration.GetSection("Encryption"));
+    }
 
+    private static void ConfigureJWT(IServiceCollection services, ConfigurationManager configuration)
+    {
         /* JWT Authentication */
         services.Configure<JWTEncriptionModel>(configuration.GetSection("SecretToken"));
         string keySecretToken = configuration.GetSection("SecretToken")["Key"];

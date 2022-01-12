@@ -4,7 +4,7 @@ using ScheduleService.Domain.Repository.Repositories;
 
 namespace ScheduleService.Application.Repository.Repositories.Cities;
 
-public class CityCreateRepository : ICityCreateRepository
+internal class CityCreateRepository : ICityCreateRepository
 {
     private readonly ICityRepository _repository;
 

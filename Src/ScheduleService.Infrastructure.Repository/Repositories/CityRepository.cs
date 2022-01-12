@@ -5,7 +5,7 @@ using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Infrastructure.Repository.Repositories;
 
-public class CityRepository : RepositoryBase<City>, ICityRepository
+internal class CityRepository : RepositoryBase<City>, ICityRepository
 {
     public CityRepository(ScheduleServiceDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
     { }

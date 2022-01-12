@@ -6,7 +6,7 @@ using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.Countries;
 
-public class CountryDeleteHandler : HandlerBase<CountryDeleteCommand, CustomResultData>
+internal class CountryDeleteHandler : HandlerBase<CountryDeleteCommand, CustomResultData>, ICountryDeleteHandler
 {
     private readonly ICountryDeleteRepository _repository;
 

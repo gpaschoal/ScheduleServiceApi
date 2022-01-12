@@ -6,7 +6,7 @@ using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.Cities;
 
-public class CityDeleteHandler : HandlerBase<CityDeleteCommand, CustomResultData>
+internal class CityDeleteHandler : HandlerBase<CityDeleteCommand, CustomResultData>, ICityDeleteHandler
 {
     private readonly ICityDeleteRepository _repository;
 

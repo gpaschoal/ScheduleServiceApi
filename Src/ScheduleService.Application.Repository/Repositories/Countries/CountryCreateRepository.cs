@@ -4,7 +4,7 @@ using ScheduleService.Domain.Repository.Repositories;
 
 namespace ScheduleService.Application.Repository.Repositories.Countries;
 
-public class CountryCreateRepository : ICountryCreateRepository
+internal class CountryCreateRepository : ICountryCreateRepository
 {
     private readonly ICountryRepository _repository;
 

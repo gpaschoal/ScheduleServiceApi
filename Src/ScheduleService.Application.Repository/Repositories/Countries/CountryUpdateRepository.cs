@@ -4,7 +4,7 @@ using ScheduleService.Domain.Repository.Repositories;
 
 namespace ScheduleService.Application.Repository.Repositories.Countries;
 
-public class CountryUpdateRepository : ICountryUpdateRepository
+internal class CountryUpdateRepository : ICountryUpdateRepository
 {
     private readonly ICountryRepository _repository;
 

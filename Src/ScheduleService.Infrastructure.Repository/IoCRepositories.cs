@@ -1,15 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using ScheduleService.Domain.Repository;
 using ScheduleService.Domain.Repository.Repositories;
-using ScheduleService.Infrastructure.Repository;
 using ScheduleService.Infrastructure.Repository.Repositories;
 
-namespace ScheduleService.IoC.Container;
+namespace ScheduleService.Infrastructure.Repository;
 
-internal class IoCRepositories
+public class IoCRepositories
 {
-    public static void Configure(IServiceCollection services, IConfiguration configuration)
+    public static void Configure(IServiceCollection services)
     {
         _ = services
                 /* Cache Repositories */
@@ -32,7 +30,5 @@ internal class IoCRepositories
                 .AddScoped<IStateRepository, StateRepository>()
                 .AddScoped<IUserRepository, UserRepository>()
                 ;
-
-        _ = services.Configure<CacheConfiguration>(configuration.GetSection("CacheConfiguration"));
     }
 }

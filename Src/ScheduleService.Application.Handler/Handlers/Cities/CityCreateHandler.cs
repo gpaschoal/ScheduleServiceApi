@@ -7,7 +7,7 @@ using ScheduleService.Domain.Handler.Handlers;
 
 namespace ScheduleService.Application.Handler.Handlers.Cities;
 
-public class CityCreateHandler : HandlerBase<CityCreateCommand, CustomResultData<Guid>>
+internal class CityCreateHandler : HandlerBase<CityCreateCommand, CustomResultData<Guid>>, ICityCreateHandler
 {
     private readonly ICityCreateRepository _repository;
 
