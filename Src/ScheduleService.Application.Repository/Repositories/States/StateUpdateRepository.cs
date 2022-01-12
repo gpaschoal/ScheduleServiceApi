@@ -1,5 +1,5 @@
-﻿using ScheduleService.Application.Handler.Repositories.States;
-using ScheduleService.Domain.Core.Entities;
+﻿using ScheduleService.Domain.Core.Entities;
+using ScheduleService.Domain.Handler.Repositories.States;
 using ScheduleService.Domain.Repository.Repositories;
 
 namespace ScheduleService.Application.Repository.Repositories.States;

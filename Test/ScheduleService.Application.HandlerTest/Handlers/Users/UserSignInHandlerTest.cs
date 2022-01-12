@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
 using Moq;
 using ScheduleService.Application.Handler.Handlers.Users;
-using ScheduleService.Application.Handler.Repositories.Users;
 using ScheduleService.Application.Handler.Services;
 using ScheduleService.Application.Handler.Services.Responses;
 using ScheduleService.Domain.Command.Commands.Users;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Handler.Handlers;
+using ScheduleService.Domain.Handler.Repositories.Users;
 using System;
 using System.Linq;
 using Xunit;

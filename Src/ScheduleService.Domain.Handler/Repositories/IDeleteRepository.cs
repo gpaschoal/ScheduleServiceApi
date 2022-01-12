@@ -1,6 +1,6 @@
 ﻿using ScheduleService.Domain.Core.Entities.Base;
 
-namespace ScheduleService.Application.Handler.Repositories;
+namespace ScheduleService.Domain.Handler.Repositories;
 
 public interface IDeleteRepository<TEntity> : IHandlerRepository<TEntity> where TEntity : EntityBase
 {

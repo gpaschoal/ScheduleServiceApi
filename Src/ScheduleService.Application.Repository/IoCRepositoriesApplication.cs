@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ScheduleService.Application.Handler.Repositories.Cities;
-using ScheduleService.Application.Handler.Repositories.Countries;
-using ScheduleService.Application.Handler.Repositories.States;
-using ScheduleService.Application.Handler.Repositories.Users;
 using ScheduleService.Application.Repository.Repositories.Cities;
 using ScheduleService.Application.Repository.Repositories.Countries;
 using ScheduleService.Application.Repository.Repositories.States;
 using ScheduleService.Application.Repository.Repositories.Users;
+using ScheduleService.Domain.Handler.Repositories.Cities;
+using ScheduleService.Domain.Handler.Repositories.Countries;
+using ScheduleService.Domain.Handler.Repositories.States;
+using ScheduleService.Domain.Handler.Repositories.Users;
 
 namespace ScheduleService.Application.Repository;
 
