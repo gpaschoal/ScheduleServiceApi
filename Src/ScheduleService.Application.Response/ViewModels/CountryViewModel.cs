@@ -1,4 +1,4 @@
-﻿namespace ScheduleService.Application.ViewModelResponses.ViewModels;
+﻿namespace ScheduleService.Application.Response.ViewModels;
 
 public class CountryViewModel : IViewModelBase
 {

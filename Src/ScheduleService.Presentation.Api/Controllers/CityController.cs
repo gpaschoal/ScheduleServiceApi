@@ -16,7 +16,7 @@ public class CityController : ControllerBase
         _mediator = mediator;
     }
 
-    [Authorize, HttpPost, Route("Create")]
+    [Authorize, HttpPost, Route("")]
     public async Task<IActionResult> Create(
        [FromBody] CityCreateCommand command)
     {
@@ -27,7 +27,7 @@ public class CityController : ControllerBase
         return BadRequest(response);
     }
 
-    [Authorize, HttpPut, Route("Update")]
+    [Authorize, HttpPut, Route("")]
     public async Task<IActionResult> Update(
         [FromBody] CityUpdateCommand command)
     {
@@ -38,7 +38,7 @@ public class CityController : ControllerBase
         return BadRequest(response);
     }
 
-    [Authorize, HttpDelete, Route("Delete")]
+    [Authorize, HttpDelete, Route("")]
     public async Task<IActionResult> Delete(
         [FromBody] CityDeleteCommand command)
     {

@@ -10,7 +10,7 @@ public class CityDeleteHandler : HandlerBase<CityDeleteCommand, CustomResultData
     private readonly ICityDeleteRepository _repository;
 
     public CityDeleteHandler(
-        IHandlerBus handlerBus, 
+        IHandlerBus handlerBus,
         ICityDeleteRepository repository) : base(handlerBus)
     {
         _repository = repository;

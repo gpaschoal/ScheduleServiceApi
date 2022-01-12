@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
-using ScheduleService.Application.Command.Commands.User;
+using ScheduleService.Application.Command.Commands.Users;
 using ScheduleService.Application.Handler.Handlers;
 using ScheduleService.Application.Handler.Handlers.Users;
 using ScheduleService.Application.Handler.Repositories.Users;

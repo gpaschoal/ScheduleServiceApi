@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ScheduleService.Application.Command.Commands.User;
+using ScheduleService.Application.Command.Commands.Users;
 
 namespace ScheduleService.Presentation.Api.Controllers;
 

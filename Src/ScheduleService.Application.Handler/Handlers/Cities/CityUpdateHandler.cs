@@ -10,7 +10,7 @@ public class CityUpdateHandler : HandlerBase<CityUpdateCommand, CustomResultData
     private readonly ICityUpdateRepository _repository;
 
     public CityUpdateHandler(
-        IHandlerBus handlerBus, 
+        IHandlerBus handlerBus,
         ICityUpdateRepository repository) : base(handlerBus)
     {
         _repository = repository;

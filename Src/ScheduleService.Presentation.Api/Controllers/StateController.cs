@@ -16,7 +16,7 @@ public class StateController : ControllerBase
         _mediator = mediator;
     }
 
-    [Authorize, HttpPost, Route("Create")]
+    [Authorize, HttpPost, Route("")]
     public async Task<IActionResult> Create(
        [FromBody] StateCreateCommand command)
     {
@@ -27,7 +27,7 @@ public class StateController : ControllerBase
         return BadRequest(response);
     }
 
-    [Authorize, HttpPut, Route("Update")]
+    [Authorize, HttpPut, Route("")]
     public async Task<IActionResult> Update(
         [FromBody] StateUpdateCommand command)
     {
@@ -38,7 +38,7 @@ public class StateController : ControllerBase
         return BadRequest(response);
     }
 
-    [Authorize, HttpDelete, Route("Delete")]
+    [Authorize, HttpDelete, Route("")]
     public async Task<IActionResult> Delete(
         [FromBody] StateDeleteCommand command)
     {

@@ -1,4 +1,4 @@
-﻿namespace ScheduleService.Application.ViewModelResponses.Responses.User;
+﻿namespace ScheduleService.Application.Response.Responses.Users;
 
 public class UserSignInResponse
 {

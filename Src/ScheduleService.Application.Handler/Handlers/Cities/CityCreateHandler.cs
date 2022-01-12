@@ -11,7 +11,7 @@ public class CityCreateHandler : HandlerBase<CityCreateCommand, CustomResultData
     private readonly ICityCreateRepository _repository;
 
     public CityCreateHandler(
-        IHandlerBus handlerBus, 
+        IHandlerBus handlerBus,
         ICityCreateRepository repository) : base(handlerBus)
     {
         _repository = repository;

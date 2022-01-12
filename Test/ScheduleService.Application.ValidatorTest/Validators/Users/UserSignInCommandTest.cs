@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using ScheduleService.Application.Command.Commands.User;
+using ScheduleService.Application.Command.Commands.Users;
 using ScheduleService.Application.Validator.Validators.Users;
 using System.Linq;
 using Xunit;

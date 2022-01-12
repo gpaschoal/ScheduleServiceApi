@@ -1,6 +1,6 @@
-﻿using ScheduleService.Application.ViewModelResponses.Responses.User;
+﻿using ScheduleService.Application.Response.Responses.Users;
 
-namespace ScheduleService.Application.Command.Commands.User;
+namespace ScheduleService.Application.Command.Commands.Users;
 
 public class UserSignInCommand : ICommandExecution<UserSignInResponse>
 {

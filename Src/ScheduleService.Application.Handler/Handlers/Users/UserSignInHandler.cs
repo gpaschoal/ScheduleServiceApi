@@ -1,9 +1,9 @@
-﻿using ScheduleService.Application.Command.Commands.User;
+﻿using ScheduleService.Application.Command.Commands.Users;
 using ScheduleService.Application.Handler.Repositories.Users;
 using ScheduleService.Application.Handler.Services;
+using ScheduleService.Application.Response.Responses.Users;
 using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Application.ViewModelResponses.Responses.User;
 using ScheduleService.Domain.Core.Entities;
 
 namespace ScheduleService.Application.Handler.Handlers.Users;

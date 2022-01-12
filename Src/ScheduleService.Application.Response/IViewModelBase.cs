@@ -1,4 +1,4 @@
-﻿namespace ScheduleService.Application.ViewModelResponses;
+﻿namespace ScheduleService.Application.Response;
 
 public interface IViewModelBase
 {

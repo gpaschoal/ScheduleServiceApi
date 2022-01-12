@@ -1,6 +1,6 @@
 ﻿using EasyValidation.Core;
 using EasyValidation.Core.Extensions;
-using ScheduleService.Application.Command.Commands.User;
+using ScheduleService.Application.Command.Commands.Users;
 using ScheduleService.Application.Shared.Resources;
 
 namespace ScheduleService.Application.Validator.Validators.Users;
