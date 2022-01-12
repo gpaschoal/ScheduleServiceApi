@@ -7,7 +7,7 @@ namespace ScheduleService.Infrastructure.Repository;
 
 public class IoCRepositories
 {
-    public static void Configure(IServiceCollection services)
+    public static void AddInfrastructureRepository(IServiceCollection services)
     {
         _ = services
                 /* Cache Repositories */
