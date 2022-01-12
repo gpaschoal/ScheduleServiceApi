@@ -1,6 +1,6 @@
-﻿using ScheduleService.Application.Command.Commands.States;
-using ScheduleService.Application.Shared;
+﻿using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Domain.Command.Commands.States;
 using ScheduleService.Domain.Handler.Handlers;
 using ScheduleService.Domain.Handler.Repositories.States;
 

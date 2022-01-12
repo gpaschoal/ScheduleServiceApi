@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
-using ScheduleService.Application.Command.Commands.States;
 using ScheduleService.Application.Validator.Validators.States;
+using ScheduleService.Domain.Command.Commands.States;
 using System;
 using System.Linq;
 using Xunit;

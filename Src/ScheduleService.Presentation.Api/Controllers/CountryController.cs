@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using ScheduleService.Application.Handler.Handlers.Countries;
+using ScheduleService.Domain.Command.Commands.Countries;
 
 namespace ScheduleService.Presentation.Api.Controllers;
 
@@ -6,43 +9,39 @@ namespace ScheduleService.Presentation.Api.Controllers;
 [ApiController]
 public class CountryController : ControllerBase
 {
-    //private readonly IMediator _mediator;
+    [Authorize, HttpPost, Route("")]
+    public async Task<IActionResult> Create(
+        [FromServices] ICountryCreateHandler handler,
+        [FromBody] CountryCreateCommand command)
+    {
+        var response = await handler.Handle(command);
 
-    //public CountryController(IMediator mediator)
-    //{
-    //    _mediator = mediator;
-    //}
+        if (response.IsValid)
+            return Ok(response);
+        return BadRequest(response);
+    }
 
-    //[Authorize, HttpPost, Route("")]
-    //public async Task<IActionResult> Create(
-    //   [FromBody] CountryCreateCommand command)
-    //{
-    //    var response = await _mediator.Send(command);
+    [Authorize, HttpPut, Route("")]
+    public async Task<IActionResult> Update(
+        [FromServices] ICountryUpdateHandler handler,
+        [FromBody] CountryUpdateCommand command)
+    {
+        var response = await handler.Handle(command);
 
-    //    if (response.IsValid)
-    //        return Ok(response);
-    //    return BadRequest(response);
-    //}
+        if (response.IsValid)
+            return Ok(response);
+        return BadRequest(response);
+    }
 
-    //[Authorize, HttpPut, Route("")]
-    //public async Task<IActionResult> Update(
-    //    [FromBody] CountryUpdateCommand command)
-    //{
-    //    var response = await _mediator.Send(command);
+    [Authorize, HttpDelete, Route("")]
+    public async Task<IActionResult> Delete(
+        [FromServices] ICountryDeleteHandler handler,
+        [FromBody] CountryDeleteCommand command)
+    {
+        var response = await handler.Handle(command);
 
-    //    if (response.IsValid)
-    //        return Ok(response);
-    //    return BadRequest(response);
-    //}
-
-    //[Authorize, HttpDelete, Route("")]
-    //public async Task<IActionResult> Delete(
-    //    [FromBody] CountryDeleteCommand command)
-    //{
-    //    var response = await _mediator.Send(command);
-
-    //    if (response.IsValid)
-    //        return Ok(response);
-    //    return BadRequest(response);
-    //}
+        if (response.IsValid)
+            return Ok(response);
+        return BadRequest(response);
+    }
 }

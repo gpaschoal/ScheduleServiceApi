@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using ScheduleService.Application.Handler.Handlers.Users;
+using ScheduleService.Domain.Command.Commands.Users;
 
 namespace ScheduleService.Presentation.Api.Controllers;
 
@@ -6,21 +9,15 @@ namespace ScheduleService.Presentation.Api.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    //private readonly IMediator _mediator;
+    [AllowAnonymous, HttpPost, Route("SignIn")]
+    public async Task<IActionResult> SignIn(
+        [FromServices] IUserSignInHandler handler,
+        [FromBody] UserSignInCommand command)
+    {
+        var response = await handler.Handle(command, default);
 
-    //public UserController(IMediator mediator)
-    //{
-    //    _mediator = mediator;
-    //}
-
-    //[AllowAnonymous, HttpPost, Route("SignIn")]
-    //public async Task<IActionResult> SignIn(
-    //   [FromBody] UserSignInCommand command)
-    //{
-    //    var response = await _mediator.Send(command);
-
-    //    if (response.IsValid)
-    //        return Ok(response);
-    //    return BadRequest(response);
-    //}
+        if (response.IsValid)
+            return Ok(response);
+        return BadRequest(response);
+    }
 }
