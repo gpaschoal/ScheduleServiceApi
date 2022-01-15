@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using ScheduleService.Application.Shared;
 using ScheduleService.Domain.Repository;
 
 namespace ScheduleService.Presentation.Api.ActionFilters;
@@ -18,14 +19,14 @@ public class UoWActionFilter : IActionFilter
 
     public void OnActionExecuted(ActionExecutedContext context)
     {
-        //var newResult = context.Result as ObjectResult;
+        var newResult = context.Result as ObjectResult;
 
-        //if (newResult is null)
-        //    return;
+        if (newResult is null)
+            return;
 
-        //if (newResult.Value is IResultData resultData && resultData is not null && resultData.IsValid)
-        //    _unitOfWork.CommitTransaction();
-        //else
-        //    _unitOfWork.RollBackTransaction();
+        if (newResult.Value is CustomResultData resultData && resultData is not null && resultData.IsValid)
+            _unitOfWork.CommitTransaction();
+        else
+            _unitOfWork.RollBackTransaction();
     }
 }
