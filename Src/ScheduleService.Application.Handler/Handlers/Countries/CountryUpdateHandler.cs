@@ -30,7 +30,7 @@ internal class CountryUpdateHandler : RequestHandler<CountryUpdateCommand, Custo
 
         var entity = await _repository.GetByIdAsync(id: request.Id);
         if (entity is null)
-            AddError(nameof(request.Id), ValidationResource.EntityNotFound);
+            AddError(ValidationResource.EntityNotFound);
 
         if (IsInvalid)
             return InvalidResponse();
