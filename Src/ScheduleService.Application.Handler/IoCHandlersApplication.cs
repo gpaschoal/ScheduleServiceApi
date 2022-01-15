@@ -16,9 +16,6 @@ public static class IoCHandlersApplication
     public static void AddApplicationHandler(IServiceCollection services)
     {
         _ = services
-                /* Handler Bus */
-                .AddScoped<IHandlerBus, HandlerBus>()
-
                 /* City */
                 .AddScoped<ICityCreateHandler, CityCreateHandler>()
                 .AddScoped<ICityUpdateHandler, CityUpdateHandler>()

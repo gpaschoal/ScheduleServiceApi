@@ -1,15 +1,13 @@
-﻿using EasyValidation.Core;
-using EasyValidation.Core.Extensions;
+﻿using FluentValidation;
 using ScheduleService.Application.Shared.Resources;
 using ScheduleService.Domain.Command.Commands.Cities;
 
 namespace ScheduleService.Application.Validator.Validators.Cities;
 
-public class CityDeleteValidator : Validation<CityDeleteCommand>
+public class CityDeleteValidator : AbstractValidator<CityDeleteCommand>
 {
-    public override void Validate()
+    public CityDeleteValidator()
     {
-        ForMember(x => x.Id)
-            .IsNotEmpty(ValidationResource.IsRequired);
+        RuleFor(x => x.Id).NotEmpty().WithMessage(ValidationResource.IsRequired);
     }
 }

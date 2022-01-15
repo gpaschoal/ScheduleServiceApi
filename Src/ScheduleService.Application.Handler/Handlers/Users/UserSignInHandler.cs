@@ -2,6 +2,7 @@
 using ScheduleService.Application.Response.Responses.Users;
 using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Application.Validator.Validators.Users;
 using ScheduleService.Domain.Command.Commands.Users;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Handler.Handlers;
@@ -10,25 +11,27 @@ using ScheduleService.Domain.Handler.Repositories.Users;
 
 namespace ScheduleService.Application.Handler.Handlers.Users;
 
-internal class UserSignInHandler : HandlerBase<UserSignInCommand, CustomResultData<UserSignInResponse>>, IUserSignInHandler
+internal class UserSignInHandler : RequestHandler<UserSignInCommand, CustomResultData<UserSignInResponse>>, IUserSignInHandler
 {
     private readonly IUserSignInRepository _repository;
     private readonly IEncryptionService _encryptionService;
     private readonly ITokenService _tokenService;
 
     public UserSignInHandler(
-        IHandlerBus handlerBus,
-        IUserSignInRepository repository,
-        IEncryptionService encryptionService,
-        ITokenService tokenService) : base(handlerBus)
+        IUserSignInRepository repository, 
+        IEncryptionService encryptionService, 
+        ITokenService tokenService)
     {
         _repository = repository;
         _encryptionService = encryptionService;
         _tokenService = tokenService;
     }
 
-    public override Task<CustomResultData<UserSignInResponse>> HandleExecution(UserSignInCommand request, CancellationToken cancellationToken)
+    public override Task<CustomResultData<UserSignInResponse>> Handle(UserSignInCommand request, CancellationToken cancellationToken)
     {
+        if(!Validate<UserSignInValidator>(request))
+            return InvalidResponseAsync();
+
         var encryptedPassword = _encryptionService.Encrypt(request.Password);
 
         User user = _repository.GetUserByEmailAndPassword(email: request.Email, password: encryptedPassword);
@@ -37,7 +40,7 @@ internal class UserSignInHandler : HandlerBase<UserSignInCommand, CustomResultDa
             AddError(nameof(request.Password), ValidationResource.UserNotFound);
 
         if (IsInvalid)
-            return InvalidResponse();
+            return InvalidResponseAsync();
 
         var tokenResponse = _tokenService.TokenGenerator(user);
 
@@ -52,6 +55,6 @@ internal class UserSignInHandler : HandlerBase<UserSignInCommand, CustomResultDa
 
         CustomResultData<UserSignInResponse> response = new(loginResponse);
 
-        return ValidResponse(response);
+        return ValidResponseAsync(response);
     }
 }

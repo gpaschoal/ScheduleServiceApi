@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using ScheduleService.IoC.Container;
 using ScheduleService.Presentation.Api.ActionFilters;
@@ -31,6 +32,7 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+builder.Services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
 
 ConfigurationIoC.Configure(builder);
 

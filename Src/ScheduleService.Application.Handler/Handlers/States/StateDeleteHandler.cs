@@ -1,5 +1,6 @@
 ﻿using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Application.Validator.Validators.States;
 using ScheduleService.Domain.Command.Commands.States;
 using ScheduleService.Domain.Handler.Handlers;
 using ScheduleService.Domain.Handler.Handlers.States;
@@ -7,19 +8,20 @@ using ScheduleService.Domain.Handler.Repositories.States;
 
 namespace ScheduleService.Application.Handler.Handlers.States;
 
-internal class StateDeleteHandler : HandlerBase<StateDeleteCommand, CustomResultData>, IStateDeleteHandler
+internal class StateDeleteHandler : RequestHandler<StateDeleteCommand, CustomResultData>, IStateDeleteHandler
 {
     private readonly IStateDeleteRepository _repository;
 
-    public StateDeleteHandler(
-        IHandlerBus handlerBus,
-        IStateDeleteRepository repository) : base(handlerBus)
+    public StateDeleteHandler(IStateDeleteRepository repository)
     {
         _repository = repository;
     }
 
-    public async override Task<CustomResultData> HandleExecution(StateDeleteCommand request, CancellationToken cancellationToken)
+    public async override Task<CustomResultData> Handle(StateDeleteCommand request, CancellationToken cancellationToken)
     {
+        if (!Validate<StateDeleteValidator>(request))
+            return InvalidResponse();
+
         if (!await _repository.CheckIfExistByIdAsync(request.Id))
             AddError(ValidationResource.EntityNotFound);
 
@@ -27,10 +29,10 @@ internal class StateDeleteHandler : HandlerBase<StateDeleteCommand, CustomResult
             AddError(ValidationResource.ThereAreCitiesUsingThisState);
 
         if (IsInvalid)
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         await _repository.DeleteAsync(request.Id);
 
-        return ValidResponseAsync();
+        return ValidResponse();
     }
 }

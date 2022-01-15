@@ -1,5 +1,6 @@
 ﻿using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Application.Validator.Validators.Countries;
 using ScheduleService.Domain.Command.Commands.Countries;
 using ScheduleService.Domain.Handler.Handlers;
 using ScheduleService.Domain.Handler.Handlers.Countries;
@@ -7,19 +8,20 @@ using ScheduleService.Domain.Handler.Repositories.Countries;
 
 namespace ScheduleService.Application.Handler.Handlers.Countries;
 
-internal class CountryUpdateHandler : HandlerBase<CountryUpdateCommand, CustomResultData>, ICountryUpdateHandler
+internal class CountryUpdateHandler : RequestHandler<CountryUpdateCommand, CustomResultData>, ICountryUpdateHandler
 {
     private readonly ICountryUpdateRepository _repository;
 
-    public CountryUpdateHandler(
-        IHandlerBus handlerBus,
-        ICountryUpdateRepository repository) : base(handlerBus)
+    public CountryUpdateHandler(ICountryUpdateRepository repository)
     {
         _repository = repository;
     }
 
-    public async override Task<CustomResultData> HandleExecution(CountryUpdateCommand request, CancellationToken cancellationToken)
+    public async override Task<CustomResultData> Handle(CountryUpdateCommand request, CancellationToken cancellationToken)
     {
+        if (!Validate<CountryUpdateValidator>(request))
+            return InvalidResponse();
+
         if (_repository.ExistsCountryWithName(id: request.Id, name: request.Name))
             AddError(nameof(request.Name), ValidationResource.AlreadyExistsACountryWithThisName);
 
@@ -31,12 +33,12 @@ internal class CountryUpdateHandler : HandlerBase<CountryUpdateCommand, CustomRe
             AddError(nameof(request.Id), ValidationResource.EntityNotFound);
 
         if (IsInvalid)
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         entity.Update(name: request.Name, externalCode: request.ExternalCode);
 
         await _repository.UpdateAsync(entity);
 
-        return ValidResponseAsync();
+        return ValidResponse();
     }
 }

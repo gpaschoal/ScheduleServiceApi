@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="10.3.6" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ScheduleService.Domain.Command\ScheduleService.Domain.Command.csproj" />
     <ProjectReference Include="..\ScheduleService.Domain.Core\ScheduleService.Domain.Core.csproj" />
     <ProjectReference Include="..\ScheduleService.Domain.Repository\ScheduleService.Domain.Repository.csproj" />

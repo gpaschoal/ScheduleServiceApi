@@ -1,15 +1,13 @@
-﻿using EasyValidation.Core;
-using EasyValidation.Core.Extensions;
+﻿using FluentValidation;
 using ScheduleService.Application.Shared.Resources;
 using ScheduleService.Domain.Command.Commands.Countries;
 
 namespace ScheduleService.Application.Validator.Validators.Countries;
 
-public class CountryDeleteValidator : Validation<CountryDeleteCommand>
+public class CountryDeleteValidator : AbstractValidator<CountryDeleteCommand>
 {
-    public override void Validate()
+    public CountryDeleteValidator()
     {
-        ForMember(x => x.Id)
-            .IsNotEmpty(ValidationResource.IsRequired);
+        RuleFor(x => x.Id).NotEmpty().WithMessage(ValidationResource.IsRequired);
     }
 }

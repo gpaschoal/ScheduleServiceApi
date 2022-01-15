@@ -1,5 +1,6 @@
 ﻿using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Application.Validator.Validators.Cities;
 using ScheduleService.Domain.Command.Commands.Cities;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Handler.Handlers;
@@ -8,19 +9,20 @@ using ScheduleService.Domain.Handler.Repositories.Cities;
 
 namespace ScheduleService.Application.Handler.Handlers.Cities;
 
-internal class CityCreateHandler : HandlerBase<CityCreateCommand, CustomResultData<Guid>>, ICityCreateHandler
+internal class CityCreateHandler : RequestHandler<CityCreateCommand, CustomResultData<Guid>>, ICityCreateHandler
 {
     private readonly ICityCreateRepository _repository;
 
-    public CityCreateHandler(
-        IHandlerBus handlerBus,
-        ICityCreateRepository repository) : base(handlerBus)
+    public CityCreateHandler(ICityCreateRepository repository)
     {
         _repository = repository;
     }
 
-    public override Task<CustomResultData<Guid>> HandleExecution(CityCreateCommand request, CancellationToken cancellationToken)
+    public override Task<CustomResultData<Guid>> Handle(CityCreateCommand request, CancellationToken cancellationToken)
     {
+        if (!Validate<CityCreateValidator>(request))
+            return InvalidResponseAsync();
+
         if (_repository.ExistsCityWithName(name: request.Name))
             AddError(nameof(request.Name), ValidationResource.AlreadyExistsACityWithThisName);
 
@@ -28,7 +30,7 @@ internal class CityCreateHandler : HandlerBase<CityCreateCommand, CustomResultDa
             AddError(nameof(request.ExternalCode), ValidationResource.AlreadyExistsAStateWithThisExternalCode);
 
         if (IsInvalid)
-            return InvalidResponse();
+            return InvalidResponseAsync();
 
         City entity = new(request.Name, request.ExternalCode, request.StateId);
 
@@ -36,6 +38,6 @@ internal class CityCreateHandler : HandlerBase<CityCreateCommand, CustomResultDa
 
         CustomResultData<Guid> response = new(entity.Id);
 
-        return ValidResponse(response);
+        return ValidResponseAsync(response);
     }
 }

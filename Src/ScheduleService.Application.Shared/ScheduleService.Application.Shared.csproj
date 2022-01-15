@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyValidation.Core" Version="1.0.0.8" />
-    <PackageReference Include="EasyValidation.DependencyInjection" Version="1.0.0.5" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Resources\EntityNameResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

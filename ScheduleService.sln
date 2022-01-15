@@ -55,9 +55,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.TestBase", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Application.Response", "Src\ScheduleService.Application.Response\ScheduleService.Application.Response.csproj", "{57611AD1-AC01-4BBC-B0A0-52FE77F4DA6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleService.Domain.Handler", "Src\ScheduleService.Domain.Handler\ScheduleService.Domain.Handler.csproj", "{75968D60-F32C-4531-8E10-3AA5C00CEA47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Domain.Handler", "Src\ScheduleService.Domain.Handler\ScheduleService.Domain.Handler.csproj", "{75968D60-F32C-4531-8E10-3AA5C00CEA47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleService.Domain.Command", "Src\ScheduleService.Domain.Command\ScheduleService.Domain.Command.csproj", "{8F82F273-F452-41D3-993C-9F88BDA2BCD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Domain.Command", "Src\ScheduleService.Domain.Command\ScheduleService.Domain.Command.csproj", "{8F82F273-F452-41D3-993C-9F88BDA2BCD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ScheduleService.Application.Response.Responses.Users;
+using ScheduleService.Application.Shared;
 using ScheduleService.Domain.Command.Commands.Users;
 using ScheduleService.Domain.Handler.Handlers.Users;
 
@@ -14,7 +16,7 @@ public class UserController : ControllerBase
         [FromServices] IUserSignInHandler handler,
         [FromBody] UserSignInCommand command)
     {
-        var response = await handler.Handle(command, default);
+        CustomResultData<UserSignInResponse> response = await handler.Handle(command);
 
         if (response.IsValid)
             return Ok(response);

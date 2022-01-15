@@ -44,7 +44,8 @@ public abstract class RepositoryBase<TEntity>
 
         result = await Queryable.FirstOrDefaultAsync(x => x.Id == id);
 
-        await _cacheRepository.SetAsync(id.ToString(), result);
+        if (result is not null)
+            await _cacheRepository.SetAsync(id.ToString(), result);
 
         return result;
     }

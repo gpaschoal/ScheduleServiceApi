@@ -1,5 +1,4 @@
-﻿using EasyValidation.DependencyInjection;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -39,8 +38,6 @@ public class ConfigurationIoC
         IoCRepositories.AddInfrastructureRepository(services);
         IoCRepositoriesApplication.AddApplicationRepository(services);
         IoCHandlersApplication.AddApplicationHandler(services);
-
-        services.AddEasyValidationValidators(typeof(CityCreateValidator).Assembly);
 
         ConfigureEncryptation(services, configuration);
         ConfigureJWT(services, configuration);

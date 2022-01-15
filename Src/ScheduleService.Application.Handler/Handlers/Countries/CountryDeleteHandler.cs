@@ -1,5 +1,6 @@
 ﻿using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
+using ScheduleService.Application.Validator.Validators.Countries;
 using ScheduleService.Domain.Command.Commands.Countries;
 using ScheduleService.Domain.Handler.Handlers;
 using ScheduleService.Domain.Handler.Handlers.Countries;
@@ -7,19 +8,20 @@ using ScheduleService.Domain.Handler.Repositories.Countries;
 
 namespace ScheduleService.Application.Handler.Handlers.Countries;
 
-internal class CountryDeleteHandler : HandlerBase<CountryDeleteCommand, CustomResultData>, ICountryDeleteHandler
+internal class CountryDeleteHandler : RequestHandler<CountryDeleteCommand, CustomResultData>, ICountryDeleteHandler
 {
     private readonly ICountryDeleteRepository _repository;
 
-    public CountryDeleteHandler(
-        IHandlerBus handlerBus,
-        ICountryDeleteRepository repository) : base(handlerBus)
+    public CountryDeleteHandler(ICountryDeleteRepository repository)
     {
         _repository = repository;
     }
 
-    public async override Task<CustomResultData> HandleExecution(CountryDeleteCommand request, CancellationToken cancellationToken)
+    public async override Task<CustomResultData> Handle(CountryDeleteCommand request, CancellationToken cancellationToken)
     {
+        if (!Validate<CountryDeleteValidator>(request))
+            return InvalidResponse();
+
         if (!await _repository.CheckIfExistByIdAsync(request.Id))
             AddError(nameof(request.Id), ValidationResource.EntityNotFound);
 
@@ -27,10 +29,10 @@ internal class CountryDeleteHandler : HandlerBase<CountryDeleteCommand, CustomRe
             AddError(ValidationResource.ThereAreStatesUsingThisCountry);
 
         if (IsInvalid)
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         await _repository.DeleteAsync(request.Id);
 
-        return ValidResponseAsync();
+        return ValidResponse();
     }
 }
