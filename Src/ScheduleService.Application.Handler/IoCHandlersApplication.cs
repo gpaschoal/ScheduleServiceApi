@@ -3,7 +3,6 @@ using ScheduleService.Application.Handler.Handlers.Cities;
 using ScheduleService.Application.Handler.Handlers.Countries;
 using ScheduleService.Application.Handler.Handlers.States;
 using ScheduleService.Application.Handler.Handlers.Users;
-using ScheduleService.Domain.Handler.Handlers;
 using ScheduleService.Domain.Handler.Handlers.Cities;
 using ScheduleService.Domain.Handler.Handlers.Countries;
 using ScheduleService.Domain.Handler.Handlers.States;

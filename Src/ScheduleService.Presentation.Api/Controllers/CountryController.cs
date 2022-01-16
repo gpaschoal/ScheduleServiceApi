@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using ScheduleService.Domain.Command.Commands.Countries;
 using ScheduleService.Domain.Handler.Handlers.Countries;
+using ScheduleService.Presentation.Api.Controllers.Base;
 
 namespace ScheduleService.Presentation.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CountryController : ControllerBase
+public class CountryController : MainController
 {
     [Authorize, HttpPost, Route("")]
     public async Task<IActionResult> Create(
@@ -16,9 +17,7 @@ public class CountryController : ControllerBase
     {
         var response = await handler.Handle(command);
 
-        if (response.IsValid)
-            return Ok(response);
-        return BadRequest(response);
+        return CustomResponse(response);
     }
 
     [Authorize, HttpPut, Route("")]
@@ -28,9 +27,7 @@ public class CountryController : ControllerBase
     {
         var response = await handler.Handle(command);
 
-        if (response.IsValid)
-            return Ok(response);
-        return BadRequest(response);
+        return CustomResponse(response);
     }
 
     [Authorize, HttpDelete, Route("")]
@@ -40,8 +37,6 @@ public class CountryController : ControllerBase
     {
         var response = await handler.Handle(command);
 
-        if (response.IsValid)
-            return Ok(response);
-        return BadRequest(response);
+        return CustomResponse(response);
     }
 }

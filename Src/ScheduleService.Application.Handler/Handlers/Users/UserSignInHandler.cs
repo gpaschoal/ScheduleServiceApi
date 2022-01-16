@@ -18,8 +18,8 @@ internal class UserSignInHandler : RequestHandler<UserSignInCommand, CustomResul
     private readonly ITokenService _tokenService;
 
     public UserSignInHandler(
-        IUserSignInRepository repository, 
-        IEncryptionService encryptionService, 
+        IUserSignInRepository repository,
+        IEncryptionService encryptionService,
         ITokenService tokenService)
     {
         _repository = repository;
@@ -29,7 +29,7 @@ internal class UserSignInHandler : RequestHandler<UserSignInCommand, CustomResul
 
     public override Task<CustomResultData<UserSignInResponse>> Handle(UserSignInCommand request, CancellationToken cancellationToken)
     {
-        if(!Validate<UserSignInValidator>(request))
+        if (!Validate<UserSignInValidator>(request))
             return InvalidResponseAsync();
 
         var encryptedPassword = _encryptionService.Encrypt(request.Password);

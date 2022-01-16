@@ -9,7 +9,6 @@ using ScheduleService.Application.Handler;
 using ScheduleService.Application.Handler.Services;
 using ScheduleService.Application.Handler.Services.Models;
 using ScheduleService.Application.Repository;
-using ScheduleService.Application.Validator.Validators.Cities;
 using ScheduleService.Infrastructure.Context.Contexts;
 using ScheduleService.Infrastructure.Repository;
 using ServiceStack.Redis;
