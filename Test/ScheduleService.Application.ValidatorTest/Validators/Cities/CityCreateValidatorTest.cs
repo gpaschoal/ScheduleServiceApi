@@ -20,7 +20,7 @@ public class CityCreateValidatorTest
         };
         CityCreateValidator validator = new();
 
-        return validator.Validate(command); 
+        return validator.Validate(command);
     }
 
     [Fact(DisplayName = "Should be valid when command is valid")]
@@ -81,7 +81,7 @@ public class CityCreateValidatorTest
     {
         var invalidSut = MakeSut(name: "");
         invalidSut.IsValid.Should().Be(false);
-        invalidSut.Errors.Select(x=>x.PropertyName).Distinct().Single().Should().Be("Name");
+        invalidSut.Errors.Select(x => x.PropertyName).Distinct().Single().Should().Be("Name");
     }
 
     [Fact(DisplayName = "Should not be valid when externalCode is empty")]

@@ -1,11 +1,4 @@
-﻿using FluentAssertions;
-using Moq;
-using ScheduleService.Application.Shared;
-using ScheduleService.Domain.Handler.Handlers;
-using System.Linq;
-using Xunit;
-
-namespace ScheduleService.Application.HandlerTest.Handlers;
+﻿namespace ScheduleService.Application.HandlerTest.Handlers;
 
 public partial class HandlerBaseTests
 {

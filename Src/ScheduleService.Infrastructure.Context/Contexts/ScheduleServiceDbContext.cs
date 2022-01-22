@@ -11,6 +11,9 @@ namespace ScheduleService.Infrastructure.Context.Contexts;
 
 public class ScheduleServiceDbContext : DbContext
 {
+    private static readonly string[] IgnoreColumns = new string[]
+        { "Id", "CreatedAt", "UserCreateId", "UserCreate", "UpdatedAt", "UserUpdateId", "UserUpdate", "DeletedAt", "UserDeleteId", "UserDelete" };
+
     private readonly IHttpContextAccessor _httpContextAccessor;
 
     public ScheduleServiceDbContext(DbContextOptions options,
@@ -29,131 +32,130 @@ public class ScheduleServiceDbContext : DbContext
     {
         var entries = ChangeTracker
             .Entries()
-            .Where(e => e.State == EntityState.Added
-                        || e.State == EntityState.Modified
-                        || e.State == EntityState.Deleted
-                        && e.Entity is not Audit);
+            .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted
+                        && e.Entity is not Audit)
+            .ToArray();
 
         if (!entries.Any())
             return await base.SaveChangesAsync(cancellationToken);
 
-        var currentlyUser = GetUserIdentity();
+        var currentlyUserId = GetUserIdentity();
 
-        if (currentlyUser.Equals(Guid.Empty))
+        if (currentlyUserId.Equals(Guid.Empty))
             throw new Exception($"There's no {IdentityConstants.UserIdentifier} Claim");
 
-        OnBeforeSaveChanges(currentlyUser, entries);
         foreach (var entry in entries)
         {
+            var auditEntry = new AuditEntryHelper(entry)
+            {
+                TableName = entry.Entity.GetType().Name,
+                UserId = currentlyUserId,
+                PrimaryKey = (Guid)entry.Properties.Single(x => x.Metadata.IsPrimaryKey()).CurrentValue
+            };
             EntityAudit auditBase = (EntityAudit)entry.Entity;
-            DateTime now = DateTime.UtcNow;
+            DateTime utcNow = DateTime.UtcNow;
 
             switch (entry.State)
             {
                 case EntityState.Added:
-                    {
-                        auditBase.CreatedAt = now;
-                        auditBase.UserCreateId = currentlyUser;
-                        Entry(auditBase).Property(p => p.UpdatedAt).IsModified = false;
-                        Entry(auditBase).Property(p => p.UserUpdateId).IsModified = false;
-                        Entry(auditBase).Property(p => p.DeletedAt).IsModified = false;
-                        Entry(auditBase).Property(p => p.UserDeleteId).IsModified = false;
-                        break;
-                    }
-
+                    EntryAdded(currentlyUserId, entry, auditEntry, auditBase, utcNow);
+                    break;
                 case EntityState.Modified:
-                    {
-                        auditBase.UpdatedAt = now;
-                        auditBase.UserUpdateId = currentlyUser;
-                        Entry(auditBase).Property(p => p.CreatedAt).IsModified = false;
-                        Entry(auditBase).Property(p => p.UserCreateId).IsModified = false;
-                        Entry(auditBase).Property(p => p.DeletedAt).IsModified = false;
-                        Entry(auditBase).Property(p => p.UserDeleteId).IsModified = false;
-                        break;
-                    }
-
+                    EntryModified(currentlyUserId, entry, auditEntry, auditBase, utcNow);
+                    break;
                 case EntityState.Deleted:
-                    {
-                        auditBase.DeletedAt = now;
-                        auditBase.UserDeleteId = currentlyUser;
-                        Entry(auditBase).Property(p => p.CreatedAt).IsModified = false;
-                        Entry(auditBase).Property(p => p.UserCreateId).IsModified = false;
-                        Entry(auditBase).Property(p => p.UpdatedAt).IsModified = false;
-                        Entry(auditBase).Property(p => p.UserUpdateId).IsModified = false;
-                        Entry(auditBase).State = EntityState.Modified;
-                        break;
-                    }
+                    EntryDeleted(currentlyUserId, auditEntry, auditBase, utcNow);
+                    break;
             }
+
+            if (!auditEntry.AuditType.Equals(EAuditType.Unchanged))
+                AuditLogs.Add(auditEntry.ToAudit());
         }
 
         return await base.SaveChangesAsync(cancellationToken);
     }
 
-    private void OnBeforeSaveChanges(Guid userId, IEnumerable<EntityEntry> entries)
+    private void EntryAdded(Guid currentlyUser, EntityEntry entry, AuditEntryHelper auditEntry, EntityAudit auditBase, DateTime now)
     {
-        ChangeTracker.DetectChanges();
-        var auditEntries = new List<AuditEntry>();
-        foreach (var entry in entries)
+        auditBase.CreatedAt = now;
+        auditBase.UserCreateId = currentlyUser;
+        Entry(auditBase).Property(p => p.UpdatedAt).IsModified = false;
+        Entry(auditBase).Property(p => p.UserUpdateId).IsModified = false;
+        Entry(auditBase).Property(p => p.DeletedAt).IsModified = false;
+        Entry(auditBase).Property(p => p.UserDeleteId).IsModified = false;
+
+        auditEntry.AuditType = EAuditType.Create;
+
+        var filteredProperties = entry.Properties.Where(x => !IgnoreColumns.Contains(x.Metadata.Name) && x.CurrentValue is not null);
+        foreach (var filteredProperty in filteredProperties)
+            auditEntry.NewValues[filteredProperty.Metadata.Name] = filteredProperty.CurrentValue;
+    }
+
+    private void EntryModified(Guid currentlyUser, EntityEntry entry, AuditEntryHelper auditEntry, EntityAudit auditBase, DateTime now)
+    {
+        auditBase.UpdatedAt = now;
+        auditBase.UserUpdateId = currentlyUser;
+        Entry(auditBase).Property(p => p.CreatedAt).IsModified = false;
+        Entry(auditBase).Property(p => p.UserCreateId).IsModified = false;
+        Entry(auditBase).Property(p => p.DeletedAt).IsModified = false;
+        Entry(auditBase).Property(p => p.UserDeleteId).IsModified = false;
+
+        auditEntry.AuditType = EAuditType.Modified;
+
+        var filteredPropertiesEntry = entry.Properties
+                                        .Where(x => !IgnoreColumns.Contains(x.Metadata.Name) && x.IsModified
+                                                    && !(x?.OriginalValue is null && x?.CurrentValue is null));
+        foreach (PropertyEntry property in filteredPropertiesEntry)
         {
-            var auditEntry = new AuditEntry(entry)
+            if (property?.OriginalValue is null && property?.CurrentValue is null)
+                continue;
+
+            if (property?.OriginalValue?.Equals(property?.CurrentValue) ?? default)
             {
-                TableName = entry.Entity.GetType().Name,
-                UserId = userId
-            };
-            auditEntries.Add(auditEntry);
-            foreach (var property in entry.Properties)
+                property.IsModified = false;
+                continue;
+            }
+
+            if (property.OriginalValue is string stringOriValue
+                && property.CurrentValue is string stringCurValue
+                && (stringOriValue?.Trim().Equals(stringCurValue?.Trim()) ?? default))
             {
-                string propertyName = property.Metadata.Name;
-                if (property.Metadata.IsPrimaryKey())
-                {
-                    auditEntry.PrimaryKey = (Guid)property.CurrentValue;
-                    continue;
-                }
-                switch (entry.State)
-                {
-                    case EntityState.Added:
-                        auditEntry.AuditType = EAuditType.Create;
-                        auditEntry.NewValues[propertyName] = property.CurrentValue;
-                        break;
-                    case EntityState.Deleted:
-                        auditEntry.AuditType = EAuditType.Delete;
-                        break;
-                    case EntityState.Modified:
-                        if (!property.IsModified)
-                            break;
+                property.IsModified = false;
+                continue;
+            }
 
-                        if (property?.OriginalValue is null && property?.CurrentValue is null)
-                            break;
+            string propertyName = property.Metadata.Name;
 
-                        if (property?.OriginalValue?.Equals(property?.CurrentValue) ?? default)
-                            break;
-
-                        if (property.OriginalValue is string stringOriValue 
-                            && property.CurrentValue is string stringCurValue 
-                            && (stringOriValue?.Equals(stringCurValue) ?? default))
-                            break;
-
-                        auditEntry.AuditType = EAuditType.Update;
-
-                        if (property.OriginalValue is string)
-                        {
-                            auditEntry.OldValues[propertyName] = ((string?)property.OriginalValue)?.Trim();
-                            auditEntry.NewValues[propertyName] = property.CurrentValue;
-                        }
-                        else
-                        {
-                            auditEntry.OldValues[propertyName] = property.OriginalValue;
-                            auditEntry.NewValues[propertyName] = property.CurrentValue;
-                        }
-
-                        break;
-                }
+            if (property.OriginalValue is string)
+            {
+                auditEntry.OldValues[propertyName] = ((string?)property.OriginalValue)?.Trim();
+                auditEntry.NewValues[propertyName] = property.CurrentValue;
+            }
+            else
+            {
+                auditEntry.OldValues[propertyName] = property.OriginalValue;
+                auditEntry.NewValues[propertyName] = property.CurrentValue;
             }
         }
-        foreach (var auditEntry in auditEntries)
+
+        if (!auditEntry.NewValues.Any())
         {
-            AuditLogs.Add(auditEntry.ToAudit());
+            auditEntry.AuditType = EAuditType.Unchanged;
+            entry.State = EntityState.Unchanged;
         }
+    }
+
+    private void EntryDeleted(Guid currentlyUser, AuditEntryHelper auditEntry, EntityAudit auditBase, DateTime now)
+    {
+        auditBase.DeletedAt = now;
+        auditBase.UserDeleteId = currentlyUser;
+        Entry(auditBase).Property(p => p.CreatedAt).IsModified = false;
+        Entry(auditBase).Property(p => p.UserCreateId).IsModified = false;
+        Entry(auditBase).Property(p => p.UpdatedAt).IsModified = false;
+        Entry(auditBase).Property(p => p.UserUpdateId).IsModified = false;
+        Entry(auditBase).State = EntityState.Modified;
+
+        auditEntry.AuditType = EAuditType.Delete;
     }
 
     private Guid GetUserIdentity()

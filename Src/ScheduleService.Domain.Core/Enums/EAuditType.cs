@@ -2,8 +2,8 @@
 
 public enum EAuditType
 {
-    None = 0,
+    Unchanged = 0,
     Create = 1,
-    Update = 2,
+    Modified = 2,
     Delete = 3
 }

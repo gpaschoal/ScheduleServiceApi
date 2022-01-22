@@ -5,9 +5,9 @@ using ScheduleService.Domain.Core.Enums;
 
 namespace ScheduleService.Infrastructure.Context.Contexts;
 
-public class AuditEntry
+public class AuditEntryHelper
 {
-    public AuditEntry(EntityEntry entry)
+    public AuditEntryHelper(EntityEntry entry)
     {
         Entry = entry;
         OldValues = new();
@@ -24,7 +24,7 @@ public class AuditEntry
 
     public Audit ToAudit()
     {
-        var audit = new Audit(UserId, AuditType, TableName, DateTime.Now, JsonConvert.SerializeObject(OldValues), JsonConvert.SerializeObject(NewValues), PrimaryKey);
+        var audit = new Audit(UserId, AuditType, TableName, JsonConvert.SerializeObject(OldValues), JsonConvert.SerializeObject(NewValues), PrimaryKey);
         return audit;
     }
 }

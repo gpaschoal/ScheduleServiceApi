@@ -5,13 +5,13 @@ namespace ScheduleService.Domain.Core.Entities;
 
 public class Audit : Entity
 {
-    public Audit(Guid userId, EAuditType type, string tableName, DateTime auditTime, string oldValues, string newValues, Guid primaryKey)
+    public Audit(Guid userId, EAuditType type, string tableName, string oldValues, string newValues, Guid primaryKey)
     {
         UserId = userId;
         PrimaryKey = primaryKey;
         Type = type;
         TableName = tableName;
-        AuditTime = auditTime;
+        AuditTime = DateTime.UtcNow;
         OldValues = oldValues;
         NewValues = newValues;
     }

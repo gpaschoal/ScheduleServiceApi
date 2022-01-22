@@ -18,10 +18,10 @@ internal class CountryCreateHandler : RequestHandler<CountryCreateCommand, Custo
         _repository = repository;
     }
 
-    public override Task<CustomResultData<Guid>> Handle(CountryCreateCommand request, CancellationToken cancellationToken)
+    public async override Task<CustomResultData<Guid>> Handle(CountryCreateCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<CountryCreateValidator>(request))
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         if (_repository.ExistsCountryWithName(name: request.Name))
             AddError(nameof(request.Name), ValidationResource.AlreadyExistsACountryWithThisName);
@@ -30,14 +30,14 @@ internal class CountryCreateHandler : RequestHandler<CountryCreateCommand, Custo
             AddError(nameof(request.ExternalCode), ValidationResource.AlreadyExistsACountryWithThisExternalCode);
 
         if (IsInvalid)
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         Country entity = new(request.Name, request.ExternalCode);
 
-        _repository.AddAsync(entity);
+        await _repository.AddAsync(entity);
 
         CustomResultData<Guid> response = new(entity.Id);
 
-        return ValidResponseAsync(response);
+        return ValidResponse(response);
     }
 }
