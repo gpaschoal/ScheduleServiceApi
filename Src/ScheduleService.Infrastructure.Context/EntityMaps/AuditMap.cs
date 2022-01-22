@@ -12,6 +12,7 @@ public class AuditMap : IEntityTypeConfiguration<Audit>
         builder.HasIndex(x => x.Id);
 
         builder.HasIndex(x => x.PrimaryKey);
+        builder.Property(x => x.PrimaryKey);
 
         builder.HasOne(x => x.User).WithMany()
             .HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.NoAction);
@@ -25,9 +26,5 @@ public class AuditMap : IEntityTypeConfiguration<Audit>
         builder.Property(x => x.OldValues).IsRequired();
 
         builder.Property(x => x.NewValues).IsRequired();
-
-        builder.Property(x => x.AffectedColumns).IsRequired();
-
-        builder.Property(x => x.PrimaryKey);
     }
 }

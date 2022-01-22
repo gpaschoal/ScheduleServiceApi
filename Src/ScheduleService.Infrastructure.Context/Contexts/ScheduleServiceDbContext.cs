@@ -117,16 +117,35 @@ public class ScheduleServiceDbContext : DbContext
                         break;
                     case EntityState.Deleted:
                         auditEntry.AuditType = EAuditType.Delete;
-                        auditEntry.OldValues[propertyName] = property.OriginalValue;
                         break;
                     case EntityState.Modified:
-                        if (property.IsModified)
+                        if (!property.IsModified)
+                            break;
+
+                        if (property?.OriginalValue is null && property?.CurrentValue is null)
+                            break;
+
+                        if (property?.OriginalValue?.Equals(property?.CurrentValue) ?? default)
+                            break;
+
+                        if (property.OriginalValue is string stringOriValue 
+                            && property.CurrentValue is string stringCurValue 
+                            && (stringOriValue?.Equals(stringCurValue) ?? default))
+                            break;
+
+                        auditEntry.AuditType = EAuditType.Update;
+
+                        if (property.OriginalValue is string)
                         {
-                            auditEntry.ChangedColumns.Add(propertyName);
-                            auditEntry.AuditType = EAuditType.Update;
+                            auditEntry.OldValues[propertyName] = ((string?)property.OriginalValue)?.Trim();
+                            auditEntry.NewValues[propertyName] = property.CurrentValue;
+                        }
+                        else
+                        {
                             auditEntry.OldValues[propertyName] = property.OriginalValue;
                             auditEntry.NewValues[propertyName] = property.CurrentValue;
                         }
+
                         break;
                 }
             }

@@ -12,7 +12,6 @@ public class AuditEntry
         Entry = entry;
         OldValues = new();
         NewValues = new();
-        ChangedColumns = new();
     }
 
     public EntityEntry Entry { get; set; }
@@ -22,11 +21,10 @@ public class AuditEntry
     public Dictionary<string, object> OldValues { get; set; }
     public Dictionary<string, object> NewValues { get; set; }
     public EAuditType AuditType { get; set; }
-    public List<string> ChangedColumns { get; set; }
 
     public Audit ToAudit()
     {
-        var audit = new Audit(UserId, AuditType, TableName, DateTime.Now, JsonConvert.SerializeObject(OldValues), JsonConvert.SerializeObject(NewValues), JsonConvert.SerializeObject(ChangedColumns), PrimaryKey);
+        var audit = new Audit(UserId, AuditType, TableName, DateTime.Now, JsonConvert.SerializeObject(OldValues), JsonConvert.SerializeObject(NewValues), PrimaryKey);
         return audit;
     }
 }

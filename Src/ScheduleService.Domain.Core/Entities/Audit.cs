@@ -5,18 +5,18 @@ namespace ScheduleService.Domain.Core.Entities;
 
 public class Audit : Entity
 {
-    public Audit(Guid userId, EAuditType type, string tableName, DateTime auditTime, string oldValues, string newValues, string affectedColumns, Guid primaryKey)
+    public Audit(Guid userId, EAuditType type, string tableName, DateTime auditTime, string oldValues, string newValues, Guid primaryKey)
     {
         UserId = userId;
+        PrimaryKey = primaryKey;
         Type = type;
         TableName = tableName;
         AuditTime = auditTime;
         OldValues = oldValues;
         NewValues = newValues;
-        AffectedColumns = affectedColumns;
-        PrimaryKey = primaryKey;
     }
 
+    public Guid PrimaryKey { get; }
     public Guid UserId { get; }
     public virtual User User { get; }
     public EAuditType Type { get; }
@@ -24,6 +24,4 @@ public class Audit : Entity
     public DateTime AuditTime { get; }
     public string OldValues { get; }
     public string NewValues { get; }
-    public string AffectedColumns { get; }
-    public Guid PrimaryKey { get; }
 }
