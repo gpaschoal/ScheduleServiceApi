@@ -2,7 +2,7 @@
 
 namespace ScheduleService.Domain.Repository;
 
-public interface IRepository<TEntity> where TEntity : EntityBase
+public interface IRepository<TEntity> where TEntity : EntityAudit
 {
     ValueTask<TEntity?> GetByIdAsync(Guid id);
     ValueTask AddAsync(TEntity data);

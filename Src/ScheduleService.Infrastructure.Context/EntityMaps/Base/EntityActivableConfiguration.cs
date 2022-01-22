@@ -3,7 +3,7 @@ using ScheduleService.Domain.Core.Entities.Base;
 
 namespace ScheduleService.Infrastructure.Context.EntityMaps.Base;
 
-public abstract class EntityActivableConfiguration<TEntity> : EntityConfiguration<TEntity>
+public abstract class EntityActivableConfiguration<TEntity> : EntityAuditConfiguration<TEntity>
         where TEntity : ActivableEntityBase
 {
     public override void Configure(EntityTypeBuilder<TEntity> builder)

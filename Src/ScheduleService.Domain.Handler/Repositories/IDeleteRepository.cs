@@ -2,7 +2,7 @@
 
 namespace ScheduleService.Domain.Handler.Repositories;
 
-public interface IDeleteRepository<TEntity> : IHandlerRepository<TEntity> where TEntity : EntityBase
+public interface IDeleteRepository<TEntity> : IHandlerRepository<TEntity> where TEntity : EntityAudit
 {
     ValueTask DeleteAsync(Guid id);
     ValueTask<TEntity?> GetByIdAsync(Guid id);

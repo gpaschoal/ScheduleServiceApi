@@ -4,8 +4,8 @@ using ScheduleService.Domain.Core.Entities.Base;
 
 namespace ScheduleService.Infrastructure.Context.EntityMaps.Base;
 
-public abstract class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
-        where TEntity : EntityBase
+public abstract class EntityAuditConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
+        where TEntity : EntityAudit
 {
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {

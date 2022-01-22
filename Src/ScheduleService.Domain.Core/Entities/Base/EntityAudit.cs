@@ -1,14 +1,7 @@
 ﻿namespace ScheduleService.Domain.Core.Entities.Base;
 
-public abstract class EntityBase : IEquatable<EntityBase>
+public abstract class EntityAudit : Entity
 {
-    public EntityBase()
-    {
-        Id = Guid.NewGuid();
-    }
-
-    public Guid Id { get; private set; }
-
     public DateTime CreatedAt { get; set; }
     public Guid UserCreateId { get; set; }
     public virtual User UserCreate { get; }
@@ -20,17 +13,4 @@ public abstract class EntityBase : IEquatable<EntityBase>
     public DateTime? DeletedAt { get; set; }
     public Guid? UserDeleteId { get; set; }
     public virtual User? UserDelete { get; }
-
-    public bool Equals(EntityBase? other)
-    {
-        if (other is null)
-            return false;
-
-        return Id.Equals(other.Id);
-    }
-
-    public override bool Equals(object? obj)
-    {
-        return Equals(obj as EntityBase);
-    }
 }

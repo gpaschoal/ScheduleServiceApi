@@ -2,5 +2,5 @@
 
 namespace ScheduleService.Domain.Handler.Repositories;
 
-public interface IHandlerRepository<TEntity> where TEntity : EntityBase
+public interface IHandlerRepository<TEntity> where TEntity : EntityAudit
 { }

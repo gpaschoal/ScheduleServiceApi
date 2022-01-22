@@ -2,7 +2,7 @@
 
 namespace ScheduleService.Domain.Core.Entities;
 
-public class ServiceOrderItem : EntityBase
+public class ServiceOrderItem : EntityAudit
 {
     public ServiceOrderItem(Guid serviceItemId, int quantity, decimal servicePrice, Guid serviceOrderId)
     {

@@ -6,7 +6,7 @@ using ScheduleService.Infrastructure.Context.Contexts;
 namespace ScheduleService.Infrastructure.Repository;
 
 public abstract class RepositoryBase<TEntity>
-    : IRepository<TEntity> where TEntity : EntityBase
+    : IRepository<TEntity> where TEntity : EntityAudit
 {
     protected readonly ScheduleServiceDbContext Context;
     private readonly ICacheRepository _cacheRepository;

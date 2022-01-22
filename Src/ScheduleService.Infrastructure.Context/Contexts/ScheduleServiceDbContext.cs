@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Core.Entities.Base;
+using ScheduleService.Domain.Core.Enums;
 using ScheduleService.Domain.Shared.Constants;
 using System.Security.Claims;
 
@@ -17,6 +20,8 @@ public class ScheduleServiceDbContext : DbContext
         _httpContextAccessor = httpContextAccessor;
     }
 
+    protected DbSet<Audit> AuditLogs { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(typeof(ScheduleServiceDbContext).Assembly);
 
@@ -26,22 +31,24 @@ public class ScheduleServiceDbContext : DbContext
             .Entries()
             .Where(e => e.State == EntityState.Added
                         || e.State == EntityState.Modified
-                        || e.State == EntityState.Deleted);
+                        || e.State == EntityState.Deleted
+                        && e.Entity is not Audit);
 
         if (!entries.Any())
             return await base.SaveChangesAsync(cancellationToken);
 
         var currentlyUser = GetUserIdentity();
 
-        if (currentlyUser == Guid.Empty)
+        if (currentlyUser.Equals(Guid.Empty))
             throw new Exception($"There's no {IdentityConstants.UserIdentifier} Claim");
 
-        foreach (var entityEntry in entries)
+        OnBeforeSaveChanges(currentlyUser, entries);
+        foreach (var entry in entries)
         {
-            EntityBase auditBase = (EntityBase)entityEntry.Entity;
+            EntityAudit auditBase = (EntityAudit)entry.Entity;
             DateTime now = DateTime.UtcNow;
 
-            switch (entityEntry.State)
+            switch (entry.State)
             {
                 case EntityState.Added:
                     {
@@ -80,6 +87,54 @@ public class ScheduleServiceDbContext : DbContext
         }
 
         return await base.SaveChangesAsync(cancellationToken);
+    }
+
+    private void OnBeforeSaveChanges(Guid userId, IEnumerable<EntityEntry> entries)
+    {
+        ChangeTracker.DetectChanges();
+        var auditEntries = new List<AuditEntry>();
+        foreach (var entry in entries)
+        {
+            var auditEntry = new AuditEntry(entry)
+            {
+                TableName = entry.Entity.GetType().Name,
+                UserId = userId
+            };
+            auditEntries.Add(auditEntry);
+            foreach (var property in entry.Properties)
+            {
+                string propertyName = property.Metadata.Name;
+                if (property.Metadata.IsPrimaryKey())
+                {
+                    auditEntry.PrimaryKey = (Guid)property.CurrentValue;
+                    continue;
+                }
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        auditEntry.AuditType = EAuditType.Create;
+                        auditEntry.NewValues[propertyName] = property.CurrentValue;
+                        break;
+                    case EntityState.Deleted:
+                        auditEntry.AuditType = EAuditType.Delete;
+                        auditEntry.OldValues[propertyName] = property.OriginalValue;
+                        break;
+                    case EntityState.Modified:
+                        if (property.IsModified)
+                        {
+                            auditEntry.ChangedColumns.Add(propertyName);
+                            auditEntry.AuditType = EAuditType.Update;
+                            auditEntry.OldValues[propertyName] = property.OriginalValue;
+                            auditEntry.NewValues[propertyName] = property.CurrentValue;
+                        }
+                        break;
+                }
+            }
+        }
+        foreach (var auditEntry in auditEntries)
+        {
+            AuditLogs.Add(auditEntry.ToAudit());
+        }
     }
 
     private Guid GetUserIdentity()

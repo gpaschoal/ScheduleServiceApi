@@ -2,7 +2,7 @@
 
 namespace ScheduleService.Domain.Handler.Repositories;
 
-public interface ICreateRepository<TEntity> : IHandlerRepository<TEntity> where TEntity : EntityBase
+public interface ICreateRepository<TEntity> : IHandlerRepository<TEntity> where TEntity : EntityAudit
 {
     ValueTask AddAsync(TEntity data);
 }
