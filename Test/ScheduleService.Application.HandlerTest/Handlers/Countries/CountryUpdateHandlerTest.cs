@@ -5,7 +5,9 @@ using ScheduleService.Domain.Command.Commands.Countries;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Handler.Repositories.Countries;
 using System;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.HandlerTest.Handlers.Countries;
@@ -42,5 +44,26 @@ public class CountryUpdateHandlerTest
         countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
         countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
         countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Country>()), Times.Never);
+    }
+
+    [Fact(DisplayName = "Should be invalid when already exists a country with the same name")]
+    public void Should_be_invalid_when_already_exists_a_country_with_the_same_name()
+    {
+        var command = MakeValidCommand();
+        Mock<ICountryUpdateRepository> countryUpdateRepositoryMock = new();
+
+        var country = new Country(command.Name, command.ExternalCode);
+        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(country));
+        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithName(command.Id, command.Name)).Returns(true);
+
+        var sut = MakeSut(countryUpdateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+        resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
+        countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Country>()), Times.Never);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<Guid>(), It.IsAny<string>()), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<Guid>(), It.IsAny<string>()), Times.Once);
     }
 }
