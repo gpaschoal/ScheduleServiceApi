@@ -81,4 +81,21 @@ public class StateCreateHandlerTest
         stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
         stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
     }
+
+    [Fact(DisplayName = "Should add a state")]
+    public void Should_add_a_state()
+    {
+        var command = MakeValidCommand();
+        Mock<IStateCreateRepository> countryCreateRepositoryMock = new();
+
+        var sut = MakeSut(countryCreateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeTrue();
+        resultData.Errors.Should().BeEmpty();
+        countryCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
+    }
 }
