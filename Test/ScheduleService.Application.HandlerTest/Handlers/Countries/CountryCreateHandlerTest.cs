@@ -56,5 +56,26 @@ public class CountryCreateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
         countryCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Country>()), Times.Never);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<string>()), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<string>()), Times.Once);
+    }
+
+    [Fact(DisplayName = "Should be invalid when already exists a country with the same externalCode")]
+    public void Should_be_invalid_when_already_exists_a_country_with_the_same_externalCode()
+    {
+        var command = MakeValidCommand();
+        Mock<ICountryCreateRepository> countryCreateRepositoryMock = new();
+
+        countryCreateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCode(command.ExternalCode)).Returns(true);
+
+        var sut = MakeSut(countryCreateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+        resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
+        countryCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Country>()), Times.Never);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<string>()), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<string>()), Times.Once);
     }
 }
