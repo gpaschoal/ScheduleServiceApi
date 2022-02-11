@@ -31,6 +31,9 @@ public class CountryUpdateHandlerTest
 
         Mock<ICountryUpdateRepository> countryUpdateRepositoryMock = new();
 
+        var country = new Country(command.Name, command.ExternalCode);
+        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(country));
+
         var sut = MakeSut(countryUpdateRepositoryMock.Object);
 
         var resultData = sut.Handle(command, CancellationToken.None).Result;
@@ -64,9 +67,9 @@ public class CountryUpdateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
         countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Country>()), Times.Never);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<Guid>(), It.IsAny<string>()), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<Guid>(), It.IsAny<string>()), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<Guid>()), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Id, command.Name), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.Id, command.ExternalCode), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
     }
 
     [Fact(DisplayName = "Should be invalid when already exists a country with the same externalCode")]
@@ -86,9 +89,9 @@ public class CountryUpdateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
         countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Country>()), Times.Never);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<Guid>(), It.IsAny<string>()), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<Guid>(), It.IsAny<string>()), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<Guid>()), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Id, command.Name), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.Id, command.ExternalCode), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
     }
 
     [Fact(DisplayName = "Should be invalid when does not exist country with id")]
@@ -105,9 +108,30 @@ public class CountryUpdateHandlerTest
         var resultData = sut.Handle(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<Guid>(), It.IsAny<string>()), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<Guid>(), It.IsAny<string>()), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<Guid>()), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Id, command.Name), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.Id, command.ExternalCode), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
         countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Country>()), Times.Never);
+    }
+
+    [Fact(DisplayName = "Should update the country")]
+    public void Should_update_the_country()
+    {
+        var command = MakeValidCommand();
+        Mock<ICountryUpdateRepository> countryUpdateRepositoryMock = new();
+
+        var country = new Country(command.Name, command.ExternalCode);
+        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(country));
+
+        var sut = MakeSut(countryUpdateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeTrue();
+        resultData.Errors.Should().BeEmpty();
+        countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(country), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Id, command.Name), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.Id, command.ExternalCode), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
     }
 }
