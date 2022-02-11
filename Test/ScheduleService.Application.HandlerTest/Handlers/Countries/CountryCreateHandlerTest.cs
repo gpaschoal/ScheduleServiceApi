@@ -20,7 +20,7 @@ public class CountryCreateHandlerTest
         return new CountryCreateHandler(countryCreateRepository);
     }
 
-    private static CountryCreateCommand MakeValidCommand() => new CountryCreateCommand() { Name = "Brazil", ExternalCode = "BR123" };
+    private static CountryCreateCommand MakeValidCommand() => new() { Name = "Brazil", ExternalCode = "BR123" };
 
     [Fact(DisplayName = "Should be invalid when command is invalid and AddAsync mustn't not be called")]
     public void Should_be_invalid_when_command_is_invalid_and_AddAsync_mustnt_not_be_called()
