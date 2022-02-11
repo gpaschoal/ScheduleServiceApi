@@ -78,4 +78,21 @@ public class CountryCreateHandlerTest
         countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<string>()), Times.Once);
         countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<string>()), Times.Once);
     }
+
+    [Fact(DisplayName = "Should add a country")]
+    public void Should_add_a_country()
+    {
+        var command = MakeValidCommand();
+        Mock<ICountryCreateRepository> countryCreateRepositoryMock = new();
+
+        var sut = MakeSut(countryCreateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeTrue();
+        resultData.Errors.Should().BeEmpty();
+        countryCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Country>()), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<string>()), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<string>()), Times.Once);
+    }
 }
