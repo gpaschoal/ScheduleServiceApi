@@ -38,6 +38,8 @@ public class CountryCreateHandlerTest
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.Name));
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.ExternalCode));
 
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<string>()), Times.Never);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<string>()), Times.Never);
         countryCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Country>()), Times.Never);
     }
 
