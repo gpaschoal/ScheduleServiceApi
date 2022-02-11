@@ -5,6 +5,7 @@ using ScheduleService.Domain.Command.Commands.States;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Handler.Repositories.States;
 using System;
+using System.Linq;
 using System.Threading;
 using Xunit;
 
@@ -41,5 +42,24 @@ public class StateCreateHandlerTest
         StateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(It.IsAny<string>()), Times.Never);
         StateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(It.IsAny<string>()), Times.Never);
         StateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Never);
+    }
+
+    [Fact(DisplayName = "Should be invalid when already exists a state with the same externalCode")]
+    public void Should_be_invalid_when_already_exists_a_state_with_the_same_externalCode()
+    {
+        var command = MakeValidCommand();
+        Mock<IStateCreateRepository> stateCreateRepositoryMock = new();
+
+        stateCreateRepositoryMock.Setup(x => x.ExistsStateWithExternalCode(command.ExternalCode)).Returns(true);
+
+        var sut = MakeSut(stateCreateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+        resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
+        stateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Never);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(It.IsAny<string>()), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(It.IsAny<string>()), Times.Once);
     }
 }
