@@ -5,6 +5,7 @@ using ScheduleService.Domain.Command.Commands.Countries;
 using ScheduleService.Domain.Handler.Repositories.Countries;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.HandlerTest.Handlers.Countries;
@@ -38,6 +39,28 @@ public class CountryDeleteHandlerTest
 
         countryDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(It.IsAny<Guid>()), Times.Never);
         countryDeleteRepositoryMock.Verify(x => x.CheckIfIsUsedByState(It.IsAny<Guid>()), Times.Never);
+        countryDeleteRepositoryMock.Verify(x => x.DeleteAsync(It.IsAny<Guid>()), Times.Never);
+    }
+
+    [Fact(DisplayName = "Should not delete when country does not exist in the DB")]
+    public void Should_not_delete_when_country_does_not_exist_in_the_DB()
+    {
+        CountryDeleteCommand command = MakeValidCommand();
+
+        Mock<ICountryDeleteRepository> countryDeleteRepositoryMock = new();
+
+        countryDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).Returns(ValueTask.FromResult(false));
+
+        var sut = MakeSut(countryDeleteRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+
+        resultData.Errors.Should().Contain(x => x.Key == nameof(command.Id));
+
+        countryDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(command.Id), Times.Once);
+        countryDeleteRepositoryMock.Verify(x => x.CheckIfIsUsedByState(command.Id), Times.Once);
         countryDeleteRepositoryMock.Verify(x => x.DeleteAsync(It.IsAny<Guid>()), Times.Never);
     }
 }
