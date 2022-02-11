@@ -8,6 +8,7 @@ using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Handler.Repositories.Users;
 using System;
 using System.Linq;
+using System.Threading;
 using Xunit;
 
 namespace ScheduleService.Application.HandlerTest.Handlers.Users;
@@ -46,6 +47,25 @@ public class UserSignInHandlerTest
 
     private static UserSignInCommand MakeValidCommand() => new() { Email = "mail@valid.com", Password = "valid_password" };
 
+    [Fact(DisplayName = "Should be invalid when command is invalid and GetUserByEmailAndPassword mustn't not be called")]
+    public void Should_be_invalid_when_command_is_invalid_and_GetUserByEmailAndPassword_mustnt_not_be_called()
+    {
+        UserSignInCommand command = new() { Email = null, Password = null };
+
+        Mock<IUserSignInRepository> userRepositoryMock = new();
+
+        var sut = MakeSut(userRepository: userRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+
+        resultData.Errors.Should().Contain(x => x.Key == nameof(command.Email));
+        resultData.Errors.Should().Contain(x => x.Key == nameof(command.Password));
+
+        userRepositoryMock.Verify(x => x.GetUserByEmailAndPassword(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+    }
+
     [Fact(DisplayName = "Should be invalid when dont find the user")]
     public void Should_be_invalid_when_dont_find_the_user()
     {
@@ -61,7 +81,7 @@ public class UserSignInHandlerTest
 
         var sut = MakeSut(userRepository: userRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, cancellationToken: System.Threading.CancellationToken.None).Result;
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Password));
@@ -87,7 +107,7 @@ public class UserSignInHandlerTest
                           encryptionService: encryptionServiceMock.Object,
                           tokenService: tokenServiceMock.Object);
 
-        _ = sut.Handle(command, cancellationToken: System.Threading.CancellationToken.None).Result;
+        _ = sut.Handle(command, CancellationToken.None).Result;
 
         userRepositoryMock.Verify(x => x.GetUserByEmailAndPassword(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         userRepositoryMock.Verify(x => x.GetUserByEmailAndPassword(
