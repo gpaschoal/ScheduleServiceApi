@@ -58,8 +58,8 @@ public class CountryCreateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
         countryCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Country>()), Times.Never);
-        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<string>()), Times.Once);
-        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<string>()), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Name), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.ExternalCode), Times.Once);
     }
 
     [Fact(DisplayName = "Should be invalid when already exists a country with the same externalCode")]
@@ -77,8 +77,8 @@ public class CountryCreateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
         countryCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Country>()), Times.Never);
-        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<string>()), Times.Once);
-        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<string>()), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Name), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.ExternalCode), Times.Once);
     }
 
     [Fact(DisplayName = "Should add a country")]
@@ -94,7 +94,7 @@ public class CountryCreateHandlerTest
         resultData.IsValid.Should().BeTrue();
         resultData.Errors.Should().BeEmpty();
         countryCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<Country>()), Times.Once);
-        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<string>()), Times.Once);
-        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<string>()), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Name), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.ExternalCode), Times.Once);
     }
 }

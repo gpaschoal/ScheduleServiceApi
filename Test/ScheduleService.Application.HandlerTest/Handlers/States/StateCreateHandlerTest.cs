@@ -44,6 +44,25 @@ public class StateCreateHandlerTest
         StateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Never);
     }
 
+    [Fact(DisplayName = "Should be invalid when already exists a state with the same name")]
+    public void Should_be_invalid_when_already_exists_a_state_with_the_same_name()
+    {
+        var command = MakeValidCommand();
+        Mock<IStateCreateRepository> countryCreateRepositoryMock = new();
+
+        countryCreateRepositoryMock.Setup(x => x.ExistsStateWithName(command.Name)).Returns(true);
+
+        var sut = MakeSut(countryCreateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+        resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
+        countryCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Never);
+        countryCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
+        countryCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
+    }
+
     [Fact(DisplayName = "Should be invalid when already exists a state with the same externalCode")]
     public void Should_be_invalid_when_already_exists_a_state_with_the_same_externalCode()
     {
@@ -59,7 +78,7 @@ public class StateCreateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
         stateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Never);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(It.IsAny<string>()), Times.Once);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(It.IsAny<string>()), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
     }
 }
