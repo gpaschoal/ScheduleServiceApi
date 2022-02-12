@@ -18,13 +18,13 @@ internal class CountryCreateRepository : ICountryCreateRepository
         return _repository.AddAsync(data);
     }
 
-    public bool ExistsCountryWithExternalCode(string externalCode)
+    public ValueTask<bool> ExistsCountryWithExternalCodeAsync(string externalCode)
     {
-        return _repository.ExistsCountryWithExternalCode(externalCode);
+        return _repository.ExistsCountryWithExternalCodeAsync(externalCode);
     }
 
-    public bool ExistsCountryWithName(string name)
+    public ValueTask<bool> ExistsCountryWithName(string name)
     {
-        return _repository.ExistsCountryWithName(name);
+        return _repository.ExistsCountryWithNameAsync(name);
     }
 }

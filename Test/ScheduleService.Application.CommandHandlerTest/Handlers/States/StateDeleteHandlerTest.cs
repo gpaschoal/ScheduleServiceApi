@@ -38,7 +38,7 @@ public class StateDeleteHandlerTest
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.Id));
 
         stateDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(It.IsAny<Guid>()), Times.Never);
-        stateDeleteRepositoryMock.Verify(x => x.CheckIfIsUsedByCity(It.IsAny<Guid>()), Times.Never);
+        stateDeleteRepositoryMock.Verify(x => x.CheckIfIsUsedByCityAsync(It.IsAny<Guid>()), Times.Never);
         stateDeleteRepositoryMock.Verify(x => x.DeleteAsync(It.IsAny<Guid>()), Times.Never);
     }
 
@@ -58,7 +58,7 @@ public class StateDeleteHandlerTest
         resultData.IsValid.Should().BeFalse();
 
         stateDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(command.Id), Times.Once);
-        stateDeleteRepositoryMock.Verify(x => x.CheckIfIsUsedByCity(command.Id), Times.Once);
+        stateDeleteRepositoryMock.Verify(x => x.CheckIfIsUsedByCityAsync(command.Id), Times.Once);
         stateDeleteRepositoryMock.Verify(x => x.DeleteAsync(It.IsAny<Guid>()), Times.Never);
     }
 
@@ -69,7 +69,7 @@ public class StateDeleteHandlerTest
 
         Mock<IStateDeleteRepository> stateDeleteRepositoryMock = new();
         stateDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).Returns(ValueTask.FromResult(false));
-        stateDeleteRepositoryMock.Setup(x => x.CheckIfIsUsedByCity(command.Id)).Returns(ValueTask.FromResult(true));
+        stateDeleteRepositoryMock.Setup(x => x.CheckIfIsUsedByCityAsync(command.Id)).Returns(ValueTask.FromResult(true));
 
         var sut = MakeSut(stateDeleteRepositoryMock.Object);
 
@@ -78,7 +78,7 @@ public class StateDeleteHandlerTest
         resultData.Errors.Should().Contain(x => x.Key != nameof(command.Id));
 
         stateDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(command.Id), Times.Once);
-        stateDeleteRepositoryMock.Verify(x => x.CheckIfIsUsedByCity(command.Id), Times.Once);
+        stateDeleteRepositoryMock.Verify(x => x.CheckIfIsUsedByCityAsync(command.Id), Times.Once);
         stateDeleteRepositoryMock.Verify(x => x.DeleteAsync(It.IsAny<Guid>()), Times.Never);
     }
 
@@ -96,7 +96,7 @@ public class StateDeleteHandlerTest
         resultData.IsValid.Should().BeTrue();
 
         stateDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(command.Id), Times.Once);
-        stateDeleteRepositoryMock.Verify(x => x.CheckIfIsUsedByCity(command.Id), Times.Once);
+        stateDeleteRepositoryMock.Verify(x => x.CheckIfIsUsedByCityAsync(command.Id), Times.Once);
         stateDeleteRepositoryMock.Verify(x => x.DeleteAsync(command.Id), Times.Once);
     }
 }

@@ -1,4 +1,5 @@
-﻿using ScheduleService.Domain.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Repository;
 using ScheduleService.Domain.Repository.Repositories;
 using ScheduleService.Infrastructure.Context.Contexts;
@@ -10,33 +11,33 @@ internal class CountryRepository : RepositoryBase<Country>, ICountryRepository
     public CountryRepository(ScheduleServiceDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
     { }
 
-    public ValueTask<bool> CheckIfIsUsedByState(Guid id)
+    public async ValueTask<bool> CheckIfIsUsedByState(Guid id)
     {
-        var result = Context.Set<State>().Any(x => x.CountryId.Equals(id));
-        return ValueTask.FromResult(result);
-    }
-
-    public bool ExistsCountryWithExternalCode(string externalCode)
-    {
-        var result = Queryable.Any(x => x.ExternalCode.Equals(externalCode));
+        var result = await Context.Set<State>().AnyAsync(x => x.CountryId.Equals(id));
         return result;
     }
 
-    public bool ExistsCountryWithExternalCode(Guid id, string externalCode)
+    public async ValueTask<bool> ExistsCountryWithExternalCodeAsync(string externalCode)
     {
-        var result = Queryable.Any(x => !x.Id.Equals(id) && x.ExternalCode.Equals(externalCode));
+        var result = await Queryable.AnyAsync(x => x.ExternalCode.Equals(externalCode));
         return result;
     }
 
-    public bool ExistsCountryWithName(string name)
+    public async ValueTask<bool> ExistsCountryWithExternalCodeAsync(Guid id, string externalCode)
     {
-        var result = Queryable.Any(x => x.Name.Equals(name));
+        var result = await Queryable.AnyAsync(x => !x.Id.Equals(id) && x.ExternalCode.Equals(externalCode));
         return result;
     }
 
-    public bool ExistsCountryWithName(Guid id, string name)
+    public async ValueTask<bool> ExistsCountryWithNameAsync(string name)
     {
-        var result = Queryable.Any(x => !x.Id.Equals(id) && x.Name.Equals(name));
+        var result = await Queryable.AnyAsync(x => x.Name.Equals(name));
+        return result;
+    }
+
+    public async ValueTask<bool> ExistsCountryWithNameAsync(Guid id, string name)
+    {
+        var result = await Queryable.AnyAsync(x => !x.Id.Equals(id) && x.Name.Equals(name));
         return result;
     }
 }

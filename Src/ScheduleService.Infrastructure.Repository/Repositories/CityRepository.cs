@@ -1,4 +1,5 @@
-﻿using ScheduleService.Domain.Core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Repository;
 using ScheduleService.Domain.Repository.Repositories;
 using ScheduleService.Infrastructure.Context.Contexts;
@@ -10,27 +11,27 @@ internal class CityRepository : RepositoryBase<City>, ICityRepository
     public CityRepository(ScheduleServiceDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
     { }
 
-    public bool ExistsCityWithExternalCode(string externalCode)
+    public async ValueTask<bool> ExistsCityWithExternalCodeAsync(string externalCode)
     {
-        var result = Queryable.Any(x => x.ExternalCode.Equals(externalCode));
+        var result = await Queryable.AnyAsync(x => x.ExternalCode.Equals(externalCode));
         return result;
     }
 
-    public bool ExistsCityWithExternalCode(Guid id, string externalCode)
+    public async ValueTask<bool> ExistsCityWithExternalCodeAsync(Guid id, string externalCode)
     {
-        var result = Queryable.Any(x => x.Id.Equals(id) && x.ExternalCode.Equals(externalCode));
+        var result = await Queryable.AnyAsync(x => x.Id.Equals(id) && x.ExternalCode.Equals(externalCode));
         return result;
     }
 
-    public bool ExistsCityWithName(string name)
+    public async ValueTask<bool> ExistsCityWithNameAsync(string name)
     {
-        var result = Queryable.Any(x => x.Name.Equals(name));
+        var result = await Queryable.AnyAsync(x => x.Name.Equals(name));
         return result;
     }
 
-    public bool ExistsCityWithName(Guid id, string name)
+    public async ValueTask<bool> ExistsCityWithNameAsync(Guid id, string name)
     {
-        var result = Queryable.Any(x => x.Id.Equals(id) && x.Name.Equals(name));
+        var result = await Queryable.AnyAsync(x => x.Id.Equals(id) && x.Name.Equals(name));
         return result;
     }
 }

@@ -1,6 +1,6 @@
-﻿using ScheduleService.Application.Shared;
+﻿using ScheduleService.Application.CommandValidator.Validators.States;
+using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Application.CommandValidator.Validators.States;
 using ScheduleService.Domain.Command.Commands.States;
 using ScheduleService.Domain.CommandHandler.Handlers;
 using ScheduleService.Domain.CommandHandler.Handlers.States;
@@ -25,7 +25,7 @@ internal class StateDeleteHandler : RequestHandler<StateDeleteCommand, CustomRes
         if (!await _repository.CheckIfExistByIdAsync(request.Id))
             AddError(ValidationResource.EntityNotFound);
 
-        if (await _repository.CheckIfIsUsedByCity(request.Id))
+        if (await _repository.CheckIfIsUsedByCityAsync(request.Id))
             AddError(ValidationResource.ThereAreCitiesUsingThisState);
 
         if (IsInvalid)

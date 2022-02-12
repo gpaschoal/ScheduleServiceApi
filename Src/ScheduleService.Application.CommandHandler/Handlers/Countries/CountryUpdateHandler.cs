@@ -1,6 +1,6 @@
-﻿using ScheduleService.Application.Shared;
+﻿using ScheduleService.Application.CommandValidator.Validators.Countries;
+using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Application.CommandValidator.Validators.Countries;
 using ScheduleService.Domain.Command.Commands.Countries;
 using ScheduleService.Domain.CommandHandler.Handlers;
 using ScheduleService.Domain.CommandHandler.Handlers.Countries;
@@ -22,10 +22,10 @@ internal class CountryUpdateHandler : RequestHandler<CountryUpdateCommand, Custo
         if (!Validate<CountryUpdateValidator>(request))
             return InvalidResponse();
 
-        if (_repository.ExistsCountryWithName(id: request.Id, name: request.Name))
+        if (await _repository.ExistsCountryWithNameAsync(id: request.Id, name: request.Name))
             AddError(nameof(request.Name), ValidationResource.AlreadyExistsACountryWithThisName);
 
-        if (_repository.ExistsCountryWithExternalCode(id: request.Id, externalCode: request.ExternalCode))
+        if (await _repository.ExistsCountryWithExternalCodeAsync(id: request.Id, externalCode: request.ExternalCode))
             AddError(nameof(request.ExternalCode), ValidationResource.AlreadyExistsACountryWithThisExternalCode);
 
         var entity = await _repository.GetByIdAsync(id: request.Id);

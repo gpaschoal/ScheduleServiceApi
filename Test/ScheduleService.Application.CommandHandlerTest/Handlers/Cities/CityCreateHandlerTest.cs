@@ -40,8 +40,8 @@ public class CityCreateHandlerTest
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.Name));
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.ExternalCode));
 
-        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithName(It.IsAny<string>()), Times.Never);
-        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCode(It.IsAny<string>()), Times.Never);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithNameAsync(It.IsAny<string>()), Times.Never);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCodeAsync(It.IsAny<string>()), Times.Never);
         cityCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<City>()), Times.Never);
         cityCreateRepositoryMock.Verify(x => x.CheckIfStateExists(command.StateId), Times.Never);
     }
@@ -52,7 +52,7 @@ public class CityCreateHandlerTest
         var command = MakeValidCommand();
         Mock<ICityCreateRepository> cityCreateRepositoryMock = new();
 
-        cityCreateRepositoryMock.Setup(x => x.ExistsCityWithName(command.Name)).Returns(true);
+        cityCreateRepositoryMock.Setup(x => x.ExistsCityWithNameAsync(command.Name)).Returns(ValueTask.FromResult(true));
         cityCreateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).Returns(ValueTask.FromResult(true));
 
         var sut = MakeSut(cityCreateRepositoryMock.Object);
@@ -62,8 +62,8 @@ public class CityCreateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
         cityCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<City>()), Times.Never);
-        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithName(command.Name), Times.Once);
-        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCode(command.ExternalCode), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithNameAsync(command.Name), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCodeAsync(command.ExternalCode), Times.Once);
         cityCreateRepositoryMock.Verify(x => x.CheckIfStateExists(command.StateId), Times.Once);
     }
 
@@ -74,7 +74,7 @@ public class CityCreateHandlerTest
         Mock<ICityCreateRepository> cityCreateRepositoryMock = new();
         cityCreateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).Returns(ValueTask.FromResult(true));
 
-        cityCreateRepositoryMock.Setup(x => x.ExistsCityWithExternalCode(command.ExternalCode)).Returns(true);
+        cityCreateRepositoryMock.Setup(x => x.ExistsCityWithExternalCodeAsync(command.ExternalCode)).Returns(ValueTask.FromResult(true));
 
         var sut = MakeSut(cityCreateRepositoryMock.Object);
 
@@ -83,8 +83,8 @@ public class CityCreateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
         cityCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<City>()), Times.Never);
-        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithName(command.Name), Times.Once);
-        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCode(command.ExternalCode), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithNameAsync(command.Name), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCodeAsync(command.ExternalCode), Times.Once);
         cityCreateRepositoryMock.Verify(x => x.CheckIfStateExists(command.StateId), Times.Once);
     }
 
@@ -101,8 +101,8 @@ public class CityCreateHandlerTest
 
         resultData.IsValid.Should().BeFalse();
         cityCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<City>()), Times.Never);
-        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithName(command.Name), Times.Once);
-        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCode(command.ExternalCode), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithNameAsync(command.Name), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCodeAsync(command.ExternalCode), Times.Once);
         cityCreateRepositoryMock.Verify(x => x.CheckIfStateExists(command.StateId), Times.Once);
     }
 
@@ -120,8 +120,8 @@ public class CityCreateHandlerTest
         resultData.IsValid.Should().BeTrue();
         resultData.Errors.Should().BeEmpty();
         cityCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<City>()), Times.Once);
-        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithName(command.Name), Times.Once);
-        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCode(command.ExternalCode), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithNameAsync(command.Name), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCodeAsync(command.ExternalCode), Times.Once);
         cityCreateRepositoryMock.Verify(x => x.CheckIfStateExists(command.StateId), Times.Once);
     }
 }

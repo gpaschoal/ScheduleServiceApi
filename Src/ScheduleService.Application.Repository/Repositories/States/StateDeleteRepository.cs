@@ -18,9 +18,9 @@ internal class StateDeleteRepository : IStateDeleteRepository
         return _repository.CheckIfExistByIdAsync(id);
     }
 
-    public ValueTask<bool> CheckIfIsUsedByCity(Guid id)
+    public ValueTask<bool> CheckIfIsUsedByCityAsync(Guid id)
     {
-        return _repository.CheckIfIsUsedByCity(id);
+        return _repository.CheckIfIsUsedByCityAsync(id);
     }
 
     public ValueTask DeleteAsync(Guid id)

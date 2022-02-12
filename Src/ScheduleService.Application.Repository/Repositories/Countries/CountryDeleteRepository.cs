@@ -18,7 +18,7 @@ internal class CountryDeleteRepository : ICountryDeleteRepository
         return _repository.CheckIfExistByIdAsync(id);
     }
 
-    public ValueTask<bool> CheckIfIsUsedByState(Guid id)
+    public ValueTask<bool> CheckIfIsUsedByStateAsync(Guid id)
     {
         return _repository.CheckIfIsUsedByState(id);
     }

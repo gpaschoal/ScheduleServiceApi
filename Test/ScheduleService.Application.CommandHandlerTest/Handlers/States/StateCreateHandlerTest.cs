@@ -40,8 +40,8 @@ public class StateCreateHandlerTest
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.Name));
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.ExternalCode));
 
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(It.IsAny<string>()), Times.Never);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(It.IsAny<string>()), Times.Never);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithNameAsync(It.IsAny<string>()), Times.Never);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCodeAsync(It.IsAny<string>()), Times.Never);
         stateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Never);
         stateCreateRepositoryMock.Verify(x => x.CheckIfCountryExists(command.CountryId), Times.Never);
     }
@@ -52,7 +52,7 @@ public class StateCreateHandlerTest
         var command = MakeValidCommand();
         Mock<IStateCreateRepository> stateCreateRepositoryMock = new();
 
-        stateCreateRepositoryMock.Setup(x => x.ExistsStateWithName(command.Name)).Returns(true);
+        stateCreateRepositoryMock.Setup(x => x.ExistsStateWithNameAsync(command.Name)).Returns(ValueTask.FromResult(true));
         stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(true));
 
         var sut = MakeSut(stateCreateRepositoryMock.Object);
@@ -62,8 +62,8 @@ public class StateCreateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
         stateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Never);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithNameAsync(command.Name), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCodeAsync(command.ExternalCode), Times.Once);
         stateCreateRepositoryMock.Verify(x => x.CheckIfCountryExists(command.CountryId), Times.Once);
     }
 
@@ -74,7 +74,7 @@ public class StateCreateHandlerTest
         Mock<IStateCreateRepository> stateCreateRepositoryMock = new();
         stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(true));
 
-        stateCreateRepositoryMock.Setup(x => x.ExistsStateWithExternalCode(command.ExternalCode)).Returns(true);
+        stateCreateRepositoryMock.Setup(x => x.ExistsStateWithExternalCodeAsync(command.ExternalCode)).Returns(ValueTask.FromResult(true));
 
         var sut = MakeSut(stateCreateRepositoryMock.Object);
 
@@ -83,8 +83,8 @@ public class StateCreateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
         stateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Never);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithNameAsync(command.Name), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCodeAsync(command.ExternalCode), Times.Once);
         stateCreateRepositoryMock.Verify(x => x.CheckIfCountryExists(command.CountryId), Times.Once);
     }
 
@@ -101,8 +101,8 @@ public class StateCreateHandlerTest
 
         resultData.IsValid.Should().BeFalse();
         stateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Never);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithNameAsync(command.Name), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCodeAsync(command.ExternalCode), Times.Once);
         stateCreateRepositoryMock.Verify(x => x.CheckIfCountryExists(command.CountryId), Times.Once);
     }
 
@@ -120,8 +120,8 @@ public class StateCreateHandlerTest
         resultData.IsValid.Should().BeTrue();
         resultData.Errors.Should().BeEmpty();
         stateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Once);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
-        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithNameAsync(command.Name), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCodeAsync(command.ExternalCode), Times.Once);
         stateCreateRepositoryMock.Verify(x => x.CheckIfCountryExists(command.CountryId), Times.Once);
     }
 }

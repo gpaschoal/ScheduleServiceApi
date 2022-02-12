@@ -22,18 +22,18 @@ internal class StateCreateRepository : IStateCreateRepository
         return _repository.AddAsync(data);
     }
 
-    public async ValueTask<bool> CheckIfCountryExists(Guid countryId)
+    public ValueTask<bool> CheckIfCountryExists(Guid countryId)
     {
-        return await _countryRepository.CheckIfExistByIdAsync(countryId);
+        return _countryRepository.CheckIfExistByIdAsync(countryId);
     }
 
-    public bool ExistsStateWithExternalCode(string externalCode)
+    public ValueTask<bool> ExistsStateWithExternalCodeAsync(string externalCode)
     {
-        return _repository.ExistsStateWithExternalCode(externalCode);
+        return _repository.ExistsStateWithExternalCodeAsync(externalCode);
     }
 
-    public bool ExistsStateWithName(string name)
+    public ValueTask<bool> ExistsStateWithNameAsync(string name)
     {
-        return _repository.ExistsStateWithName(name);
+        return _repository.ExistsStateWithNameAsync(name);
     }
 }

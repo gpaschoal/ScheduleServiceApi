@@ -4,7 +4,7 @@ namespace ScheduleService.Domain.CommandHandler.Repositories.States;
 
 public interface IStateCreateRepository : ICreateRepository<State>
 {
-    bool ExistsStateWithExternalCode(string externalCode);
-    bool ExistsStateWithName(string name);
+    ValueTask<bool> ExistsStateWithExternalCodeAsync(string externalCode);
+    ValueTask<bool> ExistsStateWithNameAsync(string name);
     ValueTask<bool> CheckIfCountryExists(Guid countryId);
 }

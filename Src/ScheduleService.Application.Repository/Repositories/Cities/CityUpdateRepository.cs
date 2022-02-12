@@ -10,7 +10,7 @@ internal class CityUpdateRepository : ICityUpdateRepository
     private readonly IStateRepository _stateRepository;
 
     public CityUpdateRepository(
-        ICityRepository repository, 
+        ICityRepository repository,
         IStateRepository stateRepository)
     {
         _repository = repository;
@@ -22,14 +22,14 @@ internal class CityUpdateRepository : ICityUpdateRepository
         return _stateRepository.CheckIfExistByIdAsync(countryId);
     }
 
-    public bool ExistsCityWithExternalCode(Guid id, string externalCode)
+    public ValueTask<bool> ExistsCityWithExternalCodeAsync(Guid id, string externalCode)
     {
-        return _repository.ExistsCityWithExternalCode(id, externalCode);
+        return _repository.ExistsCityWithExternalCodeAsync(id, externalCode);
     }
 
-    public bool ExistsCityWithName(Guid id, string name)
+    public ValueTask<bool> ExistsCityWithNameAsync(Guid id, string name)
     {
-        return _repository.ExistsCityWithName(id, name);
+        return _repository.ExistsCityWithNameAsync(id, name);
     }
 
     public ValueTask<City?> GetByIdAsync(Guid id)

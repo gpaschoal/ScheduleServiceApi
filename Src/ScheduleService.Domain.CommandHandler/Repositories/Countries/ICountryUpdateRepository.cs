@@ -4,6 +4,6 @@ namespace ScheduleService.Domain.CommandHandler.Repositories.Countries;
 
 public interface ICountryUpdateRepository : IUpdateRepository<Country>
 {
-    bool ExistsCountryWithExternalCode(Guid id, string externalCode);
-    bool ExistsCountryWithName(Guid id, string name);
+    ValueTask<bool> ExistsCountryWithExternalCodeAsync(Guid id, string externalCode);
+    ValueTask<bool> ExistsCountryWithNameAsync(Guid id, string name);
 }

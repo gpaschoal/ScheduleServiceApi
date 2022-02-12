@@ -4,5 +4,5 @@ namespace ScheduleService.Domain.CommandHandler.Repositories.Countries;
 
 public interface ICountryDeleteRepository : IDeleteRepository<Country>
 {
-    ValueTask<bool> CheckIfIsUsedByState(Guid id);
+    ValueTask<bool> CheckIfIsUsedByStateAsync(Guid id);
 }

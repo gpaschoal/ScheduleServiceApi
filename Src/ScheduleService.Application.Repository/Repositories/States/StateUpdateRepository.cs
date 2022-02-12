@@ -17,19 +17,19 @@ internal class StateUpdateRepository : IStateUpdateRepository
         _countryRepository = countryRepository;
     }
 
-    public async ValueTask<bool> CheckIfCountryExists(Guid countryId)
+    public ValueTask<bool> CheckIfCountryExists(Guid countryId)
     {
-        return await _countryRepository.CheckIfExistByIdAsync(countryId);
+        return _countryRepository.CheckIfExistByIdAsync(countryId);
     }
 
-    public bool ExistsStateWithExternalCode(Guid id, string externalCode)
+    public ValueTask<bool> ExistsStateWithExternalCodeAsync(Guid id, string externalCode)
     {
-        return _repository.ExistsStateWithExternalCode(id, externalCode);
+        return _repository.ExistsStateWithExternalCodeAsync(id, externalCode);
     }
 
-    public bool ExistsStateWithName(Guid id, string name)
+    public ValueTask<bool> ExistsStateWithNameAsync(Guid id, string name)
     {
-        return _repository.ExistsStateWithName(id, name);
+        return _repository.ExistsStateWithNameAsync(id, name);
     }
 
     public ValueTask<State?> GetByIdAsync(Guid id)

@@ -13,14 +13,14 @@ internal class CountryUpdateRepository : ICountryUpdateRepository
         _repository = repository;
     }
 
-    public bool ExistsCountryWithExternalCode(Guid id, string externalCode)
+    public ValueTask<bool> ExistsCountryWithExternalCodeAsync(Guid id, string externalCode)
     {
-        return _repository.ExistsCountryWithExternalCode(id, externalCode);
+        return _repository.ExistsCountryWithExternalCodeAsync(id, externalCode);
     }
 
-    public bool ExistsCountryWithName(Guid id, string name)
+    public ValueTask<bool> ExistsCountryWithNameAsync(Guid id, string name)
     {
-        return _repository.ExistsCountryWithName(id, name);
+        return _repository.ExistsCountryWithNameAsync(id, name);
     }
 
     public ValueTask<Country?> GetByIdAsync(Guid id)

@@ -44,8 +44,8 @@ public class CountryUpdateHandlerTest
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.Name));
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.ExternalCode));
 
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithNameAsync(It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCodeAsync(It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
         countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<Guid>()), Times.Never);
         countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Country>()), Times.Never);
     }
@@ -58,7 +58,7 @@ public class CountryUpdateHandlerTest
 
         var country = new Country(command.Name, command.ExternalCode);
         countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(country));
-        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithName(command.Id, command.Name)).Returns(true);
+        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithNameAsync(command.Id, command.Name)).Returns(ValueTask.FromResult(true));
 
         var sut = MakeSut(countryUpdateRepositoryMock.Object);
 
@@ -67,8 +67,8 @@ public class CountryUpdateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
         countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Country>()), Times.Never);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Id, command.Name), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.Id, command.ExternalCode), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithNameAsync(command.Id, command.Name), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCodeAsync(command.Id, command.ExternalCode), Times.Once);
         countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
     }
 
@@ -80,7 +80,7 @@ public class CountryUpdateHandlerTest
 
         var country = new Country(command.Name, command.ExternalCode);
         countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(country));
-        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCode(command.Id, command.ExternalCode)).Returns(true);
+        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCodeAsync(command.Id, command.ExternalCode)).Returns(ValueTask.FromResult(true));
 
         var sut = MakeSut(countryUpdateRepositoryMock.Object);
 
@@ -89,8 +89,8 @@ public class CountryUpdateHandlerTest
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
         countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Country>()), Times.Never);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Id, command.Name), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.Id, command.ExternalCode), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithNameAsync(command.Id, command.Name), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCodeAsync(command.Id, command.ExternalCode), Times.Once);
         countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
     }
 
@@ -101,15 +101,15 @@ public class CountryUpdateHandlerTest
         Mock<ICountryUpdateRepository> countryUpdateRepositoryMock = new();
 
         countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult((Country?)null));
-        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCode(command.Id, command.ExternalCode)).Returns(true);
+        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCodeAsync(command.Id, command.ExternalCode)).Returns(ValueTask.FromResult(true));
 
         var sut = MakeSut(countryUpdateRepositoryMock.Object);
 
         var resultData = sut.Handle(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Id, command.Name), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.Id, command.ExternalCode), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithNameAsync(command.Id, command.Name), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCodeAsync(command.Id, command.ExternalCode), Times.Once);
         countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
         countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<Country>()), Times.Never);
     }
@@ -130,8 +130,8 @@ public class CountryUpdateHandlerTest
         resultData.IsValid.Should().BeTrue();
         resultData.Errors.Should().BeEmpty();
         countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(country), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithName(command.Id, command.Name), Times.Once);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCode(command.Id, command.ExternalCode), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithNameAsync(command.Id, command.Name), Times.Once);
+        countryUpdateRepositoryMock.Verify(x => x.ExistsCountryWithExternalCodeAsync(command.Id, command.ExternalCode), Times.Once);
         countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
     }
 }

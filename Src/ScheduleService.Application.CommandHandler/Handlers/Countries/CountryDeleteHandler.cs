@@ -1,6 +1,6 @@
-﻿using ScheduleService.Application.Shared;
+﻿using ScheduleService.Application.CommandValidator.Validators.Countries;
+using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Application.CommandValidator.Validators.Countries;
 using ScheduleService.Domain.Command.Commands.Countries;
 using ScheduleService.Domain.CommandHandler.Handlers;
 using ScheduleService.Domain.CommandHandler.Handlers.Countries;
@@ -25,7 +25,7 @@ internal class CountryDeleteHandler : RequestHandler<CountryDeleteCommand, Custo
         if (!await _repository.CheckIfExistByIdAsync(request.Id))
             AddError(nameof(request.Id), ValidationResource.EntityNotFound);
 
-        if (await _repository.CheckIfIsUsedByState(request.Id))
+        if (await _repository.CheckIfIsUsedByStateAsync(request.Id))
             AddError(ValidationResource.ThereAreStatesUsingThisCountry);
 
         if (IsInvalid)

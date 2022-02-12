@@ -1,6 +1,6 @@
-﻿using ScheduleService.Application.Shared;
+﻿using ScheduleService.Application.CommandValidator.Validators.Cities;
+using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Application.CommandValidator.Validators.Cities;
 using ScheduleService.Domain.Command.Commands.Cities;
 using ScheduleService.Domain.CommandHandler.Handlers;
 using ScheduleService.Domain.CommandHandler.Handlers.Cities;
@@ -22,10 +22,10 @@ internal class CityUpdateHandler : RequestHandler<CityUpdateCommand, CustomResul
         if (!Validate<CityUpdateValidator>(request))
             return InvalidResponse();
 
-        if (_repository.ExistsCityWithName(id: request.Id, name: request.Name))
+        if (await _repository.ExistsCityWithNameAsync(id: request.Id, name: request.Name))
             AddError(nameof(request.Name), ValidationResource.AlreadyExistsACityWithThisName);
 
-        if (_repository.ExistsCityWithExternalCode(id: request.Id, externalCode: request.ExternalCode))
+        if (await _repository.ExistsCityWithExternalCodeAsync(id: request.Id, externalCode: request.ExternalCode))
             AddError(nameof(request.ExternalCode), ValidationResource.AlreadyExistsACityWithThisExternalCode);
 
         if (!await _repository.CheckIfStateExists(countryId: request.StateId))

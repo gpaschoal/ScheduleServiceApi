@@ -19,18 +19,18 @@ internal class CityCreateRepository : ICityCreateRepository
         return _repository.AddAsync(data);
     }
 
-    public async ValueTask<bool> CheckIfStateExists(Guid countryId)
+    public ValueTask<bool> CheckIfStateExists(Guid countryId)
     {
-        return await _stateRepository.CheckIfExistByIdAsync(countryId);
+        return _stateRepository.CheckIfExistByIdAsync(countryId);
     }
 
-    public bool ExistsCityWithExternalCode(string externalCode)
+    public ValueTask<bool> ExistsCityWithExternalCodeAsync(string externalCode)
     {
-        return _repository.ExistsCityWithExternalCode(externalCode);
+        return _repository.ExistsCityWithExternalCodeAsync(externalCode);
     }
 
-    public bool ExistsCityWithName(string name)
+    public ValueTask<bool> ExistsCityWithNameAsync(string name)
     {
-        return _repository.ExistsCityWithName(name);
+        return _repository.ExistsCityWithNameAsync(name);
     }
 }

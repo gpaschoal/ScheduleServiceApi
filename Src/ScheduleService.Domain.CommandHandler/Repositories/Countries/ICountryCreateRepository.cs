@@ -4,6 +4,6 @@ namespace ScheduleService.Domain.CommandHandler.Repositories.Countries;
 
 public interface ICountryCreateRepository : ICreateRepository<Country>
 {
-    bool ExistsCountryWithExternalCode(string externalCode);
-    bool ExistsCountryWithName(string name);
+    ValueTask<bool> ExistsCountryWithExternalCodeAsync(string externalCode);
+    ValueTask<bool> ExistsCountryWithName(string name);
 }

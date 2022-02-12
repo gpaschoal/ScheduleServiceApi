@@ -1,6 +1,6 @@
-﻿using ScheduleService.Application.Shared;
+﻿using ScheduleService.Application.CommandValidator.Validators.States;
+using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Application.CommandValidator.Validators.States;
 using ScheduleService.Domain.Command.Commands.States;
 using ScheduleService.Domain.CommandHandler.Handlers;
 using ScheduleService.Domain.CommandHandler.Handlers.States;
@@ -22,10 +22,10 @@ internal class StateUpdateHandler : RequestHandler<StateUpdateCommand, CustomRes
         if (!Validate<StateUpdateValidator>(request))
             return InvalidResponse();
 
-        if (_repository.ExistsStateWithName(id: request.Id, name: request.Name))
+        if (await _repository.ExistsStateWithNameAsync(id: request.Id, name: request.Name))
             AddError(nameof(request.Name), ValidationResource.AlreadyExistsAStateWithThisName);
 
-        if (_repository.ExistsStateWithExternalCode(id: request.Id, externalCode: request.ExternalCode))
+        if (await _repository.ExistsStateWithExternalCodeAsync(id: request.Id, externalCode: request.ExternalCode))
             AddError(nameof(request.ExternalCode), ValidationResource.AlreadyExistsAStateWithThisExternalCode);
 
         if (!await _repository.CheckIfCountryExists(countryId: request.CountryId))
