@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="ScheduleService.Application.HandlerTest" />
+		<InternalsVisibleTo Include="ScheduleService.Application.CommandHandlerTest" />
 	</ItemGroup>
 
 	<ItemGroup>
