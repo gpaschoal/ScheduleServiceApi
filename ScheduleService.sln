@@ -29,8 +29,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.IoC.Contain
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Infrastructure.Context", "Src\ScheduleService.Infrastructure.Context\ScheduleService.Infrastructure.Context.csproj", "{E2BCDF86-D6A2-41C9-A1EC-621742FA7CFF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Application.Validator", "Src\ScheduleService.Application.Validator\ScheduleService.Application.Validator.csproj", "{BC5B0FBB-F616-41EA-B71C-420A75396F4B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Application.Shared", "Src\ScheduleService.Application.Shared\ScheduleService.Application.Shared.csproj", "{C28E7252-3A42-4779-AA12-BB77FF5F8E35}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Domain.Shared", "Src\ScheduleService.Domain.Shared\ScheduleService.Domain.Shared.csproj", "{B5CBAC87-0189-446E-B447-F639E5E77E02}"
@@ -58,6 +56,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Domain.CommandHandler", "Src\ScheduleService.Domain.CommandHandler\ScheduleService.Domain.CommandHandler.csproj", "{5E37CBB8-30DF-47E8-8CA1-4F46496A96DE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Application.CommandHandlerTest", "Test\ScheduleService.Application.CommandHandlerTest\ScheduleService.Application.CommandHandlerTest.csproj", "{FE6B1DB0-B325-4E8B-B40A-B9FC06062559}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScheduleService.Application.CommandValidator", "Src\ScheduleService.Application.CommandValidator\ScheduleService.Application.CommandValidator.csproj", "{66A6216F-F4BA-4BA2-9BC1-67341FC9571A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,10 +89,6 @@ Global
 		{E2BCDF86-D6A2-41C9-A1EC-621742FA7CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2BCDF86-D6A2-41C9-A1EC-621742FA7CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2BCDF86-D6A2-41C9-A1EC-621742FA7CFF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC5B0FBB-F616-41EA-B71C-420A75396F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC5B0FBB-F616-41EA-B71C-420A75396F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC5B0FBB-F616-41EA-B71C-420A75396F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC5B0FBB-F616-41EA-B71C-420A75396F4B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C28E7252-3A42-4779-AA12-BB77FF5F8E35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C28E7252-3A42-4779-AA12-BB77FF5F8E35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C28E7252-3A42-4779-AA12-BB77FF5F8E35}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -141,6 +137,10 @@ Global
 		{FE6B1DB0-B325-4E8B-B40A-B9FC06062559}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE6B1DB0-B325-4E8B-B40A-B9FC06062559}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE6B1DB0-B325-4E8B-B40A-B9FC06062559}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66A6216F-F4BA-4BA2-9BC1-67341FC9571A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66A6216F-F4BA-4BA2-9BC1-67341FC9571A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66A6216F-F4BA-4BA2-9BC1-67341FC9571A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66A6216F-F4BA-4BA2-9BC1-67341FC9571A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,7 +157,6 @@ Global
 		{48F14FDF-36A2-42F3-989B-DFA7B1C90CE0} = {0A98B7B5-B0AE-4E6A-B231-A668EA03EE00}
 		{E606CB33-CB91-4E41-97C7-2F9E8E386E68} = {57ECF0FA-2E93-4903-879F-6CFC5234AF9B}
 		{E2BCDF86-D6A2-41C9-A1EC-621742FA7CFF} = {0A98B7B5-B0AE-4E6A-B231-A668EA03EE00}
-		{BC5B0FBB-F616-41EA-B71C-420A75396F4B} = {56A3FE61-763D-4AC6-B003-826DDB9DBC7F}
 		{C28E7252-3A42-4779-AA12-BB77FF5F8E35} = {56A3FE61-763D-4AC6-B003-826DDB9DBC7F}
 		{B5CBAC87-0189-446E-B447-F639E5E77E02} = {C535D2DF-6EDE-4CB3-90EE-2172D95A1141}
 		{2D0BAB29-FF8F-4BF1-A4D8-E76366E60A7E} = {56A3FE61-763D-4AC6-B003-826DDB9DBC7F}
@@ -172,6 +171,7 @@ Global
 		{28A62D2A-81F2-431B-9C11-76E263C75BA7} = {56A3FE61-763D-4AC6-B003-826DDB9DBC7F}
 		{5E37CBB8-30DF-47E8-8CA1-4F46496A96DE} = {C535D2DF-6EDE-4CB3-90EE-2172D95A1141}
 		{FE6B1DB0-B325-4E8B-B40A-B9FC06062559} = {36FAE2E0-0778-4861-B518-3ED64DB468E7}
+		{66A6216F-F4BA-4BA2-9BC1-67341FC9571A} = {56A3FE61-763D-4AC6-B003-826DDB9DBC7F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0559ABF3-1EE6-4253-9D7B-731F645C0C90}

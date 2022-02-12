@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Domain.Command.Commands.Countries;
+using ScheduleService.Domain.Command.Commands.Cities;
 
-namespace ScheduleService.Application.Validator.Validators.Countries;
+namespace ScheduleService.Application.CommandValidator.Validators.Cities;
 
-public class CountryUpdateValidator : AbstractValidator<CountryUpdateCommand>
+public class CityUpdateValidator : AbstractValidator<CityUpdateCommand>
 {
-    public CountryUpdateValidator()
+    public CityUpdateValidator()
     {
         RuleFor(x => x.Id).NotEmpty().WithMessage(ValidationResource.IsRequired);
         RuleFor(x => x.Name).NotEmpty().WithMessage(ValidationResource.IsRequired).Length(5, 50).WithMessage(ValidationResource.ShouldHaveMaxLenght);

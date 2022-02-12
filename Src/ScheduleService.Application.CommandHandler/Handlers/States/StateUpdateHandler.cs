@@ -1,6 +1,6 @@
 ﻿using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Application.Validator.Validators.States;
+using ScheduleService.Application.CommandValidator.Validators.States;
 using ScheduleService.Domain.Command.Commands.States;
 using ScheduleService.Domain.CommandHandler.Handlers;
 using ScheduleService.Domain.CommandHandler.Handlers.States;

@@ -2,7 +2,7 @@
 using ScheduleService.Application.Shared.Resources;
 using ScheduleService.Domain.Command.Commands.Users;
 
-namespace ScheduleService.Application.Validator.Validators.Users;
+namespace ScheduleService.Application.CommandValidator.Validators.Users;
 
 public class UserSignInValidator : AbstractValidator<UserSignInCommand>
 {

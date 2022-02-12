@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 using FluentValidation.Results;
-using ScheduleService.Application.Validator.Validators.Users;
+using ScheduleService.Application.CommandValidator.Validators.Users;
 using ScheduleService.Domain.Command.Commands.Users;
 using System.Linq;
 using Xunit;
 
-namespace ScheduleService.Application.ValidatorTest.Validators.Users;
+namespace ScheduleService.Application.CommandValidatorTest.Validators.Users;
 
 public class UserSignInCommandTest
 {

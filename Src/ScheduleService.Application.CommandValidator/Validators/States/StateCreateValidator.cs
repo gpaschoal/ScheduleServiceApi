@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Domain.Command.Commands.Cities;
+using ScheduleService.Domain.Command.Commands.States;
 
-namespace ScheduleService.Application.Validator.Validators.Cities;
+namespace ScheduleService.Application.CommandValidator.Validators.States;
 
-public class CityUpdateValidator : AbstractValidator<CityUpdateCommand>
+public class StateCreateValidator : AbstractValidator<StateCreateCommand>
 {
-    public CityUpdateValidator()
+    public StateCreateValidator()
     {
-        RuleFor(x => x.Id).NotEmpty().WithMessage(ValidationResource.IsRequired);
         RuleFor(x => x.Name).NotEmpty().WithMessage(ValidationResource.IsRequired).Length(5, 50).WithMessage(ValidationResource.ShouldHaveMaxLenght);
         RuleFor(x => x.ExternalCode).NotEmpty().WithMessage(ValidationResource.IsRequired).Length(5, 50).WithMessage(ValidationResource.ShouldHaveMaxLenght);
     }

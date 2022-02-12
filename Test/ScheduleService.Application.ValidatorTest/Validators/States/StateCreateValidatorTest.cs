@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 using FluentValidation.Results;
-using ScheduleService.Application.Validator.Validators.States;
+using ScheduleService.Application.CommandValidator.Validators.States;
 using ScheduleService.Domain.Command.Commands.States;
 using System.Linq;
 using Xunit;
 
-namespace ScheduleService.Application.ValidatorTest.Validators.States;
+namespace ScheduleService.Application.CommandValidatorTest.Validators.States;
 
 public class StateCreateValidatorTest
 {

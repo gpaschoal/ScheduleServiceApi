@@ -2,7 +2,7 @@
 using ScheduleService.Application.Shared.Resources;
 using ScheduleService.Domain.Command.Commands.Countries;
 
-namespace ScheduleService.Application.Validator.Validators.Countries;
+namespace ScheduleService.Application.CommandValidator.Validators.Countries;
 
 public class CountryDeleteValidator : AbstractValidator<CountryDeleteCommand>
 {

@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
 using FluentValidation.Results;
-using ScheduleService.Application.Validator.Validators.Countries;
+using ScheduleService.Application.CommandValidator.Validators.Countries;
 using ScheduleService.Domain.Command.Commands.Countries;
 using System;
 using System.Linq;
 using Xunit;
 
-namespace ScheduleService.Application.ValidatorTest.Validators.Countries;
+namespace ScheduleService.Application.CommandValidatorTest.Validators.Countries;
 
 public class CountryUpdateValidatorTest
 {

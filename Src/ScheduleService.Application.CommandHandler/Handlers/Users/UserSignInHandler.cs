@@ -2,7 +2,7 @@
 using ScheduleService.Application.Response.Responses.Users;
 using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Application.Validator.Validators.Users;
+using ScheduleService.Application.CommandValidator.Validators.Users;
 using ScheduleService.Domain.Command.Commands.Users;
 using ScheduleService.Domain.CommandHandler.Handlers;
 using ScheduleService.Domain.CommandHandler.Handlers.Users;

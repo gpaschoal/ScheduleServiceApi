@@ -1,12 +1,12 @@
 ﻿using FluentAssertions;
 using FluentValidation.Results;
-using ScheduleService.Application.Validator.Validators.Cities;
+using ScheduleService.Application.CommandValidator.Validators.Cities;
 using ScheduleService.Domain.Command.Commands.Cities;
 using System;
 using System.Linq;
 using Xunit;
 
-namespace ScheduleService.Application.ValidatorTest.Validators.Cities;
+namespace ScheduleService.Application.CommandValidatorTest.Validators.Cities;
 
 public class CityUpdateValidatorTest
 {

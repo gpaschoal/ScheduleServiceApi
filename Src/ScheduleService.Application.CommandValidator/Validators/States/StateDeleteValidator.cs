@@ -2,7 +2,7 @@
 using ScheduleService.Application.Shared.Resources;
 using ScheduleService.Domain.Command.Commands.States;
 
-namespace ScheduleService.Application.Validator.Validators.States;
+namespace ScheduleService.Application.CommandValidator.Validators.States;
 
 public class StateDeleteValidator : AbstractValidator<StateDeleteCommand>
 {

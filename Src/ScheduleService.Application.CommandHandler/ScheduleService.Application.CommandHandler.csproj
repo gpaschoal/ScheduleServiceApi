@@ -16,7 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ScheduleService.Application.Validator\ScheduleService.Application.Validator.csproj" />
+		<ProjectReference Include="..\ScheduleService.Application.CommandValidator\ScheduleService.Application.CommandValidator.csproj" />
 		<ProjectReference Include="..\ScheduleService.Domain.Core\ScheduleService.Domain.Core.csproj" />
 		<ProjectReference Include="..\ScheduleService.Domain.CommandHandler\ScheduleService.Domain.CommandHandler.csproj" />
 		<ProjectReference Include="..\ScheduleService.Domain.Repository\ScheduleService.Domain.Repository.csproj" />
