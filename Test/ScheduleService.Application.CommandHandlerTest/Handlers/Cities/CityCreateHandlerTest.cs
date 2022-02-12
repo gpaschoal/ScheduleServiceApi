@@ -66,4 +66,25 @@ public class CityCreateHandlerTest
         cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCode(command.ExternalCode), Times.Once);
         cityCreateRepositoryMock.Verify(x => x.CheckIfStateExists(command.StateId), Times.Once);
     }
+
+    [Fact(DisplayName = "Should be invalid when already exists a city with the same externalCode")]
+    public void Should_be_invalid_when_already_exists_a_city_with_the_same_externalCode()
+    {
+        var command = MakeValidCommand();
+        Mock<ICityCreateRepository> cityCreateRepositoryMock = new();
+        cityCreateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).Returns(ValueTask.FromResult(true));
+
+        cityCreateRepositoryMock.Setup(x => x.ExistsCityWithExternalCode(command.ExternalCode)).Returns(true);
+
+        var sut = MakeSut(cityCreateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+        resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
+        cityCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<City>()), Times.Never);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithName(command.Name), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCode(command.ExternalCode), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.CheckIfStateExists(command.StateId), Times.Once);
+    }
 }
