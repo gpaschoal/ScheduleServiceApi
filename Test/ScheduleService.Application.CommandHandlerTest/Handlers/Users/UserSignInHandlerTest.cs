@@ -16,9 +16,9 @@ namespace ScheduleService.Application.CommandHandlerTest.Handlers.Users;
 public class UserSignInHandlerTest
 {
     private static UserSignInHandler MakeSut(
-      IUserSignInRepository? userRepository = null,
-      IEncryptionService? encryptionService = null,
-      ITokenService? tokenService = null)
+      IUserSignInRepository userRepository = null,
+      IEncryptionService encryptionService = null,
+      ITokenService tokenService = null)
     {
         userRepository ??= new Mock<IUserSignInRepository>().Object;
         encryptionService ??= new Mock<IEncryptionService>().Object;
@@ -63,7 +63,7 @@ public class UserSignInHandlerTest
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.Email));
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.Password));
 
-        userRepositoryMock.Verify(x => x.GetUserByEmailAndPassword(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
+        userRepositoryMock.Verify(x => x.GetUserByEmailAndPasswordAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Never);
     }
 
     [Fact(DisplayName = "Should be invalid when dont find the user")]
@@ -71,9 +71,9 @@ public class UserSignInHandlerTest
     {
         var command = MakeValidCommand();
         Mock<IUserSignInRepository> userRepositoryMock = new();
-        var user = (User?)null;
-        userRepositoryMock.Setup(x => x.GetUserByEmailAndPassword(It.IsAny<string>(), It.IsAny<string>()))
-                    .Returns(user);
+        var user = (User)null;
+        userRepositoryMock.Setup(x => x.GetUserByEmailAndPasswordAsync(It.IsAny<string>(), It.IsAny<string>()))
+                    .ReturnsAsync(user);
 
         var sut = MakeSut(userRepository: userRepositoryMock.Object);
 
@@ -97,7 +97,7 @@ public class UserSignInHandlerTest
 
         User user = MakeUser();
         Mock<IUserSignInRepository> userRepositoryMock = new();
-        userRepositoryMock.Setup(x => x.GetUserByEmailAndPassword(It.IsAny<string>(), It.IsAny<string>())).Returns(user);
+        userRepositoryMock.Setup(x => x.GetUserByEmailAndPasswordAsync(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(user);
 
         UserSignInHandler sut = MakeSut(userRepository: userRepositoryMock.Object,
                           encryptionService: encryptionServiceMock.Object,
@@ -105,8 +105,8 @@ public class UserSignInHandlerTest
 
         _ = sut.Handle(command, CancellationToken.None).Result;
 
-        userRepositoryMock.Verify(x => x.GetUserByEmailAndPassword(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
-        userRepositoryMock.Verify(x => x.GetUserByEmailAndPassword(
+        userRepositoryMock.Verify(x => x.GetUserByEmailAndPasswordAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
+        userRepositoryMock.Verify(x => x.GetUserByEmailAndPasswordAsync(
                                                 It.Is<string>(x => x.Equals(command.Email)),
                                                 It.Is<string>(x => x.Equals(encryptedPassword)))
         );

@@ -7,7 +7,6 @@ using ScheduleService.Domain.Core.Entities;
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.CommandHandlerTest.Handlers.Cities;
@@ -15,7 +14,7 @@ namespace ScheduleService.Application.CommandHandlerTest.Handlers.Cities;
 public class CityUpdateHandlerTest
 {
     private static CityUpdateHandler MakeSut(
-        ICityUpdateRepository? cityUpdateRepository = null)
+        ICityUpdateRepository cityUpdateRepository = null)
     {
         cityUpdateRepository ??= new Mock<ICityUpdateRepository>().Object;
 
@@ -32,7 +31,7 @@ public class CityUpdateHandlerTest
         Mock<ICityUpdateRepository> cityUpdateRepositoryMock = new();
 
         var city = new City(command.Name, command.ExternalCode, command.StateId);
-        cityUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(city));
+        cityUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).ReturnsAsync(city);
 
         var sut = MakeSut(cityUpdateRepositoryMock.Object);
 
@@ -59,9 +58,9 @@ public class CityUpdateHandlerTest
         Mock<ICityUpdateRepository> cityUpdateRepositoryMock = new();
 
         var city = new City(command.Name, command.ExternalCode, command.StateId);
-        cityUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(city));
-        cityUpdateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).Returns(ValueTask.FromResult(true));
-        cityUpdateRepositoryMock.Setup(x => x.ExistsCityWithNameAsync(command.Id, command.Name)).Returns(ValueTask.FromResult(true));
+        cityUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).ReturnsAsync(city);
+        cityUpdateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).ReturnsAsync(true);
+        cityUpdateRepositoryMock.Setup(x => x.ExistsCityWithNameAsync(command.Id, command.Name)).ReturnsAsync(true);
 
         var sut = MakeSut(cityUpdateRepositoryMock.Object);
 
@@ -83,9 +82,9 @@ public class CityUpdateHandlerTest
         Mock<ICityUpdateRepository> cityUpdateRepositoryMock = new();
 
         var city = new City(command.Name, command.ExternalCode, command.StateId);
-        cityUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(city));
-        cityUpdateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).Returns(ValueTask.FromResult(true));
-        cityUpdateRepositoryMock.Setup(x => x.ExistsCityWithExternalCodeAsync(command.Id, command.ExternalCode)).Returns(ValueTask.FromResult(true));
+        cityUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).ReturnsAsync((city));
+        cityUpdateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).ReturnsAsync(true);
+        cityUpdateRepositoryMock.Setup(x => x.ExistsCityWithExternalCodeAsync(command.Id, command.ExternalCode)).ReturnsAsync(true);
 
         var sut = MakeSut(cityUpdateRepositoryMock.Object);
 
@@ -107,8 +106,8 @@ public class CityUpdateHandlerTest
         Mock<ICityUpdateRepository> cityUpdateRepositoryMock = new();
 
         var city = new City(command.Name, command.ExternalCode, command.StateId);
-        cityUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(city));
-        cityUpdateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).Returns(ValueTask.FromResult(false));
+        cityUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).ReturnsAsync(city);
+        cityUpdateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).ReturnsAsync(false);
 
         var sut = MakeSut(cityUpdateRepositoryMock.Object);
 
@@ -129,8 +128,8 @@ public class CityUpdateHandlerTest
         Mock<ICityUpdateRepository> cityUpdateRepositoryMock = new();
 
         var city = new City(command.Name, command.ExternalCode, command.StateId);
-        cityUpdateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).Returns(ValueTask.FromResult(true));
-        cityUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(city));
+        cityUpdateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).ReturnsAsync(true);
+        cityUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).ReturnsAsync(city);
 
         var sut = MakeSut(cityUpdateRepositoryMock.Object);
 

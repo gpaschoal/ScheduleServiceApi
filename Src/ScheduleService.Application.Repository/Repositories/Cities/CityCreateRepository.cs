@@ -9,9 +9,12 @@ internal class CityCreateRepository : ICityCreateRepository
     private readonly ICityRepository _repository;
     private readonly IStateRepository _stateRepository;
 
-    public CityCreateRepository(ICityRepository repository)
+    public CityCreateRepository(
+        ICityRepository repository,
+        IStateRepository stateRepository)
     {
         _repository = repository;
+        _stateRepository = stateRepository;
     }
 
     public ValueTask AddAsync(City data)

@@ -5,7 +5,6 @@ using ScheduleService.Domain.Command.Commands.Countries;
 using ScheduleService.Domain.CommandHandler.Repositories.Countries;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.CommandHandlerTest.Handlers.Countries;
@@ -13,7 +12,7 @@ namespace ScheduleService.Application.CommandHandlerTest.Handlers.Countries;
 public class CountryDeleteHandlerTest
 {
     private static CountryDeleteHandler MakeSut(
-        ICountryDeleteRepository? countryDeleteRepository = null)
+        ICountryDeleteRepository countryDeleteRepository = null)
     {
         countryDeleteRepository ??= new Mock<ICountryDeleteRepository>().Object;
 
@@ -49,7 +48,7 @@ public class CountryDeleteHandlerTest
 
         Mock<ICountryDeleteRepository> countryDeleteRepositoryMock = new();
 
-        countryDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).Returns(ValueTask.FromResult(false));
+        countryDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).ReturnsAsync(false);
 
         var sut = MakeSut(countryDeleteRepositoryMock.Object);
 
@@ -70,8 +69,8 @@ public class CountryDeleteHandlerTest
         CountryDeleteCommand command = MakeValidCommand();
 
         Mock<ICountryDeleteRepository> countryDeleteRepositoryMock = new();
-        countryDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).Returns(ValueTask.FromResult(false));
-        countryDeleteRepositoryMock.Setup(x => x.CheckIfIsUsedByStateAsync(command.Id)).Returns(ValueTask.FromResult(true));
+        countryDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).ReturnsAsync(false);
+        countryDeleteRepositoryMock.Setup(x => x.CheckIfIsUsedByStateAsync(command.Id)).ReturnsAsync(true);
 
         var sut = MakeSut(countryDeleteRepositoryMock.Object);
 
@@ -90,7 +89,7 @@ public class CountryDeleteHandlerTest
         CountryDeleteCommand command = MakeValidCommand();
 
         Mock<ICountryDeleteRepository> countryDeleteRepositoryMock = new();
-        countryDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).Returns(ValueTask.FromResult(true));
+        countryDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).ReturnsAsync(true);
 
         var sut = MakeSut(countryDeleteRepositoryMock.Object);
 

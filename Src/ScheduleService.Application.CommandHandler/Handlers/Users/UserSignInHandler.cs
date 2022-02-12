@@ -34,7 +34,7 @@ internal class UserSignInHandler : RequestHandler<UserSignInCommand, CustomResul
 
         var encryptedPassword = _encryptionService.Encrypt(request.Password);
 
-        User user = _repository.GetUserByEmailAndPassword(email: request.Email, password: encryptedPassword);
+        User user = await _repository.GetUserByEmailAndPasswordAsync(email: request.Email, password: encryptedPassword);
 
         if (user is null)
             AddError(nameof(request.Password), ValidationResource.UserNotFound);

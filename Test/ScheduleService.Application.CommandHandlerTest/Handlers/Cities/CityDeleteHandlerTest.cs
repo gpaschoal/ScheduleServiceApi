@@ -5,7 +5,6 @@ using ScheduleService.Domain.Command.Commands.Cities;
 using ScheduleService.Domain.CommandHandler.Repositories.Cities;
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.CommandHandlerTest.Handlers.Cities;
@@ -13,7 +12,7 @@ namespace ScheduleService.Application.CommandHandlerTest.Handlers.Cities;
 public class CityDeleteHandlerTest
 {
     private static CityDeleteHandler MakeSut(
-        ICityDeleteRepository? cityDeleteRepository = null)
+        ICityDeleteRepository cityDeleteRepository = null)
     {
         cityDeleteRepository ??= new Mock<ICityDeleteRepository>().Object;
 
@@ -48,7 +47,7 @@ public class CityDeleteHandlerTest
 
         Mock<ICityDeleteRepository> stateDeleteRepositoryMock = new();
 
-        stateDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).Returns(ValueTask.FromResult(false));
+        stateDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).ReturnsAsync(false);
 
         var sut = MakeSut(stateDeleteRepositoryMock.Object);
 
@@ -66,7 +65,7 @@ public class CityDeleteHandlerTest
         CityDeleteCommand command = MakeValidCommand();
 
         Mock<ICityDeleteRepository> cityDeleteRepositoryMock = new();
-        cityDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).Returns(ValueTask.FromResult(true));
+        cityDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).ReturnsAsync(true);
 
         var sut = MakeSut(cityDeleteRepositoryMock.Object);
 

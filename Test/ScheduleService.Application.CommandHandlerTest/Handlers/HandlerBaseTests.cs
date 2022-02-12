@@ -51,7 +51,7 @@ public partial class HandlerBaseTests
     }
 
     [Fact(DisplayName = "AddError should add errors to the intern Response")]
-    public async Task AddError_should_add_errors_to_the_intern_Response()
+    public void AddError_should_add_errors_to_the_intern_Response()
     {
         var sut = MakeSut();
 
@@ -69,7 +69,7 @@ public partial class HandlerBaseTests
     }
 
     [Fact(DisplayName = "AddError should add message errors to the intern Response")]
-    public async Task AddError_should_add_message_errors_to_the_intern_Response()
+    public void AddError_should_add_message_errors_to_the_intern_Response()
     {
         var sut = MakeSut();
 

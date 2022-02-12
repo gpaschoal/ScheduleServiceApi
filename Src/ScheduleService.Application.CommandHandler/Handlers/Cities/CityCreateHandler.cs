@@ -37,7 +37,7 @@ internal class CityCreateHandler : RequestHandler<CityCreateCommand, CustomResul
 
         City entity = new(request.Name, request.ExternalCode, request.StateId);
 
-        _repository.AddAsync(entity);
+        await _repository.AddAsync(entity);
 
         CustomResultData<Guid> response = new(entity.Id);
 

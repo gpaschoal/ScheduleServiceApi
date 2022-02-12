@@ -7,7 +7,6 @@ using ScheduleService.Domain.Core.Entities;
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.CommandHandlerTest.Handlers.States;
@@ -15,7 +14,7 @@ namespace ScheduleService.Application.CommandHandlerTest.Handlers.States;
 public class StateCreateHandlerTest
 {
     private static StateCreateHandler MakeSut(
-        IStateCreateRepository? stateCreateRepository = null)
+        IStateCreateRepository stateCreateRepository = null)
     {
         stateCreateRepository ??= new Mock<IStateCreateRepository>().Object;
 
@@ -52,8 +51,8 @@ public class StateCreateHandlerTest
         var command = MakeValidCommand();
         Mock<IStateCreateRepository> stateCreateRepositoryMock = new();
 
-        stateCreateRepositoryMock.Setup(x => x.ExistsStateWithNameAsync(command.Name)).Returns(ValueTask.FromResult(true));
-        stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(true));
+        stateCreateRepositoryMock.Setup(x => x.ExistsStateWithNameAsync(command.Name)).ReturnsAsync(true);
+        stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).ReturnsAsync(true);
 
         var sut = MakeSut(stateCreateRepositoryMock.Object);
 
@@ -72,9 +71,9 @@ public class StateCreateHandlerTest
     {
         var command = MakeValidCommand();
         Mock<IStateCreateRepository> stateCreateRepositoryMock = new();
-        stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(true));
+        stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).ReturnsAsync(true);
 
-        stateCreateRepositoryMock.Setup(x => x.ExistsStateWithExternalCodeAsync(command.ExternalCode)).Returns(ValueTask.FromResult(true));
+        stateCreateRepositoryMock.Setup(x => x.ExistsStateWithExternalCodeAsync(command.ExternalCode)).ReturnsAsync(true);
 
         var sut = MakeSut(stateCreateRepositoryMock.Object);
 
@@ -93,7 +92,7 @@ public class StateCreateHandlerTest
     {
         var command = MakeValidCommand();
         Mock<IStateCreateRepository> stateCreateRepositoryMock = new();
-        stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(false));
+        stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).ReturnsAsync(false);
 
         var sut = MakeSut(stateCreateRepositoryMock.Object);
 
@@ -111,7 +110,7 @@ public class StateCreateHandlerTest
     {
         var command = MakeValidCommand();
         Mock<IStateCreateRepository> stateCreateRepositoryMock = new();
-        stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(true));
+        stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).ReturnsAsync(true);
 
         var sut = MakeSut(stateCreateRepositoryMock.Object);
 

@@ -7,7 +7,6 @@ using ScheduleService.Domain.Core.Entities;
 using System;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.CommandHandlerTest.Handlers.Countries;
@@ -15,7 +14,7 @@ namespace ScheduleService.Application.CommandHandlerTest.Handlers.Countries;
 public class CountryUpdateHandlerTest
 {
     private static CountryUpdateHandler MakeSut(
-        ICountryUpdateRepository? countryUpdateRepository = null)
+        ICountryUpdateRepository countryUpdateRepository = null)
     {
         countryUpdateRepository ??= new Mock<ICountryUpdateRepository>().Object;
 
@@ -32,7 +31,7 @@ public class CountryUpdateHandlerTest
         Mock<ICountryUpdateRepository> countryUpdateRepositoryMock = new();
 
         var country = new Country(command.Name, command.ExternalCode);
-        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(country));
+        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).ReturnsAsync(country);
 
         var sut = MakeSut(countryUpdateRepositoryMock.Object);
 
@@ -57,8 +56,8 @@ public class CountryUpdateHandlerTest
         Mock<ICountryUpdateRepository> countryUpdateRepositoryMock = new();
 
         var country = new Country(command.Name, command.ExternalCode);
-        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(country));
-        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithNameAsync(command.Id, command.Name)).Returns(ValueTask.FromResult(true));
+        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).ReturnsAsync(country);
+        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithNameAsync(command.Id, command.Name)).ReturnsAsync(true);
 
         var sut = MakeSut(countryUpdateRepositoryMock.Object);
 
@@ -79,8 +78,8 @@ public class CountryUpdateHandlerTest
         Mock<ICountryUpdateRepository> countryUpdateRepositoryMock = new();
 
         var country = new Country(command.Name, command.ExternalCode);
-        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(country));
-        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCodeAsync(command.Id, command.ExternalCode)).Returns(ValueTask.FromResult(true));
+        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).ReturnsAsync(country);
+        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCodeAsync(command.Id, command.ExternalCode)).ReturnsAsync(true);
 
         var sut = MakeSut(countryUpdateRepositoryMock.Object);
 
@@ -100,8 +99,8 @@ public class CountryUpdateHandlerTest
         var command = MakeValidCommand();
         Mock<ICountryUpdateRepository> countryUpdateRepositoryMock = new();
 
-        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult((Country?)null));
-        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCodeAsync(command.Id, command.ExternalCode)).Returns(ValueTask.FromResult(true));
+        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).ReturnsAsync((Country)null);
+        countryUpdateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCodeAsync(command.Id, command.ExternalCode)).ReturnsAsync(true);
 
         var sut = MakeSut(countryUpdateRepositoryMock.Object);
 
@@ -121,7 +120,7 @@ public class CountryUpdateHandlerTest
         Mock<ICountryUpdateRepository> countryUpdateRepositoryMock = new();
 
         var country = new Country(command.Name, command.ExternalCode);
-        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(country));
+        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).ReturnsAsync(country);
 
         var sut = MakeSut(countryUpdateRepositoryMock.Object);
 

@@ -13,8 +13,8 @@ internal class UserSignInRepository : IUserSignInRepository
         _repository = repository;
     }
 
-    public User GetUserByEmailAndPassword(string email, string password)
+    public ValueTask<User?> GetUserByEmailAndPasswordAsync(string email, string password)
     {
-        return _repository.GetUserByEmailAndPassword(email, password);
+        return _repository.GetUserByEmailAndPasswordAsync(email, password);
     }
 }

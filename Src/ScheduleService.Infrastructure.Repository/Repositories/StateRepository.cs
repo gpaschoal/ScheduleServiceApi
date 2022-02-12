@@ -19,7 +19,7 @@ internal class StateRepository : RepositoryBase<State>, IStateRepository
 
     public async ValueTask<bool> ExistsStateWithExternalCodeAsync(string externalCode)
     {
-        var result = Queryable.Any(x => x.ExternalCode.Equals(externalCode));
+        var result = await Queryable.AnyAsync(x => x.ExternalCode.Equals(externalCode));
         return result;
     }
 

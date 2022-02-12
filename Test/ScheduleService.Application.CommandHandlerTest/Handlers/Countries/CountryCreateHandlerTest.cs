@@ -6,7 +6,6 @@ using ScheduleService.Domain.CommandHandler.Repositories.Countries;
 using ScheduleService.Domain.Core.Entities;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.CommandHandlerTest.Handlers.Countries;
@@ -14,7 +13,7 @@ namespace ScheduleService.Application.CommandHandlerTest.Handlers.Countries;
 public class CountryCreateHandlerTest
 {
     private static CountryCreateHandler MakeSut(
-        ICountryCreateRepository? countryCreateRepository = null)
+        ICountryCreateRepository countryCreateRepository = null)
     {
         countryCreateRepository ??= new Mock<ICountryCreateRepository>().Object;
 
@@ -50,7 +49,7 @@ public class CountryCreateHandlerTest
         var command = MakeValidCommand();
         Mock<ICountryCreateRepository> countryCreateRepositoryMock = new();
 
-        countryCreateRepositoryMock.Setup(x => x.ExistsCountryWithName(command.Name)).Returns(ValueTask.FromResult(true));
+        countryCreateRepositoryMock.Setup(x => x.ExistsCountryWithName(command.Name)).ReturnsAsync(true);
 
         var sut = MakeSut(countryCreateRepositoryMock.Object);
 
@@ -69,7 +68,7 @@ public class CountryCreateHandlerTest
         var command = MakeValidCommand();
         Mock<ICountryCreateRepository> countryCreateRepositoryMock = new();
 
-        countryCreateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCodeAsync(command.ExternalCode)).Returns(ValueTask.FromResult(true));
+        countryCreateRepositoryMock.Setup(x => x.ExistsCountryWithExternalCodeAsync(command.ExternalCode)).ReturnsAsync(true);
 
         var sut = MakeSut(countryCreateRepositoryMock.Object);
 
