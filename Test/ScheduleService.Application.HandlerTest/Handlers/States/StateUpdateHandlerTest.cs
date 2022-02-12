@@ -75,4 +75,28 @@ public class StateUpdateHandlerTest
         stateUpdateRepositoryMock.Verify(x => x.CheckIfCountryExists(command.CountryId), Times.Once);
         stateUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
     }
+
+    [Fact(DisplayName = "Should be invalid when already exists an externalCode with the same name")]
+    public void Should_be_invalid_when_already_exists_an_externalCode_with_the_same_name()
+    {
+        var command = MakeValidCommand();
+        Mock<IStateUpdateRepository> stateUpdateRepositoryMock = new();
+
+        var state = new State(command.Name, command.ExternalCode, command.CountryId);
+        stateUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(state));
+        stateUpdateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(true));
+        stateUpdateRepositoryMock.Setup(x => x.ExistsStateWithExternalCode(command.Id, command.ExternalCode)).Returns(true);
+
+        var sut = MakeSut(stateUpdateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+        resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
+        stateUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<State>()), Times.Never);
+        stateUpdateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Id, command.Name), Times.Once);
+        stateUpdateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.Id, command.ExternalCode), Times.Once);
+        stateUpdateRepositoryMock.Verify(x => x.CheckIfCountryExists(command.CountryId), Times.Once);
+        stateUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
+    }
 }
