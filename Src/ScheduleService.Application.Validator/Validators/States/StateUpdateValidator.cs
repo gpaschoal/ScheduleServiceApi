@@ -11,5 +11,6 @@ public class StateUpdateValidator : AbstractValidator<StateUpdateCommand>
         RuleFor(x => x.Id).NotEmpty().WithMessage(ValidationResource.IsRequired);
         RuleFor(x => x.Name).NotEmpty().WithMessage(ValidationResource.IsRequired).Length(5, 50).WithMessage(ValidationResource.ShouldHaveMaxLenght);
         RuleFor(x => x.ExternalCode).Length(5, 50).NotEmpty().WithMessage(ValidationResource.IsRequired).WithMessage(ValidationResource.ShouldHaveMaxLenght);
+        RuleFor(x => x.CountryId).NotEmpty().WithMessage(ValidationResource.IsRequired);
     }
 }

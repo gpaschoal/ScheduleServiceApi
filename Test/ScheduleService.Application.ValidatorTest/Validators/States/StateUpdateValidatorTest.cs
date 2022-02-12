@@ -13,13 +13,15 @@ public class StateUpdateValidatorTest
     private static ValidationResult MakeSut(
         Guid? id = null,
         string name = "validName",
-        string externalCode = "validCode")
+        string externalCode = "validCode",
+        Guid? countryId = null)
     {
         StateUpdateCommand command = new()
         {
             Id = id ?? Guid.NewGuid(),
             Name = name,
-            ExternalCode = externalCode
+            ExternalCode = externalCode,
+            CountryId = countryId ?? Guid.NewGuid(),
         };
         StateUpdateValidator validator = new();
 
@@ -39,6 +41,14 @@ public class StateUpdateValidatorTest
         var invalidSut = MakeSut(id: Guid.Empty);
         invalidSut.IsValid.Should().Be(false);
         invalidSut.Errors.Single().PropertyName.Should().Be("Id");
+    }
+
+    [Fact(DisplayName = "Should not be valid when countryId is empty")]
+    public void Should_not_be_valid_when_countryId_is_empty()
+    {
+        var invalidSut = MakeSut(countryId: Guid.Empty);
+        invalidSut.IsValid.Should().Be(false);
+        invalidSut.Errors.Single().PropertyName.Should().Be("CountryId");
     }
 
     [Fact(DisplayName = "Should not be valid when name is null")]
