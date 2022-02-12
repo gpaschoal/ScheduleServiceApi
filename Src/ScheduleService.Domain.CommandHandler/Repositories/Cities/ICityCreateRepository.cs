@@ -6,4 +6,5 @@ public interface ICityCreateRepository : ICreateRepository<City>
 {
     bool ExistsCityWithName(string name);
     bool ExistsCityWithExternalCode(string externalCode);
+    ValueTask<bool> CheckIfStateExists(Guid countryId);
 }

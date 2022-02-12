@@ -17,9 +17,9 @@ public class HandlerBaseStub : RequestHandler<StubCommand, CustomResultData>
         HandleExecutionCalls = default;
     }
 
-    public override Task<CustomResultData> Handle(StubCommand request, CancellationToken cancellationToken)
+    public override async Task<CustomResultData> Handle(StubCommand request, CancellationToken cancellationToken)
     {
         HandleExecutionCalls++;
-        return ValidResponseAsync();
+        return ValidResponse();
     }
 }

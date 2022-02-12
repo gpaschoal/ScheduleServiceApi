@@ -27,10 +27,10 @@ internal class UserSignInHandler : RequestHandler<UserSignInCommand, CustomResul
         _tokenService = tokenService;
     }
 
-    public override Task<CustomResultData<UserSignInResponse>> Handle(UserSignInCommand request, CancellationToken cancellationToken)
+    public override async Task<CustomResultData<UserSignInResponse>> Handle(UserSignInCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<UserSignInValidator>(request))
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         var encryptedPassword = _encryptionService.Encrypt(request.Password);
 
@@ -40,7 +40,7 @@ internal class UserSignInHandler : RequestHandler<UserSignInCommand, CustomResul
             AddError(nameof(request.Password), ValidationResource.UserNotFound);
 
         if (IsInvalid)
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         var tokenResponse = _tokenService.TokenGenerator(user);
 
@@ -55,6 +55,6 @@ internal class UserSignInHandler : RequestHandler<UserSignInCommand, CustomResul
 
         CustomResultData<UserSignInResponse> response = new(loginResponse);
 
-        return ValidResponseAsync(response);
+        return ValidResponse(response);
     }
 }

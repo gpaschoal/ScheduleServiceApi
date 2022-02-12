@@ -18,10 +18,10 @@ internal class CityCreateHandler : RequestHandler<CityCreateCommand, CustomResul
         _repository = repository;
     }
 
-    public override Task<CustomResultData<Guid>> Handle(CityCreateCommand request, CancellationToken cancellationToken)
+    public override async Task<CustomResultData<Guid>> Handle(CityCreateCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<CityCreateValidator>(request))
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         if (_repository.ExistsCityWithName(name: request.Name))
             AddError(nameof(request.Name), ValidationResource.AlreadyExistsACityWithThisName);
@@ -29,8 +29,11 @@ internal class CityCreateHandler : RequestHandler<CityCreateCommand, CustomResul
         if (_repository.ExistsCityWithExternalCode(externalCode: request.ExternalCode))
             AddError(nameof(request.ExternalCode), ValidationResource.AlreadyExistsAStateWithThisExternalCode);
 
+        if (!await _repository.CheckIfStateExists(countryId: request.StateId))
+            AddError(ValidationResource.StateNotFound);
+
         if (IsInvalid)
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         City entity = new(request.Name, request.ExternalCode, request.StateId);
 
@@ -38,6 +41,6 @@ internal class CityCreateHandler : RequestHandler<CityCreateCommand, CustomResul
 
         CustomResultData<Guid> response = new(entity.Id);
 
-        return ValidResponseAsync(response);
+        return ValidResponse(response);
     }
 }

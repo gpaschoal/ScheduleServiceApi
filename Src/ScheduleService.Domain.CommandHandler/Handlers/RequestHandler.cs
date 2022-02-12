@@ -41,12 +41,9 @@ public abstract class RequestHandler<TRequest, TResponse> : IRequestHandler<TReq
 
     public void AddError(string key, string message) => _response.AddError(key, message);
 
-    public Task<TResponse> InvalidResponseAsync() => Task.FromResult(_response);
     public TResponse InvalidResponse() => _response;
 
-    public Task<TResponse> ValidResponseAsync() => Task.FromResult(new TResponse());
     public TResponse ValidResponse() => new();
 
-    public Task<TResponse> ValidResponseAsync(TResponse response) => Task.FromResult(response);
     public TResponse ValidResponse(TResponse response) => response;
 }

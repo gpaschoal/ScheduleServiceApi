@@ -7,6 +7,7 @@ namespace ScheduleService.Application.Repository.Repositories.Cities;
 internal class CityCreateRepository : ICityCreateRepository
 {
     private readonly ICityRepository _repository;
+    private readonly IStateRepository _stateRepository;
 
     public CityCreateRepository(ICityRepository repository)
     {
@@ -16,6 +17,11 @@ internal class CityCreateRepository : ICityCreateRepository
     public ValueTask AddAsync(City data)
     {
         return _repository.AddAsync(data);
+    }
+
+    public async ValueTask<bool> CheckIfStateExists(Guid countryId)
+    {
+        return await _stateRepository.CheckIfExistByIdAsync(countryId);
     }
 
     public bool ExistsCityWithExternalCode(string externalCode)
