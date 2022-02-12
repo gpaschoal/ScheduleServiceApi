@@ -17,10 +17,10 @@ public class CountryDeleteHandlerTest
     {
         countryDeleteRepository ??= new Mock<ICountryDeleteRepository>().Object;
 
-        return new CountryDeleteHandler(countryDeleteRepository);
+        return new(countryDeleteRepository);
     }
 
-    private static CountryDeleteCommand MakeValidCommand() => new CountryDeleteCommand() { Id = Guid.NewGuid() };
+    private static CountryDeleteCommand MakeValidCommand() => new() { Id = Guid.NewGuid() };
 
     [Fact(DisplayName = "Should be invalid when command is invalid and DeleteAsync mustn't not be called")]
     public void Should_be_invalid_when_command_is_invalid_and_DeleteAsync_mustnt_not_be_called()
