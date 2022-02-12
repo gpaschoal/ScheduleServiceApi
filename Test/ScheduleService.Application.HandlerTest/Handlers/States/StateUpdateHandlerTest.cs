@@ -5,6 +5,7 @@ using ScheduleService.Domain.Command.Commands.States;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Handler.Repositories.States;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -28,12 +29,12 @@ public class StateUpdateHandlerTest
     {
         StateUpdateCommand command = new() { };
 
-        Mock<IStateUpdateRepository> countryUpdateRepositoryMock = new();
+        Mock<IStateUpdateRepository> stateUpdateRepositoryMock = new();
 
         var state = new State(command.Name, command.ExternalCode, command.CountryId);
-        countryUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(state));
+        stateUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(state));
 
-        var sut = MakeSut(countryUpdateRepositoryMock.Object);
+        var sut = MakeSut(stateUpdateRepositoryMock.Object);
 
         var resultData = sut.Handle(command, CancellationToken.None).Result;
 
@@ -44,10 +45,34 @@ public class StateUpdateHandlerTest
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.ExternalCode));
         resultData.Errors.Should().Contain(x => x.Key == nameof(command.CountryId));
 
-        countryUpdateRepositoryMock.Verify(x => x.ExistsStateWithName(It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
-        countryUpdateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
-        countryUpdateRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<Guid>()), Times.Never);
-        countryUpdateRepositoryMock.Verify(x => x.CheckIfCountryExists(It.IsAny<Guid>()), Times.Never);
-        countryUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<State>()), Times.Never);
+        stateUpdateRepositoryMock.Verify(x => x.ExistsStateWithName(It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
+        stateUpdateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(It.IsAny<Guid>(), It.IsAny<string>()), Times.Never);
+        stateUpdateRepositoryMock.Verify(x => x.GetByIdAsync(It.IsAny<Guid>()), Times.Never);
+        stateUpdateRepositoryMock.Verify(x => x.CheckIfCountryExists(It.IsAny<Guid>()), Times.Never);
+        stateUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<State>()), Times.Never);
+    }
+
+    [Fact(DisplayName = "Should be invalid when already exists a state with the same name")]
+    public void Should_be_invalid_when_already_exists_a_state_with_the_same_name()
+    {
+        var command = MakeValidCommand();
+        Mock<IStateUpdateRepository> stateUpdateRepositoryMock = new();
+
+        var state = new State(command.Name, command.ExternalCode, command.CountryId);
+        stateUpdateRepositoryMock.Setup(x => x.GetByIdAsync(command.Id)).Returns(ValueTask.FromResult(state));
+        stateUpdateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(true));
+        stateUpdateRepositoryMock.Setup(x => x.ExistsStateWithName(command.Id, command.Name)).Returns(true);
+
+        var sut = MakeSut(stateUpdateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+        resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
+        stateUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<State>()), Times.Never);
+        stateUpdateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Id, command.Name), Times.Once);
+        stateUpdateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.Id, command.ExternalCode), Times.Once);
+        stateUpdateRepositoryMock.Verify(x => x.CheckIfCountryExists(command.CountryId), Times.Once);
+        stateUpdateRepositoryMock.Verify(x => x.GetByIdAsync(command.Id), Times.Once);
     }
 }
