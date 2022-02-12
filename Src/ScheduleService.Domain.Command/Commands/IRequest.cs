@@ -1,5 +1,6 @@
 ﻿namespace ScheduleService.Domain.Command.Commands;
 
-public interface IRequest<out TResponse>
-{
-}
+public interface IRequest { }
+
+public interface IRequest<out TResponse> : IRequest
+{ }
