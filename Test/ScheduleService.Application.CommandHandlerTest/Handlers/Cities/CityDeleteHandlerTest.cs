@@ -59,4 +59,21 @@ public class CityDeleteHandlerTest
         stateDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(command.Id), Times.Once);
         stateDeleteRepositoryMock.Verify(x => x.DeleteAsync(It.IsAny<Guid>()), Times.Never);
     }
+
+    [Fact(DisplayName = "Should delete the city")]
+    public void Should_delete_the_city()
+    {
+        CityDeleteCommand command = MakeValidCommand();
+
+        Mock<ICityDeleteRepository> cityDeleteRepositoryMock = new();
+        cityDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).Returns(ValueTask.FromResult(true));
+
+        var sut = MakeSut(cityDeleteRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        resultData.IsValid.Should().BeTrue();
+
+        cityDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(command.Id), Times.Once);
+        cityDeleteRepositoryMock.Verify(x => x.DeleteAsync(command.Id), Times.Once);
+    }
 }
