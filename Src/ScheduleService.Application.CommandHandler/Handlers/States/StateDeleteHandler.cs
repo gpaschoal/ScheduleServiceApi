@@ -17,7 +17,7 @@ internal class StateDeleteHandler : RequestHandler<StateDeleteCommand, CustomRes
         _repository = repository;
     }
 
-    public async override Task<CustomResultData> Handle(StateDeleteCommand request, CancellationToken cancellationToken)
+    public async override Task<CustomResultData> HandleAsync(StateDeleteCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<StateDeleteValidator>(request))
             return InvalidResponse();

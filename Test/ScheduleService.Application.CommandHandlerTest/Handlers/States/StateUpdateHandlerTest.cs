@@ -35,7 +35,7 @@ public class StateUpdateHandlerTest
 
         var sut = MakeSut(stateUpdateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
 
@@ -64,7 +64,7 @@ public class StateUpdateHandlerTest
 
         var sut = MakeSut(stateUpdateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
@@ -88,7 +88,7 @@ public class StateUpdateHandlerTest
 
         var sut = MakeSut(stateUpdateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
@@ -111,7 +111,7 @@ public class StateUpdateHandlerTest
 
         var sut = MakeSut(stateUpdateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         stateUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<State>()), Times.Never);
@@ -133,7 +133,7 @@ public class StateUpdateHandlerTest
 
         var sut = MakeSut(stateUpdateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeTrue();
         stateUpdateRepositoryMock.Verify(x => x.UpdateAsync(state), Times.Once);

@@ -17,7 +17,7 @@ internal class CountryUpdateHandler : RequestHandler<CountryUpdateCommand, Custo
         _repository = repository;
     }
 
-    public async override Task<CustomResultData> Handle(CountryUpdateCommand request, CancellationToken cancellationToken)
+    public async override Task<CustomResultData> HandleAsync(CountryUpdateCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<CountryUpdateValidator>(request))
             return InvalidResponse();

@@ -44,7 +44,7 @@ public partial class HandlerBaseTests
 
         var sut = MakeSut();
 
-        CustomResultData commandResult = await sut.Handle(It.IsAny<StubCommand>(), System.Threading.CancellationToken.None);
+        CustomResultData commandResult = await sut.HandleAsync(It.IsAny<StubCommand>(), System.Threading.CancellationToken.None);
 
         commandResult.IsValid.Should().BeTrue();
         sut.HandleExecutionCalls.Should().Be(1);

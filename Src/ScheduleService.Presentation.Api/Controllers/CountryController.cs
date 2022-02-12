@@ -15,7 +15,7 @@ public class CountryController : MainController
         [FromServices] ICountryCreateHandler handler,
         [FromBody] CountryCreateCommand command)
     {
-        var response = await handler.Handle(command);
+        var response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
     }
@@ -25,7 +25,7 @@ public class CountryController : MainController
         [FromServices] ICountryUpdateHandler handler,
         [FromBody] CountryUpdateCommand command)
     {
-        var response = await handler.Handle(command);
+        var response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
     }
@@ -35,7 +35,7 @@ public class CountryController : MainController
         [FromServices] ICountryDeleteHandler handler,
         [FromBody] CountryDeleteCommand command)
     {
-        var response = await handler.Handle(command);
+        var response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
     }

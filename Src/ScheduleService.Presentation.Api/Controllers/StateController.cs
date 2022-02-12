@@ -15,7 +15,7 @@ public class StateController : MainController
         [FromServices] IStateCreateHandler handler,
         [FromBody] StateCreateCommand command)
     {
-        var response = await handler.Handle(command);
+        var response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
     }
@@ -25,7 +25,7 @@ public class StateController : MainController
         [FromServices] IStateUpdateHandler handler,
         [FromBody] StateUpdateCommand command)
     {
-        var response = await handler.Handle(command);
+        var response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
     }
@@ -35,7 +35,7 @@ public class StateController : MainController
         [FromServices] IStateDeleteHandler handler,
         [FromBody] StateDeleteCommand command)
     {
-        var response = await handler.Handle(command);
+        var response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
     }

@@ -56,7 +56,7 @@ public class UserSignInHandlerTest
 
         var sut = MakeSut(userRepository: userRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
 
@@ -77,7 +77,7 @@ public class UserSignInHandlerTest
 
         var sut = MakeSut(userRepository: userRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Password));
@@ -103,7 +103,7 @@ public class UserSignInHandlerTest
                           encryptionService: encryptionServiceMock.Object,
                           tokenService: tokenServiceMock.Object);
 
-        _ = sut.Handle(command, CancellationToken.None).Result;
+        _ = sut.HandleAsync(command, CancellationToken.None).Result;
 
         userRepositoryMock.Verify(x => x.GetUserByEmailAndPasswordAsync(It.IsAny<string>(), It.IsAny<string>()), Times.Once);
         userRepositoryMock.Verify(x => x.GetUserByEmailAndPasswordAsync(

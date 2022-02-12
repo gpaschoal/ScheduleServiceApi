@@ -17,7 +17,7 @@ public class UserController : MainController
         [FromServices] IUserSignInHandler handler,
         [FromBody] UserSignInCommand command)
     {
-        CustomResultData<UserSignInResponse> response = await handler.Handle(command);
+        CustomResultData<UserSignInResponse> response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
     }

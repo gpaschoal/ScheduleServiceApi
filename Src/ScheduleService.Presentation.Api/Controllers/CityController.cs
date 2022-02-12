@@ -15,7 +15,7 @@ public class CityController : MainController
         [FromServices] ICityCreateHandler handler,
         [FromBody] CityCreateCommand command)
     {
-        var response = await handler.Handle(command);
+        var response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
     }
@@ -25,7 +25,7 @@ public class CityController : MainController
         [FromServices] ICityUpdateHandler handler,
         [FromBody] CityUpdateCommand command)
     {
-        var response = await handler.Handle(command);
+        var response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
     }
@@ -35,7 +35,7 @@ public class CityController : MainController
         [FromServices] ICityDeleteHandler handler,
         [FromBody] CityDeleteCommand command)
     {
-        var response = await handler.Handle(command);
+        var response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
     }

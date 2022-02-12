@@ -18,7 +18,7 @@ internal class StateCreateHandler : RequestHandler<StateCreateCommand, CustomRes
         _repository = repository;
     }
 
-    public override async Task<CustomResultData<Guid>> Handle(StateCreateCommand request, CancellationToken cancellationToken)
+    public override async Task<CustomResultData<Guid>> HandleAsync(StateCreateCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<StateCreateValidator>(request))
             return InvalidResponse();

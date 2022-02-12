@@ -35,7 +35,7 @@ public abstract class RequestHandler<TRequest, TResponse> : IRequestHandler<TReq
         return false;
     }
 
-    public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
+    public abstract Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken);
 
     public void AddError(string message) => _response.AddError("&___message", message);
 

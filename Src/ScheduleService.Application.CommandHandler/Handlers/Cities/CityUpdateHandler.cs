@@ -17,7 +17,7 @@ internal class CityUpdateHandler : RequestHandler<CityUpdateCommand, CustomResul
         _repository = repository;
     }
 
-    public async override Task<CustomResultData> Handle(CityUpdateCommand request, CancellationToken cancellationToken)
+    public async override Task<CustomResultData> HandleAsync(CityUpdateCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<CityUpdateValidator>(request))
             return InvalidResponse();

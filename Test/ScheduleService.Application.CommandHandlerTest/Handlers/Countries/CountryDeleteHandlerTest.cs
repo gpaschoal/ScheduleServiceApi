@@ -30,7 +30,7 @@ public class CountryDeleteHandlerTest
 
         var sut = MakeSut(countryDeleteRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
 
@@ -52,7 +52,7 @@ public class CountryDeleteHandlerTest
 
         var sut = MakeSut(countryDeleteRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
 
@@ -74,7 +74,7 @@ public class CountryDeleteHandlerTest
 
         var sut = MakeSut(countryDeleteRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Should().Contain(x => x.Key != nameof(command.Id));
 
@@ -93,7 +93,7 @@ public class CountryDeleteHandlerTest
 
         var sut = MakeSut(countryDeleteRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
         resultData.IsValid.Should().BeTrue();
 
         countryDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(command.Id), Times.Once);

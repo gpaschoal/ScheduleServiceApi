@@ -18,7 +18,7 @@ internal class CityCreateHandler : RequestHandler<CityCreateCommand, CustomResul
         _repository = repository;
     }
 
-    public override async Task<CustomResultData<Guid>> Handle(CityCreateCommand request, CancellationToken cancellationToken)
+    public override async Task<CustomResultData<Guid>> HandleAsync(CityCreateCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<CityCreateValidator>(request))
             return InvalidResponse();

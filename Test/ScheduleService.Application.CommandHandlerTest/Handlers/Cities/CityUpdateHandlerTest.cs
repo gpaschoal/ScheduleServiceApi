@@ -35,7 +35,7 @@ public class CityUpdateHandlerTest
 
         var sut = MakeSut(cityUpdateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
 
@@ -64,7 +64,7 @@ public class CityUpdateHandlerTest
 
         var sut = MakeSut(cityUpdateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
@@ -88,7 +88,7 @@ public class CityUpdateHandlerTest
 
         var sut = MakeSut(cityUpdateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
@@ -111,7 +111,7 @@ public class CityUpdateHandlerTest
 
         var sut = MakeSut(cityUpdateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         cityUpdateRepositoryMock.Verify(x => x.UpdateAsync(It.IsAny<City>()), Times.Never);
@@ -133,7 +133,7 @@ public class CityUpdateHandlerTest
 
         var sut = MakeSut(cityUpdateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeTrue();
         cityUpdateRepositoryMock.Verify(x => x.UpdateAsync(city), Times.Once);

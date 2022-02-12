@@ -32,7 +32,7 @@ public class CityCreateHandlerTest
 
         var sut = MakeSut(cityCreateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
 
@@ -56,7 +56,7 @@ public class CityCreateHandlerTest
 
         var sut = MakeSut(cityCreateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
@@ -77,7 +77,7 @@ public class CityCreateHandlerTest
 
         var sut = MakeSut(cityCreateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         resultData.Errors.Single().Key.Should().Be(nameof(command.ExternalCode));
@@ -96,7 +96,7 @@ public class CityCreateHandlerTest
 
         var sut = MakeSut(cityCreateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
         cityCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<City>()), Times.Never);
@@ -114,7 +114,7 @@ public class CityCreateHandlerTest
 
         var sut = MakeSut(cityCreateRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeTrue();
         resultData.Errors.Should().BeEmpty();

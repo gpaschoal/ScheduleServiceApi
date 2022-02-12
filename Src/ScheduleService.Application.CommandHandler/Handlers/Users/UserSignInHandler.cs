@@ -27,7 +27,7 @@ internal class UserSignInHandler : RequestHandler<UserSignInCommand, CustomResul
         _tokenService = tokenService;
     }
 
-    public override async Task<CustomResultData<UserSignInResponse>> Handle(UserSignInCommand request, CancellationToken cancellationToken)
+    public override async Task<CustomResultData<UserSignInResponse>> HandleAsync(UserSignInCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<UserSignInValidator>(request))
             return InvalidResponse();

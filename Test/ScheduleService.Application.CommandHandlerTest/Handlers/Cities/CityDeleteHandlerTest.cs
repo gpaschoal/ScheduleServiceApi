@@ -30,7 +30,7 @@ public class CityDeleteHandlerTest
 
         var sut = MakeSut(cityDeleteRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
 
@@ -51,7 +51,7 @@ public class CityDeleteHandlerTest
 
         var sut = MakeSut(stateDeleteRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeFalse();
 
@@ -69,7 +69,7 @@ public class CityDeleteHandlerTest
 
         var sut = MakeSut(cityDeleteRepositoryMock.Object);
 
-        var resultData = sut.Handle(command, CancellationToken.None).Result;
+        var resultData = sut.HandleAsync(command, CancellationToken.None).Result;
         resultData.IsValid.Should().BeTrue();
 
         cityDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(command.Id), Times.Once);
