@@ -18,10 +18,10 @@ internal class StateCreateHandler : RequestHandler<StateCreateCommand, CustomRes
         _repository = repository;
     }
 
-    public override Task<CustomResultData<Guid>> Handle(StateCreateCommand request, CancellationToken cancellationToken)
+    public override async Task<CustomResultData<Guid>> Handle(StateCreateCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<StateCreateValidator>(request))
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         if (_repository.ExistsStateWithName(name: request.Name))
             AddError(nameof(request.Name), ValidationResource.AlreadyExistsAStateWithThisName);
@@ -29,15 +29,18 @@ internal class StateCreateHandler : RequestHandler<StateCreateCommand, CustomRes
         if (_repository.ExistsStateWithExternalCode(externalCode: request.ExternalCode))
             AddError(nameof(request.ExternalCode), ValidationResource.AlreadyExistsAStateWithThisExternalCode);
 
+        if (!await _repository.CheckIfCountryExists(countryId: request.CountryId))
+            AddError(ValidationResource.CountryNotFound);
+
         if (IsInvalid)
-            return InvalidResponseAsync();
+            return InvalidResponse();
 
         State entity = new(request.Name, request.ExternalCode, request.CountryId);
 
-        _repository.AddAsync(entity);
+        await _repository.AddAsync(entity);
 
         CustomResultData<Guid> response = new(entity.Id);
 
-        return ValidResponseAsync(response);
+        return ValidResponse(response);
     }
 }
