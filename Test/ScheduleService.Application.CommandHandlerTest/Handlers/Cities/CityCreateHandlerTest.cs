@@ -5,7 +5,9 @@ using ScheduleService.Domain.Command.Commands.Cities;
 using ScheduleService.Domain.CommandHandler.Repositories.Cities;
 using ScheduleService.Domain.Core.Entities;
 using System;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.HandlerTest.Handlers.Cities;
@@ -42,5 +44,26 @@ public class CityCreateHandlerTest
         cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCode(It.IsAny<string>()), Times.Never);
         cityCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<City>()), Times.Never);
         cityCreateRepositoryMock.Verify(x => x.CheckIfStateExists(command.StateId), Times.Never);
+    }
+
+    [Fact(DisplayName = "Should be invalid when already exists a city with the same name")]
+    public void Should_be_invalid_when_already_exists_a_city_with_the_same_name()
+    {
+        var command = MakeValidCommand();
+        Mock<ICityCreateRepository> cityCreateRepositoryMock = new();
+
+        cityCreateRepositoryMock.Setup(x => x.ExistsCityWithName(command.Name)).Returns(true);
+        cityCreateRepositoryMock.Setup(x => x.CheckIfStateExists(command.StateId)).Returns(ValueTask.FromResult(true));
+
+        var sut = MakeSut(cityCreateRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+        resultData.Errors.Single().Key.Should().Be(nameof(command.Name));
+        cityCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<City>()), Times.Never);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithName(command.Name), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.ExistsCityWithExternalCode(command.ExternalCode), Times.Once);
+        cityCreateRepositoryMock.Verify(x => x.CheckIfStateExists(command.StateId), Times.Once);
     }
 }
