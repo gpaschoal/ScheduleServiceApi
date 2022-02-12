@@ -7,15 +7,24 @@ namespace ScheduleService.Application.Repository.Repositories.States;
 internal class StateCreateRepository : IStateCreateRepository
 {
     private readonly IStateRepository _repository;
+    private readonly ICountryRepository _countryRepository;
 
-    public StateCreateRepository(IStateRepository repository)
+    public StateCreateRepository(
+        IStateRepository repository, 
+        ICountryRepository countryRepository)
     {
         _repository = repository;
+        _countryRepository = countryRepository;
     }
 
     public ValueTask AddAsync(State data)
     {
         return _repository.AddAsync(data);
+    }
+
+    public async ValueTask<bool> CheckIfCountryExists(Guid countryId)
+    {
+        return await _countryRepository.CheckIfExistByIdAsync(countryId);
     }
 
     public bool ExistsStateWithExternalCode(string externalCode)

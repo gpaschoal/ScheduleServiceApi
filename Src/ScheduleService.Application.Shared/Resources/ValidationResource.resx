@@ -133,4 +133,7 @@
   <data name="AlreadyExistsACityWithThisExternalCode" xml:space="preserve">
     <value>Already exists a city with this external code</value>
   </data>
+  <data name="CountryNotFound" xml:space="preserve">
+    <value>Country not found</value>
+  </data>
 </root>

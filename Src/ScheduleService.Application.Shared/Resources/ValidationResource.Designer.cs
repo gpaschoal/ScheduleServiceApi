@@ -115,6 +115,15 @@ namespace ScheduleService.Application.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country not found.
+        /// </summary>
+        public static string CountryNotFound {
+            get {
+                return ResourceManager.GetString("CountryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entity not found.
         /// </summary>
         public static string EntityNotFound {

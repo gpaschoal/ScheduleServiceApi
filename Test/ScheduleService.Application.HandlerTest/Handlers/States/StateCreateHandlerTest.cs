@@ -7,6 +7,7 @@ using ScheduleService.Domain.Handler.Repositories.States;
 using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.HandlerTest.Handlers.States;
@@ -18,7 +19,7 @@ public class StateCreateHandlerTest
     {
         StateCreateRepository ??= new Mock<IStateCreateRepository>().Object;
 
-        return new StateCreateHandler(StateCreateRepository);
+        return new(StateCreateRepository);
     }
 
     private static StateCreateCommand MakeValidCommand() => new() { CountryId = Guid.NewGuid(), Name = "São Paulo", ExternalCode = "SP123" };
@@ -51,6 +52,7 @@ public class StateCreateHandlerTest
         Mock<IStateCreateRepository> countryCreateRepositoryMock = new();
 
         countryCreateRepositoryMock.Setup(x => x.ExistsStateWithName(command.Name)).Returns(true);
+        countryCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(true));
 
         var sut = MakeSut(countryCreateRepositoryMock.Object);
 
@@ -68,6 +70,7 @@ public class StateCreateHandlerTest
     {
         var command = MakeValidCommand();
         Mock<IStateCreateRepository> stateCreateRepositoryMock = new();
+        stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(true));
 
         stateCreateRepositoryMock.Setup(x => x.ExistsStateWithExternalCode(command.ExternalCode)).Returns(true);
 
@@ -86,16 +89,17 @@ public class StateCreateHandlerTest
     public void Should_add_a_state()
     {
         var command = MakeValidCommand();
-        Mock<IStateCreateRepository> countryCreateRepositoryMock = new();
+        Mock<IStateCreateRepository> stateCreateRepositoryMock = new();
+        stateCreateRepositoryMock.Setup(x => x.CheckIfCountryExists(command.CountryId)).Returns(ValueTask.FromResult(true));
 
-        var sut = MakeSut(countryCreateRepositoryMock.Object);
+        var sut = MakeSut(stateCreateRepositoryMock.Object);
 
         var resultData = sut.Handle(command, CancellationToken.None).Result;
 
         resultData.IsValid.Should().BeTrue();
         resultData.Errors.Should().BeEmpty();
-        countryCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Once);
-        countryCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
-        countryCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
     }
 }

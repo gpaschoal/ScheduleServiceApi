@@ -6,4 +6,5 @@ public interface IStateCreateRepository : ICreateRepository<State>
 {
     bool ExistsStateWithExternalCode(string externalCode);
     bool ExistsStateWithName(string name);
+    ValueTask<bool> CheckIfCountryExists(Guid countryId);
 }
