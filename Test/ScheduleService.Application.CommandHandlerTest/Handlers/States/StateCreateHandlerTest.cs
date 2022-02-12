@@ -122,5 +122,6 @@ public class StateCreateHandlerTest
         stateCreateRepositoryMock.Verify(x => x.AddAsync(It.IsAny<State>()), Times.Once);
         stateCreateRepositoryMock.Verify(x => x.ExistsStateWithName(command.Name), Times.Once);
         stateCreateRepositoryMock.Verify(x => x.ExistsStateWithExternalCode(command.ExternalCode), Times.Once);
+        stateCreateRepositoryMock.Verify(x => x.CheckIfCountryExists(command.CountryId), Times.Once);
     }
 }
