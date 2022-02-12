@@ -5,6 +5,7 @@ using ScheduleService.Domain.Command.Commands.Cities;
 using ScheduleService.Domain.CommandHandler.Repositories.Cities;
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ScheduleService.Application.CommandHandlerTest.Handlers.Cities;
@@ -38,5 +39,24 @@ public class CityDeleteHandlerTest
 
         cityDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(It.IsAny<Guid>()), Times.Never);
         cityDeleteRepositoryMock.Verify(x => x.DeleteAsync(It.IsAny<Guid>()), Times.Never);
+    }
+
+    [Fact(DisplayName = "Should not delete when city does not exist in the DB")]
+    public void Should_not_delete_when_city_does_not_exist_in_the_DB()
+    {
+        CityDeleteCommand command = MakeValidCommand();
+
+        Mock<ICityDeleteRepository> stateDeleteRepositoryMock = new();
+
+        stateDeleteRepositoryMock.Setup(x => x.CheckIfExistByIdAsync(command.Id)).Returns(ValueTask.FromResult(false));
+
+        var sut = MakeSut(stateDeleteRepositoryMock.Object);
+
+        var resultData = sut.Handle(command, CancellationToken.None).Result;
+
+        resultData.IsValid.Should().BeFalse();
+
+        stateDeleteRepositoryMock.Verify(x => x.CheckIfExistByIdAsync(command.Id), Times.Once);
+        stateDeleteRepositoryMock.Verify(x => x.DeleteAsync(It.IsAny<Guid>()), Times.Never);
     }
 }
