@@ -13,13 +13,15 @@ public class CityUpdateValidatorTest
     private static ValidationResult MakeSut(
        Guid? id = null,
        string name = "validName",
-       string externalCode = "validCode")
+       string externalCode = "validCode",
+       Guid? stateId = null)
     {
         CityUpdateCommand command = new()
         {
             Id = id ?? Guid.NewGuid(),
             Name = name,
-            ExternalCode = externalCode
+            ExternalCode = externalCode,
+            StateId = stateId ?? Guid.NewGuid(),
         };
         CityUpdateValidator validator = new();
 

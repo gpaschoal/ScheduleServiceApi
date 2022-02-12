@@ -6,4 +6,5 @@ public interface ICityUpdateRepository : IUpdateRepository<City>
 {
     bool ExistsCityWithExternalCode(Guid id, string externalCode);
     bool ExistsCityWithName(Guid id, string name);
+    ValueTask<bool> CheckIfStateExists(Guid countryId);
 }

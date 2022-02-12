@@ -7,10 +7,19 @@ namespace ScheduleService.Application.Repository.Repositories.Cities;
 internal class CityUpdateRepository : ICityUpdateRepository
 {
     private readonly ICityRepository _repository;
+    private readonly IStateRepository _stateRepository;
 
-    public CityUpdateRepository(ICityRepository repository)
+    public CityUpdateRepository(
+        ICityRepository repository, 
+        IStateRepository stateRepository)
     {
         _repository = repository;
+        _stateRepository = stateRepository;
+    }
+
+    public ValueTask<bool> CheckIfStateExists(Guid countryId)
+    {
+        return _stateRepository.CheckIfExistByIdAsync(countryId);
     }
 
     public bool ExistsCityWithExternalCode(Guid id, string externalCode)

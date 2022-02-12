@@ -22,7 +22,7 @@ public class StateUpdateHandlerTest
         return new(stateUpdateRepository);
     }
 
-    private static StateUpdateCommand MakeValidCommand() => new() { Id = Guid.NewGuid(), CountryId = Guid.NewGuid(), Name = "Brazil", ExternalCode = "BR123" };
+    private static StateUpdateCommand MakeValidCommand() => new() { Id = Guid.NewGuid(), CountryId = Guid.NewGuid(), Name = "São Paulo", ExternalCode = "SP123" };
 
     [Fact(DisplayName = "Should be invalid when command is invalid and UpdateAsync mustn't not be called")]
     public void Should_be_invalid_when_command_is_invalid_and_UpdateAsync_mustnt_not_be_called()
