@@ -1,14 +1,14 @@
 ﻿using FluentAssertions;
 using Moq;
-using ScheduleService.Application.Handler.Handlers.Countries;
+using ScheduleService.Application.CommandHandler.Handlers.Countries;
 using ScheduleService.Domain.Command.Commands.Countries;
-using ScheduleService.Domain.Handler.Repositories.Countries;
+using ScheduleService.Domain.CommandHandler.Repositories.Countries;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ScheduleService.Application.HandlerTest.Handlers.Countries;
+namespace ScheduleService.Application.CommandHandlerTest.Handlers.Countries;
 
 public class CountryDeleteHandlerTest
 {

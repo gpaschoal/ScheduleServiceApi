@@ -3,10 +3,10 @@ using ScheduleService.Application.Repository.Repositories.Cities;
 using ScheduleService.Application.Repository.Repositories.Countries;
 using ScheduleService.Application.Repository.Repositories.States;
 using ScheduleService.Application.Repository.Repositories.Users;
-using ScheduleService.Domain.Handler.Repositories.Cities;
-using ScheduleService.Domain.Handler.Repositories.Countries;
-using ScheduleService.Domain.Handler.Repositories.States;
-using ScheduleService.Domain.Handler.Repositories.Users;
+using ScheduleService.Domain.CommandHandler.Repositories.Cities;
+using ScheduleService.Domain.CommandHandler.Repositories.Countries;
+using ScheduleService.Domain.CommandHandler.Repositories.States;
+using ScheduleService.Domain.CommandHandler.Repositories.Users;
 
 namespace ScheduleService.Application.Repository;
 

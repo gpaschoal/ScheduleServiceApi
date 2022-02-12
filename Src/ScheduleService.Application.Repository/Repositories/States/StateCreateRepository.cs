@@ -1,5 +1,5 @@
-﻿using ScheduleService.Domain.Core.Entities;
-using ScheduleService.Domain.Handler.Repositories.States;
+﻿using ScheduleService.Domain.CommandHandler.Repositories.States;
+using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Repository.Repositories;
 
 namespace ScheduleService.Application.Repository.Repositories.States;
@@ -10,7 +10,7 @@ internal class StateCreateRepository : IStateCreateRepository
     private readonly ICountryRepository _countryRepository;
 
     public StateCreateRepository(
-        IStateRepository repository, 
+        IStateRepository repository,
         ICountryRepository countryRepository)
     {
         _repository = repository;

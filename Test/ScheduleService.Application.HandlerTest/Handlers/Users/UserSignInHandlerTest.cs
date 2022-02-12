@@ -1,17 +1,17 @@
 ﻿using FluentAssertions;
 using Moq;
-using ScheduleService.Application.Handler.Handlers.Users;
-using ScheduleService.Application.Handler.Services;
-using ScheduleService.Application.Handler.Services.Responses;
+using ScheduleService.Application.CommandHandler.Handlers.Users;
+using ScheduleService.Application.CommandHandler.Services;
+using ScheduleService.Application.CommandHandler.Services.Responses;
 using ScheduleService.Domain.Command.Commands.Users;
+using ScheduleService.Domain.CommandHandler.Repositories.Users;
 using ScheduleService.Domain.Core.Entities;
-using ScheduleService.Domain.Handler.Repositories.Users;
 using System;
 using System.Linq;
 using System.Threading;
 using Xunit;
 
-namespace ScheduleService.Application.HandlerTest.Handlers.Users;
+namespace ScheduleService.Application.CommandHandlerTest.Handlers.Users;
 
 public class UserSignInHandlerTest
 {
@@ -24,7 +24,7 @@ public class UserSignInHandlerTest
         encryptionService ??= new Mock<IEncryptionService>().Object;
         tokenService ??= new Mock<ITokenService>().Object;
 
-        return new UserSignInHandler(userRepository, encryptionService, tokenService);
+        return new(userRepository, encryptionService, tokenService);
     }
 
     private static User MakeUser()
@@ -50,7 +50,7 @@ public class UserSignInHandlerTest
     [Fact(DisplayName = "Should be invalid when command is invalid and GetUserByEmailAndPassword mustn't not be called")]
     public void Should_be_invalid_when_command_is_invalid_and_GetUserByEmailAndPassword_mustnt_not_be_called()
     {
-        UserSignInCommand command = new() { Email = null, Password = null };
+        UserSignInCommand command = new();
 
         Mock<IUserSignInRepository> userRepositoryMock = new();
 
@@ -71,13 +71,9 @@ public class UserSignInHandlerTest
     {
         var command = MakeValidCommand();
         Mock<IUserSignInRepository> userRepositoryMock = new();
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-        User user = null;
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+        var user = (User?)null;
         userRepositoryMock.Setup(x => x.GetUserByEmailAndPassword(It.IsAny<string>(), It.IsAny<string>()))
-#pragma warning disable CS8604 // Possible null reference argument.
                     .Returns(user);
-#pragma warning restore CS8604 // Possible null reference argument.
 
         var sut = MakeSut(userRepository: userRepositoryMock.Object);
 

@@ -1,16 +1,16 @@
 ﻿using FluentAssertions;
 using Moq;
-using ScheduleService.Application.Handler.Handlers.States;
+using ScheduleService.Application.CommandHandler.Handlers.States;
 using ScheduleService.Domain.Command.Commands.States;
+using ScheduleService.Domain.CommandHandler.Repositories.States;
 using ScheduleService.Domain.Core.Entities;
-using ScheduleService.Domain.Handler.Repositories.States;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ScheduleService.Application.HandlerTest.Handlers.States;
+namespace ScheduleService.Application.CommandHandlerTest.Handlers.States;
 
 public class StateCreateHandlerTest
 {

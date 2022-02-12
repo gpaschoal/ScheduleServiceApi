@@ -1,10 +1,10 @@
 ﻿using ScheduleService.Application.Shared;
 using ScheduleService.Domain.Command.Commands;
-using ScheduleService.Domain.Handler.Handlers;
+using ScheduleService.Domain.CommandHandler.Handlers;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ScheduleService.Application.HandlerTest.Handlers;
+namespace ScheduleService.Application.CommandHandlerTest.Handlers;
 
 public class StubCommand : ICommandExecution
 { }

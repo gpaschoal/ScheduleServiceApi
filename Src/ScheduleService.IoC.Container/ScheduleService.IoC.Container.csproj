@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ScheduleService.Application.Handler\ScheduleService.Application.Handler.csproj" />
+    <ProjectReference Include="..\ScheduleService.Application.CommandHandler\ScheduleService.Application.CommandHandler.csproj" />
     <ProjectReference Include="..\ScheduleService.Application.Repository\ScheduleService.Application.Repository.csproj" />
     <ProjectReference Include="..\ScheduleService.Application.Service\ScheduleService.Application.Service.csproj" />
     <ProjectReference Include="..\ScheduleService.Domain.Repository\ScheduleService.Domain.Repository.csproj" />

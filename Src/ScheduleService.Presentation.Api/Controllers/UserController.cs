@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ScheduleService.Application.Response.Responses.Users;
 using ScheduleService.Application.Shared;
 using ScheduleService.Domain.Command.Commands.Users;
-using ScheduleService.Domain.Handler.Handlers.Users;
+using ScheduleService.Domain.CommandHandler.Handlers.Users;
 using ScheduleService.Presentation.Api.Controllers.Base;
 
 namespace ScheduleService.Presentation.Api.Controllers;

@@ -4,7 +4,7 @@ using ScheduleService.Application.Shared;
 using System.Linq;
 using Xunit;
 
-namespace ScheduleService.Application.HandlerTest.Handlers;
+namespace ScheduleService.Application.CommandHandlerTest.Handlers;
 
 public partial class HandlerBaseTests
 {
