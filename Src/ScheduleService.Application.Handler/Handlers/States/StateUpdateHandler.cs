@@ -28,6 +28,9 @@ internal class StateUpdateHandler : RequestHandler<StateUpdateCommand, CustomRes
         if (_repository.ExistsStateWithExternalCode(id: request.Id, externalCode: request.ExternalCode))
             AddError(nameof(request.ExternalCode), ValidationResource.AlreadyExistsAStateWithThisExternalCode);
 
+        if (!await _repository.CheckIfCountryExists(countryId: request.CountryId))
+            AddError(ValidationResource.CountryNotFound);
+
         var entity = await _repository.GetByIdAsync(id: request.Id);
         if (entity is null)
             AddError(nameof(request.Id), ValidationResource.EntityNotFound);

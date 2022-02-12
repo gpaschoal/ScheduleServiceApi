@@ -15,11 +15,11 @@ namespace ScheduleService.Application.HandlerTest.Handlers.States;
 public class StateCreateHandlerTest
 {
     private static StateCreateHandler MakeSut(
-        IStateCreateRepository? StateCreateRepository = null)
+        IStateCreateRepository? stateCreateRepository = null)
     {
-        StateCreateRepository ??= new Mock<IStateCreateRepository>().Object;
+        stateCreateRepository ??= new Mock<IStateCreateRepository>().Object;
 
-        return new(StateCreateRepository);
+        return new(stateCreateRepository);
     }
 
     private static StateCreateCommand MakeValidCommand() => new() { CountryId = Guid.NewGuid(), Name = "São Paulo", ExternalCode = "SP123" };
