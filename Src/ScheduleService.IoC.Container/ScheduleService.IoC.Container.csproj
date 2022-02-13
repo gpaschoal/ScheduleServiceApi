@@ -17,6 +17,7 @@
     <ProjectReference Include="..\ScheduleService.Application.Service\ScheduleService.Application.Service.csproj" />
     <ProjectReference Include="..\ScheduleService.Domain.Repository\ScheduleService.Domain.Repository.csproj" />
     <ProjectReference Include="..\ScheduleService.Infrastructure.Context\ScheduleService.Infrastructure.Context.csproj" />
+    <ProjectReference Include="..\ScheduleService.Infrastructure.QueryHandler\ScheduleService.Infrastructure.QueryHandler.csproj" />
     <ProjectReference Include="..\ScheduleService.Infrastructure.Repository\ScheduleService.Infrastructure.Repository.csproj" />
   </ItemGroup>
 

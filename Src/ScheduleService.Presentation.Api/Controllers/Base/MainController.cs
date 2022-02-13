@@ -42,4 +42,12 @@ public abstract class MainController : ControllerBase
 
         return result;
     }
+
+    public IActionResult OkOrNotFoundQuery(object? response)
+    {
+        if(response is  null)
+            return NotFound();
+
+        return Ok(response);
+    }
 }

@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ScheduleService.Domain.Command.Commands.Countries;
+using ScheduleService.Domain.Command.Queries.Countries;
 using ScheduleService.Domain.CommandHandler.Handlers.Countries;
+using ScheduleService.Domain.QueryHandler.Handlers.Countries;
 using ScheduleService.Presentation.Api.Controllers.Base;
 
 namespace ScheduleService.Presentation.Api.Controllers;
@@ -38,5 +40,15 @@ public class CountryController : MainController
         var response = await handler.HandleAsync(command);
 
         return CustomResponse(response);
+    }
+
+    [Authorize, HttpGet, Route("GetViewModel")]
+    public async Task<IActionResult> GetViewModel(
+        [FromServices] IGetCountryViewModelQueryHandler handler,
+        [FromQuery] GetCountryViewModel command)
+    {
+        var response = await handler.HandleAsync(command);
+
+        return OkOrNotFoundQuery(response);
     }
 }

@@ -3,5 +3,5 @@ using ScheduleService.Domain.Command.QueryResponses.Countries;
 
 namespace ScheduleService.Domain.QueryHandler.Handlers.Countries;
 
-public interface IGetCountryViewModelQuery : IQueryHandler<GetCountryViewModel, CountryViewModel>
+public interface IGetCountryViewModelQueryHandler : IQueryHandler<GetCountryViewModel, CountryViewModel>
 { }

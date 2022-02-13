@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ScheduleService.Application.Shared\ScheduleService.Application.Shared.csproj" />
+    <ProjectReference Include="..\ScheduleService.Domain.Core\ScheduleService.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

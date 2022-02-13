@@ -10,6 +10,7 @@ using ScheduleService.Application.CommandHandler.Services;
 using ScheduleService.Application.CommandHandler.Services.Models;
 using ScheduleService.Application.Repository;
 using ScheduleService.Infrastructure.Context.Contexts;
+using ScheduleService.Infrastructure.QueryHandler;
 using ScheduleService.Infrastructure.Repository;
 using ServiceStack.Redis;
 using System.Text;
@@ -37,6 +38,7 @@ public class ConfigurationIoC
         IoCRepositories.AddInfrastructureRepository(services);
         IoCRepositoriesApplication.AddApplicationRepository(services);
         IoCHandlersApplication.AddApplicationHandler(services);
+        IoCQueryHandlers.AddQueryHandlers(services);
 
         ConfigureEncryptation(services, configuration);
         ConfigureJWT(services, configuration);
