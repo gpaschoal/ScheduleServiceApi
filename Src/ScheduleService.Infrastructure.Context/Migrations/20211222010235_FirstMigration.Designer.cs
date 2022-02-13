@@ -11,7 +11,7 @@ using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Infrastructure.Context.Migrations
 {
-  [DbContext(typeof(ScheduleServiceDbContext))]
+  [DbContext(typeof(AppDbContext))]
   [Migration("20211222010235_FirstMigration")]
   partial class FirstMigration
   {

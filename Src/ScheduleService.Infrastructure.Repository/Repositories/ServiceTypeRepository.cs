@@ -7,6 +7,6 @@ namespace ScheduleService.Infrastructure.Repository.Repositories;
 
 internal class ServiceTypeRepository : RepositoryBase<ServiceType>, IServiceTypeRepository
 {
-    public ServiceTypeRepository(ScheduleServiceDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
+    public ServiceTypeRepository(AppDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
     { }
 }

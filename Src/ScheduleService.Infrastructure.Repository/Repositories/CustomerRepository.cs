@@ -7,6 +7,6 @@ namespace ScheduleService.Infrastructure.Repository.Repositories;
 
 internal class CustomerRepository : RepositoryBase<Customer>, ICustomerRepository
 {
-    public CustomerRepository(ScheduleServiceDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
+    public CustomerRepository(AppDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
     { }
 }

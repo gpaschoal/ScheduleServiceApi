@@ -10,7 +10,7 @@ using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Infrastructure.Context.Migrations
 {
-    [DbContext(typeof(ScheduleServiceDbContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class ScheduleServiceDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

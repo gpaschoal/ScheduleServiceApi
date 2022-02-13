@@ -8,12 +8,12 @@ namespace ScheduleService.Infrastructure.Repository;
 public abstract class RepositoryBase<TEntity>
     : IRepository<TEntity> where TEntity : EntityAudit
 {
-    protected readonly ScheduleServiceDbContext Context;
+    protected readonly AppDbContext Context;
     private readonly ICacheRepository _cacheRepository;
     protected readonly DbSet<TEntity> Queryable;
 
     protected RepositoryBase(
-        ScheduleServiceDbContext context,
+        AppDbContext context,
         ICacheRepository cacheRepository)
     {
         Context = context;

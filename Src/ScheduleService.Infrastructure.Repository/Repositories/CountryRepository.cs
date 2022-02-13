@@ -8,7 +8,7 @@ namespace ScheduleService.Infrastructure.Repository.Repositories;
 
 internal class CountryRepository : RepositoryBase<Country>, ICountryRepository
 {
-    public CountryRepository(ScheduleServiceDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
+    public CountryRepository(AppDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
     { }
 
     public async ValueTask<bool> CheckIfIsUsedByState(Guid id)

@@ -9,14 +9,14 @@ using System.Security.Claims;
 
 namespace ScheduleService.Infrastructure.Context.Contexts;
 
-public class ScheduleServiceDbContext : DbContext
+public class AppDbContext : DbContext
 {
     private static readonly string[] IgnoreColumns = new string[]
         { "Id", "CreatedAt", "UserCreateId", "UserCreate", "UpdatedAt", "UserUpdateId", "UserUpdate", "DeletedAt", "UserDeleteId", "UserDelete" };
 
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public ScheduleServiceDbContext(DbContextOptions options,
+    public AppDbContext(DbContextOptions options,
         IHttpContextAccessor httpContextAccessor)
         : base(options)
     {
@@ -26,7 +26,7 @@ public class ScheduleServiceDbContext : DbContext
     protected DbSet<Audit> AuditLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-        => modelBuilder.ApplyConfigurationsFromAssembly(typeof(ScheduleServiceDbContext).Assembly);
+        => modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {

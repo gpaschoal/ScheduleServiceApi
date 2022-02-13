@@ -11,7 +11,7 @@ using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Infrastructure.Context.Migrations
 {
-    [DbContext(typeof(ScheduleServiceDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20220122002247_AddAuditTable")]
     partial class AddAuditTable
     {

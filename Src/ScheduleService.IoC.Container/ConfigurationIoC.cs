@@ -25,7 +25,7 @@ public class ConfigurationIoC
 
         services.AddHttpContextAccessor();
 
-        services.AddDbContext<ScheduleServiceDbContext>(options =>
+        services.AddDbContext<AppDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("DbConn"));
             options.EnableDetailedErrors();

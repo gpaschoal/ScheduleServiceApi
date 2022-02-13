@@ -8,7 +8,7 @@ namespace ScheduleService.Infrastructure.Repository.Repositories;
 
 internal class CityRepository : RepositoryBase<City>, ICityRepository
 {
-    public CityRepository(ScheduleServiceDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
+    public CityRepository(AppDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
     { }
 
     public async ValueTask<bool> ExistsCityWithExternalCodeAsync(string externalCode)

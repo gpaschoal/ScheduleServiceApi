@@ -8,7 +8,7 @@ namespace ScheduleService.Infrastructure.Repository.Repositories;
 
 internal class StateRepository : RepositoryBase<State>, IStateRepository
 {
-    public StateRepository(ScheduleServiceDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
+    public StateRepository(AppDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
     { }
 
     public async ValueTask<bool> CheckIfIsUsedByCityAsync(Guid id)

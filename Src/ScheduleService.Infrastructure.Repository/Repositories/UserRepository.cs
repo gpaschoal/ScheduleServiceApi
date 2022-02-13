@@ -8,7 +8,7 @@ namespace ScheduleService.Infrastructure.Repository.Repositories;
 
 internal class UserRepository : RepositoryBase<User>, IUserRepository
 {
-    public UserRepository(ScheduleServiceDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
+    public UserRepository(AppDbContext context, ICacheRepository cacheRepository) : base(context, cacheRepository)
     { }
 
     public async ValueTask<User?> GetUserByEmailAndPasswordAsync(string email, string password)

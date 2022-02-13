@@ -6,11 +6,11 @@ namespace ScheduleService.Infrastructure.Repository;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly ScheduleServiceDbContext _context;
+    private readonly AppDbContext _context;
 
     private IDbContextTransaction? _transaction;
 
-    public UnitOfWork(ScheduleServiceDbContext context)
+    public UnitOfWork(AppDbContext context)
     {
         _context = context;
     }
