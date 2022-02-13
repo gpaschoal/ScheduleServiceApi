@@ -8,7 +8,7 @@ using ScheduleService.Domain.CommandHandler.Repositories.Cities;
 
 namespace ScheduleService.Application.CommandHandler.Handlers.Cities;
 
-internal class CityUpdateHandler : RequestHandler<CityUpdateCommand, CustomResultData>, ICityUpdateHandler
+internal class CityUpdateHandler : CommandHandler<CityUpdateCommand, CustomResultData>, ICityUpdateHandler
 {
     private readonly ICityUpdateRepository _repository;
 

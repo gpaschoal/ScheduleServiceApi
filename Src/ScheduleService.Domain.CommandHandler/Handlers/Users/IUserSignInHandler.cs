@@ -4,5 +4,5 @@ using ScheduleService.Domain.Command.Commands.Users;
 
 namespace ScheduleService.Domain.CommandHandler.Handlers.Users;
 
-public interface IUserSignInHandler : IRequestHandler<UserSignInCommand, CustomResultData<UserSignInResponse>>
+public interface IUserSignInHandler : ICommandHandler<UserSignInCommand, CustomResultData<UserSignInResponse>>
 { }

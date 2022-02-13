@@ -3,5 +3,5 @@ using ScheduleService.Domain.Command.Commands.States;
 
 namespace ScheduleService.Domain.CommandHandler.Handlers.States;
 
-public interface IStateCreateHandler : IRequestHandler<StateCreateCommand, CustomResultData<Guid>>
+public interface IStateCreateHandler : ICommandHandler<StateCreateCommand, CustomResultData<Guid>>
 { }

@@ -9,7 +9,7 @@ using ScheduleService.Domain.Core.Entities;
 
 namespace ScheduleService.Application.CommandHandler.Handlers.Countries;
 
-internal class CountryCreateHandler : RequestHandler<CountryCreateCommand, CustomResultData<Guid>>, ICountryCreateHandler
+internal class CountryCreateHandler : CommandHandler<CountryCreateCommand, CustomResultData<Guid>>, ICountryCreateHandler
 {
     private readonly ICountryCreateRepository _repository;
 

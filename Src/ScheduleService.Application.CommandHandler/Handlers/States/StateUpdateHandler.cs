@@ -8,7 +8,7 @@ using ScheduleService.Domain.CommandHandler.Repositories.States;
 
 namespace ScheduleService.Application.CommandHandler.Handlers.States;
 
-internal class StateUpdateHandler : RequestHandler<StateUpdateCommand, CustomResultData>, IStateUpdateHandler
+internal class StateUpdateHandler : CommandHandler<StateUpdateCommand, CustomResultData>, IStateUpdateHandler
 {
     private readonly IStateUpdateRepository _repository;
 

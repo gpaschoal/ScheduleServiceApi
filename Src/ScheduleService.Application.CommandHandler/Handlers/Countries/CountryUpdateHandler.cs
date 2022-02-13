@@ -8,7 +8,7 @@ using ScheduleService.Domain.CommandHandler.Repositories.Countries;
 
 namespace ScheduleService.Application.CommandHandler.Handlers.Countries;
 
-internal class CountryUpdateHandler : RequestHandler<CountryUpdateCommand, CustomResultData>, ICountryUpdateHandler
+internal class CountryUpdateHandler : CommandHandler<CountryUpdateCommand, CustomResultData>, ICountryUpdateHandler
 {
     private readonly ICountryUpdateRepository _repository;
 

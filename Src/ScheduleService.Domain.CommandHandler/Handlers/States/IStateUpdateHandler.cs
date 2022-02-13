@@ -3,5 +3,5 @@ using ScheduleService.Domain.Command.Commands.States;
 
 namespace ScheduleService.Domain.CommandHandler.Handlers.States;
 
-public interface IStateUpdateHandler : IRequestHandler<StateUpdateCommand, CustomResultData>
+public interface IStateUpdateHandler : ICommandHandler<StateUpdateCommand, CustomResultData>
 { }

@@ -9,7 +9,7 @@ using ScheduleService.Domain.Core.Entities;
 
 namespace ScheduleService.Application.CommandHandler.Handlers.Cities;
 
-internal class CityCreateHandler : RequestHandler<CityCreateCommand, CustomResultData<Guid>>, ICityCreateHandler
+internal class CityCreateHandler : CommandHandler<CityCreateCommand, CustomResultData<Guid>>, ICityCreateHandler
 {
     private readonly ICityCreateRepository _repository;
 

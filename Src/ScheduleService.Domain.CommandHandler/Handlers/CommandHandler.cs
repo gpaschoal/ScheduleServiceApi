@@ -3,14 +3,14 @@ using ScheduleService.Application.Shared;
 using ScheduleService.Domain.Command.Commands;
 
 namespace ScheduleService.Domain.CommandHandler.Handlers;
-public abstract class RequestHandler<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
+public abstract class CommandHandler<TRequest, TResponse> : ICommandHandler<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
     where TResponse : CustomResultData, new()
 {
     private readonly TResponse _response;
     public bool IsInvalid { get => !_response.IsValid; }
 
-    public RequestHandler()
+    public CommandHandler()
     {
         _response = new();
     }

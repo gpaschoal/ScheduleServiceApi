@@ -9,7 +9,7 @@ using ScheduleService.Domain.Core.Entities;
 
 namespace ScheduleService.Application.CommandHandler.Handlers.States;
 
-internal class StateCreateHandler : RequestHandler<StateCreateCommand, CustomResultData<Guid>>, IStateCreateHandler
+internal class StateCreateHandler : CommandHandler<StateCreateCommand, CustomResultData<Guid>>, IStateCreateHandler
 {
     private readonly IStateCreateRepository _repository;
 

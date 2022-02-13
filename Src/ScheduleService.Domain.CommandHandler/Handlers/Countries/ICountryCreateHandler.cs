@@ -3,5 +3,5 @@ using ScheduleService.Domain.Command.Commands.Countries;
 
 namespace ScheduleService.Domain.CommandHandler.Handlers.Countries;
 
-public interface ICountryCreateHandler : IRequestHandler<CountryCreateCommand, CustomResultData<Guid>>
+public interface ICountryCreateHandler : ICommandHandler<CountryCreateCommand, CustomResultData<Guid>>
 { }

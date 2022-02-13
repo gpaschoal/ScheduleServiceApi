@@ -11,7 +11,7 @@ using ScheduleService.Domain.Core.Entities;
 
 namespace ScheduleService.Application.CommandHandler.Handlers.Users;
 
-internal class UserSignInHandler : RequestHandler<UserSignInCommand, CustomResultData<UserSignInResponse>>, IUserSignInHandler
+internal class UserSignInHandler : CommandHandler<UserSignInCommand, CustomResultData<UserSignInResponse>>, IUserSignInHandler
 {
     private readonly IUserSignInRepository _repository;
     private readonly IEncryptionService _encryptionService;

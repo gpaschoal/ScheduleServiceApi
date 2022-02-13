@@ -8,7 +8,7 @@ using ScheduleService.Domain.CommandHandler.Repositories.States;
 
 namespace ScheduleService.Application.CommandHandler.Handlers.States;
 
-internal class StateDeleteHandler : RequestHandler<StateDeleteCommand, CustomResultData>, IStateDeleteHandler
+internal class StateDeleteHandler : CommandHandler<StateDeleteCommand, CustomResultData>, IStateDeleteHandler
 {
     private readonly IStateDeleteRepository _repository;
 

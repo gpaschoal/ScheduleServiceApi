@@ -9,7 +9,7 @@ namespace ScheduleService.Application.CommandHandlerTest.Handlers;
 public class StubCommand : ICommandExecution
 { }
 
-public class HandlerBaseStub : RequestHandler<StubCommand, CustomResultData>
+public class HandlerBaseStub : CommandHandler<StubCommand, CustomResultData>
 {
     public int HandleExecutionCalls { get; private set; }
     public HandlerBaseStub()

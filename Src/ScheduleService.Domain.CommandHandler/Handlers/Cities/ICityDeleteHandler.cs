@@ -3,5 +3,5 @@ using ScheduleService.Domain.Command.Commands.Cities;
 
 namespace ScheduleService.Domain.CommandHandler.Handlers.Cities;
 
-public interface ICityDeleteHandler : IRequestHandler<CityDeleteCommand, CustomResultData>
+public interface ICityDeleteHandler : ICommandHandler<CityDeleteCommand, CustomResultData>
 { }
