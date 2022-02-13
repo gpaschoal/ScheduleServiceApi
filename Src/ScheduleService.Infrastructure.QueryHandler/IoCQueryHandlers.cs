@@ -15,10 +15,10 @@ public class IoCQueryHandlers
         _ = services
                 /* Country */
                 .AddScoped<IGetCountryViewModelQueryHandler, GetCountryViewModelQueryHandler>()
-                
+
                 /* State */
                 .AddScoped<IGetStateViewModelQueryHandler, GetStateViewModelQueryHandler>()
-                
+
                 /* City */
                 .AddScoped<IGetCityViewModelQueryHandler, GetCityViewModelQueryHandler>()
                 ;

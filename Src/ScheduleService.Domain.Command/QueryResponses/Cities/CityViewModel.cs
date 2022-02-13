@@ -1,6 +1,4 @@
-﻿using ScheduleService.Domain.Core.Entities;
-
-namespace ScheduleService.Domain.Command.QueryResponses.Cities;
+﻿namespace ScheduleService.Domain.Command.QueryResponses.Cities;
 
 public class CityViewModel : IViewModelBase
 {

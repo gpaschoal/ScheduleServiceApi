@@ -8,6 +8,8 @@ public class AuditMap : IEntityTypeConfiguration<Audit>
 {
     public void Configure(EntityTypeBuilder<Audit> builder)
     {
+        builder.ToTable("Audit");
+
         builder.HasKey(x => x.Id);
         builder.HasIndex(x => x.Id);
 

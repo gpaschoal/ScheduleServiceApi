@@ -55,5 +55,9 @@ public class User : ActivableEntityBase
     public PhoneNumberValueObject Cellphone2 { get; private set; }
     public AddressValueObject Address { get; private set; }
 
+    public bool IsAdmin { get; private set; }
+
+    public virtual ICollection<UserRole>? UserRoles { get; }
+
     public string FullName { get => $"{FirstName.Trim()} {LastName.Trim()}"; }
 }

@@ -45,7 +45,7 @@ public abstract class MainController : ControllerBase
 
     public IActionResult OkOrNotFoundQuery(object? response)
     {
-        if(response is  null)
+        if (response is null)
             return NotFound();
 
         return Ok(response);
