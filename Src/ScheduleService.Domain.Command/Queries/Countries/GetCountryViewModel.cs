@@ -2,7 +2,7 @@
 
 namespace ScheduleService.Domain.Command.Queries.Countries;
 
-public class GetCountryByIdViewModel : IGetById<CountryViewModel>
+public class GetCountryViewModel : IGetById<CountryViewModel>
 {
     public Guid Id { get; set; }
 }

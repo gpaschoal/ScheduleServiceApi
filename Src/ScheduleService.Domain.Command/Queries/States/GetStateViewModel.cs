@@ -2,7 +2,7 @@
 
 namespace ScheduleService.Domain.Command.Queries.States;
 
-public class GetStateByIdViewModel : IGetById<StateViewModel>
+public class GetStateViewModel : IGetById<StateViewModel>
 {
     public Guid Id { get; set; }
 }

@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ScheduleService.Domain.Command\ScheduleService.Domain.Command.csproj" />
+    <ProjectReference Include="..\ScheduleService.Domain.QueryHandler\ScheduleService.Domain.QueryHandler.csproj" />
+    <ProjectReference Include="..\ScheduleService.Infrastructure.Context\ScheduleService.Infrastructure.Context.csproj" />
   </ItemGroup>
 
 </Project>

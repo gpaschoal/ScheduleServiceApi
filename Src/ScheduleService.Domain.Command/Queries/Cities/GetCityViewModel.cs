@@ -2,7 +2,7 @@
 
 namespace ScheduleService.Domain.Command.Queries.Cities;
 
-public class GetCityByIdViewModel : IGetById<CityViewModel>
+public class GetCityViewModel : IGetById<CityViewModel>
 {
     public Guid Id { get; set; }
 }
