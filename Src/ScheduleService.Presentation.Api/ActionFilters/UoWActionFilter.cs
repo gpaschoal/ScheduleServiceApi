@@ -6,33 +6,31 @@ using ScheduleService.Presentation.Api.Controllers.Base;
 
 namespace ScheduleService.Presentation.Api.ActionFilters;
 
-public class UoWActionFilter : IActionFilter
+public class UoWActionFilter : IAsyncActionFilter
 {
     private readonly IUnitOfWork _unitOfWork;
-    private bool _isTransactable = false;
 
     public UoWActionFilter(IUnitOfWork unitOfWork)
     { _unitOfWork = unitOfWork; }
 
-    public void OnActionExecuting(ActionExecutingContext context)
+    public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
     {
-        _isTransactable = context.ActionArguments.Any(argument => argument.Value is IRequest);
+        var isTransactable = context.ActionArguments.Any(argument => argument.Value is IRequest);
 
-        if (_isTransactable)
+        if (isTransactable)
+        {
             _unitOfWork.BeginTransaction();
-    }
 
-    public void OnActionExecuted(ActionExecutedContext context)
-    {
-        if (!_isTransactable)
-            return;
+            var invocationResult = await next();
 
-        if (context.Result is not ObjectResult newResult)
-            return;
+            if (invocationResult.Result is not ObjectResult objectResult)
+                return;
 
-        if (newResult.Value is CustomResponse resultData && resultData.Success)
-            _unitOfWork.CommitTransaction();
-        else
-            _unitOfWork.RollBackTransaction();
+            if (objectResult.Value is CustomResponse resultData && resultData.Success)
+                _unitOfWork.CommitTransaction();
+            else
+                _unitOfWork.RollBackTransaction();
+        }
+        else await next();
     }
 }
