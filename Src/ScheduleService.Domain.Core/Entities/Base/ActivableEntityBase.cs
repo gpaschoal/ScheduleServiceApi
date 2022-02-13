@@ -1,6 +1,6 @@
 ﻿namespace ScheduleService.Domain.Core.Entities.Base;
 
-public abstract class ActivableEntityBase : EntityBase, IActivable
+public abstract class ActivableEntityBase : EntityAudit, IActivable
 {
     public ActivableEntityBase()
     {

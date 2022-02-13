@@ -7,9 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="EasyValidation.Core" Version="1.0.0.7" />
-    <PackageReference Include="EasyValidation.DependencyInjection" Version="1.0.0.4" />
-    <PackageReference Include="MediatR" Version="9.0.0" />
+    <Compile Update="Resources\EntityNameResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EntityNameResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\ValidationResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ValidationResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\EntityNameResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EntityNameResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\ValidationResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

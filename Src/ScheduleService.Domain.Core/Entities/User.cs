@@ -13,6 +13,7 @@ public class User : ActivableEntityBase
         string lastName,
         string userName,
         string password,
+        string email,
         CpfValueObject cpf,
         Guid? cityId,
         PhoneNumberValueObject telephone1,
@@ -25,6 +26,7 @@ public class User : ActivableEntityBase
         LastName = lastName;
         UserName = userName;
         Password = password;
+        Email = email;
         Cpf = cpf;
         CityId = cityId;
         Telephone1 = telephone1;
@@ -40,6 +42,8 @@ public class User : ActivableEntityBase
     public string UserName { get; private set; }
     public string Password { get; private set; }
 
+    public string Email { get; private set; }
+
     public CpfValueObject Cpf { get; private set; }
 
     public Guid? CityId { get; private set; }
@@ -51,5 +55,5 @@ public class User : ActivableEntityBase
     public PhoneNumberValueObject Cellphone2 { get; private set; }
     public AddressValueObject Address { get; private set; }
 
-    public string FullName { get => $"{FirstName} {LastName}"; }
+    public string FullName { get => $"{FirstName.Trim()} {LastName.Trim()}"; }
 }

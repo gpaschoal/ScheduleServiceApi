@@ -17,4 +17,10 @@ public class City : ActivableEntityBase
     public string ExternalCode { get; private set; }
     public Guid StateId { get; private set; }
     public virtual State State { get; private set; }
+
+    public void Update(string name, string externalCode)
+    {
+        Name = name;
+        ExternalCode = externalCode;
+    }
 }

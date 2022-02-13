@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using ScheduleService.Application.Handler.Services.Models;
-using ScheduleService.Application.Handler.Services.Responses;
+using ScheduleService.Application.CommandHandler.Services.Models;
+using ScheduleService.Application.CommandHandler.Services.Responses;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Shared.Constants;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace ScheduleService.Application.Handler.Services;
+namespace ScheduleService.Application.CommandHandler.Services;
 
 public class TokenService : ITokenService
 {

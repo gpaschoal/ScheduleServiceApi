@@ -2,4 +2,5 @@
 
 public class StateDeleteCommand : ICommandExecution
 {
+    public Guid Id { get; set; }
 }

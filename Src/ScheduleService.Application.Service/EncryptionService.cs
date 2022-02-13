@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Options;
-using ScheduleService.Application.Handler.Services.Models;
+using ScheduleService.Application.CommandHandler.Services.Models;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ScheduleService.Application.Handler.Services;
+namespace ScheduleService.Application.CommandHandler.Services;
 
 public class EncryptionService : IEncryptionService
 {

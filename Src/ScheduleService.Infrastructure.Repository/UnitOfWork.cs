@@ -6,11 +6,11 @@ namespace ScheduleService.Infrastructure.Repository;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly ScheduleServiceDbContext _context;
+    private readonly AppDbContext _context;
 
-    private IDbContextTransaction _transaction;
+    private IDbContextTransaction? _transaction;
 
-    public UnitOfWork(ScheduleServiceDbContext context)
+    public UnitOfWork(AppDbContext context)
     {
         _context = context;
     }
@@ -23,11 +23,11 @@ public class UnitOfWork : IUnitOfWork
     public void CommitTransaction()
     {
         _ = _context.SaveChangesAsync().Result;
-        _transaction.Commit();
+        _transaction?.Commit();
     }
 
     public void RollBackTransaction()
     {
-        _transaction.Rollback();
+        _transaction?.Rollback();
     }
 }

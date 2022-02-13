@@ -1,5 +1,4 @@
-﻿using MediatR;
-using ScheduleService.Application.Shared;
+﻿using ScheduleService.Application.Shared;
 
 namespace ScheduleService.Application.Command.Commands;
 

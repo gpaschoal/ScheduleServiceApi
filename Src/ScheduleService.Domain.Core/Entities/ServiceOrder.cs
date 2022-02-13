@@ -3,7 +3,7 @@ using ScheduleService.Domain.Core.Enums;
 
 namespace ScheduleService.Domain.Core.Entities;
 
-public class ServiceOrder : EntityBase
+public class ServiceOrder : EntityAudit
 {
     public ServiceOrder()
     {

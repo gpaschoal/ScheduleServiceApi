@@ -1,17 +1,18 @@
-﻿using EasyValidation.DependencyInjection;
-using MediatR;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using ScheduleService.Application.Handler.Handlers;
-using ScheduleService.Application.Handler.Services;
-using ScheduleService.Application.Handler.Services.Models;
-using ScheduleService.Application.Shared;
+using ScheduleService.Application.CommandHandler;
+using ScheduleService.Application.CommandHandler.Services;
+using ScheduleService.Application.CommandHandler.Services.Models;
+using ScheduleService.Application.Repository;
 using ScheduleService.Infrastructure.Context.Contexts;
+using ScheduleService.Infrastructure.QueryHandler;
+using ScheduleService.Infrastructure.Repository;
+using ServiceStack.Redis;
 using System.Text;
 
 namespace ScheduleService.IoC.Container;
@@ -25,27 +26,36 @@ public class ConfigurationIoC
 
         services.AddHttpContextAccessor();
 
-        services.AddDbContext<ScheduleServiceDbContext>(options =>
+        services.AddDbContext<AppDbContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("DbConn"));
             options.EnableDetailedErrors();
         });
 
-        IoCRepositories.Configure(services, configuration);
+        services.AddSingleton<IRedisClientsManagerAsync>(c => new RedisManagerPool(configuration.GetConnectionString("RedisConn")));
+        _ = services.Configure<CacheConfiguration>(configuration.GetSection("CacheConfiguration"));
 
-        services.AddEasyValidationValidators(typeof(CustomResultData).Assembly);
-        services.AddMediatR(typeof(CustomResultData).Assembly);
+        IoCRepositories.AddInfrastructureRepository(services);
+        IoCRepositoriesApplication.AddApplicationRepository(services);
+        IoCHandlersApplication.AddApplicationHandler(services);
+        IoCQueryHandlers.AddQueryHandlers(services);
 
-        /* Handler Bus */
-        services.AddScoped<IHandlerBus, HandlerBus>();
+        ConfigureEncryptation(services, configuration);
+        ConfigureJWT(services, configuration);
+    }
 
+    private static void ConfigureEncryptation(IServiceCollection services, ConfigurationManager configuration)
+    {
         /* Encrypt Service */
         services.AddScoped<IEncryptionService, EncryptionService>();
         services.AddScoped<ITokenService, TokenService>();
 
         /* Encrypt Service Model */
         services.Configure<EncryptionModel>(configuration.GetSection("Encryption"));
+    }
 
+    private static void ConfigureJWT(IServiceCollection services, ConfigurationManager configuration)
+    {
         /* JWT Authentication */
         services.Configure<JWTEncriptionModel>(configuration.GetSection("SecretToken"));
         string keySecretToken = configuration.GetSection("SecretToken")["Key"];

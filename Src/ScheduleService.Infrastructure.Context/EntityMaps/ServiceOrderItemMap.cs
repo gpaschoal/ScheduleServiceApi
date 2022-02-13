@@ -5,7 +5,7 @@ using ScheduleService.Infrastructure.Context.EntityMaps.Base;
 
 namespace ScheduleService.Infrastructure.Context.EntityMaps;
 
-public class ServiceOrderItemMap : EntityConfiguration<ServiceOrderItem>
+public class ServiceOrderItemMap : EntityAuditConfiguration<ServiceOrderItem>
 {
     public override void CustomConfiguration(EntityTypeBuilder<ServiceOrderItem> builder)
     {

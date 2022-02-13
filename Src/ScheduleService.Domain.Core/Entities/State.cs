@@ -22,4 +22,10 @@ public class State : ActivableEntityBase
     public virtual Country Country { get; private set; }
 
     public virtual ICollection<City> Cities { get; private set; }
+
+    public void Update(string name, string externalCode)
+    {
+        Name = name;
+        ExternalCode = externalCode;
+    }
 }

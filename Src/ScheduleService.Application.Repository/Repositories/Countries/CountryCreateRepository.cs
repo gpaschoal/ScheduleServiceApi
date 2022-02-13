@@ -1,10 +1,10 @@
-﻿using ScheduleService.Application.Handler.Repositories.Countries;
+﻿using ScheduleService.Domain.CommandHandler.Repositories.Countries;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.Repository.Repositories;
 
 namespace ScheduleService.Application.Repository.Repositories.Countries;
 
-public class CountryCreateRepository : ICountryCreateRepository
+internal class CountryCreateRepository : ICountryCreateRepository
 {
     private readonly ICountryRepository _repository;
 
@@ -16,5 +16,15 @@ public class CountryCreateRepository : ICountryCreateRepository
     public ValueTask AddAsync(Country data)
     {
         return _repository.AddAsync(data);
+    }
+
+    public ValueTask<bool> ExistsCountryWithExternalCodeAsync(string externalCode)
+    {
+        return _repository.ExistsCountryWithExternalCodeAsync(externalCode);
+    }
+
+    public ValueTask<bool> ExistsCountryWithName(string name)
+    {
+        return _repository.ExistsCountryWithNameAsync(name);
     }
 }
