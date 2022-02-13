@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ScheduleService.Application.Response\ScheduleService.Application.Response.csproj" />
     <ProjectReference Include="..\ScheduleService.Application.Shared\ScheduleService.Application.Shared.csproj" />
   </ItemGroup>
 

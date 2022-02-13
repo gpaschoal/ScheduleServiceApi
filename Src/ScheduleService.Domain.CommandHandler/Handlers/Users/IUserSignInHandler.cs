@@ -1,5 +1,5 @@
-﻿using ScheduleService.Application.Response.Responses.Users;
-using ScheduleService.Application.Shared;
+﻿using ScheduleService.Application.Shared;
+using ScheduleService.Domain.Command.CommandResponses.Users;
 using ScheduleService.Domain.Command.Commands.Users;
 
 namespace ScheduleService.Domain.CommandHandler.Handlers.Users;

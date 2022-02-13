@@ -1,4 +1,4 @@
-﻿using ScheduleService.Application.Response.Responses.Users;
+﻿using ScheduleService.Domain.Command.CommandResponses.Users;
 
 namespace ScheduleService.Domain.Command.Commands.Users;
 
