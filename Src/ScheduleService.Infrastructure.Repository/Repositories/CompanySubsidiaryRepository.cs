@@ -1,6 +1,6 @@
 ﻿using ScheduleService.Domain.Core.Entities;
-using ScheduleService.Domain.Repository;
-using ScheduleService.Domain.Repository.Repositories;
+using ScheduleService.Domain.Core.Repositories;
+using ScheduleService.Domain.Core.Repositories.Base;
 using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Infrastructure.Repository.Repositories;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using ScheduleService.Domain.Repository;
+using ScheduleService.Domain.Core.Repositories.Base;
 
 namespace ScheduleService.Infrastructure.Repository;
 

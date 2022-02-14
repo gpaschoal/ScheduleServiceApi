@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
-using ScheduleService.Domain.Repository;
+using ScheduleService.Domain.Core.Repositories.Base;
 using ServiceStack.Redis;
 
 namespace ScheduleService.Infrastructure.Repository;

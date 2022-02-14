@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
-using ScheduleService.Domain.Repository;
+using ScheduleService.Domain.Core.Repositories.Base;
 using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Infrastructure.Repository;

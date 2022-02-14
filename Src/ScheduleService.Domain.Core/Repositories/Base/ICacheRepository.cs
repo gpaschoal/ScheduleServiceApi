@@ -1,4 +1,4 @@
-﻿namespace ScheduleService.Domain.Repository;
+﻿namespace ScheduleService.Domain.Core.Repositories.Base;
 
 public interface ICacheRepository
 {

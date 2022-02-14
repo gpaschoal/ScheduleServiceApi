@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ScheduleService.Domain.Repository;
-using ScheduleService.Domain.Repository.Repositories;
+using ScheduleService.Domain.Core.Repositories;
+using ScheduleService.Domain.Core.Repositories.Base;
 using ScheduleService.Infrastructure.Repository.Repositories;
 
 namespace ScheduleService.Infrastructure.Repository;

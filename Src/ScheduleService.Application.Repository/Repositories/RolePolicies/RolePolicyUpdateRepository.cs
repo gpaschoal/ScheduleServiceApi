@@ -1,6 +1,6 @@
 ﻿using ScheduleService.Domain.CommandHandler.Repositories.RolePolicies;
 using ScheduleService.Domain.Core.Entities;
-using ScheduleService.Domain.Repository.Repositories;
+using ScheduleService.Domain.Core.Repositories;
 
 namespace ScheduleService.Application.Repository.Repositories.RolePolicies;
 
