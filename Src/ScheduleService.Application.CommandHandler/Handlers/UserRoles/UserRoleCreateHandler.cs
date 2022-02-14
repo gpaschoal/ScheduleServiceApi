@@ -14,7 +14,7 @@ public class UserRoleCreateHandler : IUserRoleCreateHandler
         _repository = repository;
     }
 
-    public Task<CustomResultData<Guid>> HandleAsync(UserRoleCreateCommand request, CancellationToken cancellationToken = default)
+    public ValueTask<CustomResultData<Guid>> HandleAsync(UserRoleCreateCommand request, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }

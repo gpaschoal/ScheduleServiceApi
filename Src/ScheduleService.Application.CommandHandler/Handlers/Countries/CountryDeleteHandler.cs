@@ -17,7 +17,7 @@ internal class CountryDeleteHandler : CommandHandler<CountryDeleteCommand, Custo
         _repository = repository;
     }
 
-    public async override Task<CustomResultData> HandleAsync(CountryDeleteCommand request, CancellationToken cancellationToken)
+    public async override ValueTask<CustomResultData> HandleAsync(CountryDeleteCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<CountryDeleteValidator>(request))
             return InvalidResponse();

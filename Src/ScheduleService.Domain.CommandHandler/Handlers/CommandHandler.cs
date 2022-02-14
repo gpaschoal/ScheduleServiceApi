@@ -35,7 +35,7 @@ public abstract class CommandHandler<TRequest, TResponse> : ICommandHandler<TReq
         return false;
     }
 
-    public abstract Task<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken);
+    public abstract ValueTask<TResponse> HandleAsync(TRequest request, CancellationToken cancellationToken);
 
     public void AddError(string message) => _response.AddError("&___message", message);
 

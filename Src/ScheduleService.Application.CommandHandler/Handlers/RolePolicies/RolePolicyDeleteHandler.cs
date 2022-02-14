@@ -14,7 +14,7 @@ public class RolePolicyDeleteHandler : IRolePolicyDeleteHandler
         _repository = repository;
     }
 
-    public Task<CustomResultData> HandleAsync(RolePolicyDeleteCommand request, CancellationToken cancellationToken = default)
+    public ValueTask<CustomResultData> HandleAsync(RolePolicyDeleteCommand request, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }

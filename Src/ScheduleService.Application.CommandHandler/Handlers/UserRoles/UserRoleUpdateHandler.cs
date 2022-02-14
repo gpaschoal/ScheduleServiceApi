@@ -14,7 +14,7 @@ public class UserRoleUpdateHandler : IUserRoleUpdateHandler
         _repository = repository;
     }
 
-    public Task<CustomResultData> HandleAsync(UserRoleUpdateCommand request, CancellationToken cancellationToken = default)
+    public ValueTask<CustomResultData> HandleAsync(UserRoleUpdateCommand request, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }

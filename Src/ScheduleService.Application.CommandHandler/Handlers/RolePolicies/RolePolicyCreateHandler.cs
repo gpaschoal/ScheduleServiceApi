@@ -14,7 +14,7 @@ public class RolePolicyCreateHandler : IRolePolicyCreateHandler
         _repository = repository;
     }
 
-    public Task<CustomResultData<Guid>> HandleAsync(RolePolicyCreateCommand request, CancellationToken cancellationToken = default)
+    public ValueTask<CustomResultData<Guid>> HandleAsync(RolePolicyCreateCommand request, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }

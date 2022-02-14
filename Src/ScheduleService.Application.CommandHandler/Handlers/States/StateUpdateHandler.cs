@@ -17,7 +17,7 @@ internal class StateUpdateHandler : CommandHandler<StateUpdateCommand, CustomRes
         _repository = repository;
     }
 
-    public async override Task<CustomResultData> HandleAsync(StateUpdateCommand request, CancellationToken cancellationToken)
+    public async override ValueTask<CustomResultData> HandleAsync(StateUpdateCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<StateUpdateValidator>(request))
             return InvalidResponse();

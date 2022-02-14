@@ -14,7 +14,7 @@ public class RoleUpdateHandler : IRoleUpdateHandler
         _repository = repository;
     }
 
-    public Task<CustomResultData> HandleAsync(RoleUpdateCommand request, CancellationToken cancellationToken = default)
+    public ValueTask<CustomResultData> HandleAsync(RoleUpdateCommand request, CancellationToken cancellationToken = default)
     {
         throw new NotImplementedException();
     }

@@ -18,7 +18,7 @@ internal class CountryCreateHandler : CommandHandler<CountryCreateCommand, Custo
         _repository = repository;
     }
 
-    public async override Task<CustomResultData<Guid>> HandleAsync(CountryCreateCommand request, CancellationToken cancellationToken)
+    public async override ValueTask<CustomResultData<Guid>> HandleAsync(CountryCreateCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<CountryCreateValidator>(request))
             return InvalidResponse();

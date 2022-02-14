@@ -17,7 +17,7 @@ internal class CityDeleteHandler : CommandHandler<CityDeleteCommand, CustomResul
         _repository = repository;
     }
 
-    public async override Task<CustomResultData> HandleAsync(CityDeleteCommand request, CancellationToken cancellationToken)
+    public async override ValueTask<CustomResultData> HandleAsync(CityDeleteCommand request, CancellationToken cancellationToken)
     {
         if (!Validate<CityDeleteValidator>(request))
             return InvalidResponse();
