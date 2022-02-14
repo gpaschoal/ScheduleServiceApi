@@ -29,6 +29,9 @@ public class IoCRepositories
                 .AddScoped<IServiceTypeRepository, ServiceTypeRepository>()
                 .AddScoped<IStateRepository, StateRepository>()
                 .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IRolePolicyRepository, RolePolicyRepository>()
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IUserRoleRepository, UserRoleRepository>()
                 ;
     }
 }

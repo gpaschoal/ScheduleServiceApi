@@ -2,5 +2,5 @@
 
 namespace ScheduleService.Domain.CommandHandler.Repositories.UserRoles;
 
-public interface IUserRoleDeleteRepository : IDeleteRepository<Role>
+public interface IUserRoleDeleteRepository : IDeleteRepository<UserRole>
 { }

@@ -2,5 +2,5 @@
 
 namespace ScheduleService.Domain.CommandHandler.Repositories.RolePolicies;
 
-public interface IRolePolicyCreateRepository : ICreateRepository<Role>
+public interface IRolePolicyCreateRepository : ICreateRepository<RolePolicy>
 { }
