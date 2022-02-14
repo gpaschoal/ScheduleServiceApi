@@ -1,4 +1,4 @@
-﻿using ScheduleService.Application.CommandValidator.Validators.Cities;
+﻿using ScheduleService.Application.CommandHandler.Validators.Cities;
 using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
 using ScheduleService.Domain.CommandHandler.Commands.Cities;

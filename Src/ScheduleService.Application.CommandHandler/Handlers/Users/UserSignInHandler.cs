@@ -1,5 +1,5 @@
 ﻿using ScheduleService.Application.CommandHandler.Services;
-using ScheduleService.Application.CommandValidator.Validators.Users;
+using ScheduleService.Application.CommandHandler.Validators.Users;
 using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
 using ScheduleService.Domain.Command.CommandResponses.Users;
