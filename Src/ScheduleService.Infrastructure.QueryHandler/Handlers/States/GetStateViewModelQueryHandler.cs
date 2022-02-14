@@ -2,6 +2,7 @@
 using ScheduleService.Domain.Command.QueryResponses.States;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.QueryHandler.Handlers.States;
+using ScheduleService.Domain.QueryHandler.Queries.States;
 using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Infrastructure.QueryHandler.Handlers.States;
@@ -11,7 +12,7 @@ internal class GetStateViewModelQueryHandler : QueryHandlerBase<State>, IGetStat
     public GetStateViewModelQueryHandler(AppDbContext context) : base(context)
     { }
 
-    public async ValueTask<StateViewModel> HandleAsync(Domain.Command.Queries.States.GetStateViewModel query)
+    public async ValueTask<StateViewModel?> HandleAsync(GetStateViewModel query)
     {
         var result = await Queryable
             .Where(x => x.Id.Equals(query.Id))

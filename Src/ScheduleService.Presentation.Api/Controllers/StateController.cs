@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ScheduleService.Domain.Command.Commands.States;
-using ScheduleService.Domain.Command.Queries.States;
+using ScheduleService.Domain.CommandHandler.Commands.States;
 using ScheduleService.Domain.CommandHandler.Handlers.States;
 using ScheduleService.Domain.Core.Policies;
 using ScheduleService.Domain.QueryHandler.Handlers.States;
+using ScheduleService.Domain.QueryHandler.Queries.States;
 using ScheduleService.Presentation.Api.Controllers.Base;
 
 namespace ScheduleService.Presentation.Api.Controllers;

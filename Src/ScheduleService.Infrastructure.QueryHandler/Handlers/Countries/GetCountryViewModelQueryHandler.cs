@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ScheduleService.Domain.Command.Queries.Countries;
 using ScheduleService.Domain.Command.QueryResponses.Countries;
 using ScheduleService.Domain.Core.Entities;
 using ScheduleService.Domain.QueryHandler.Handlers.Countries;
+using ScheduleService.Domain.QueryHandler.Queries.Countries;
 using ScheduleService.Infrastructure.Context.Contexts;
 
 namespace ScheduleService.Infrastructure.QueryHandler.Handlers.Countries;
@@ -12,7 +12,7 @@ internal class GetCountryViewModelQueryHandler : QueryHandlerBase<Country>, IGet
     public GetCountryViewModelQueryHandler(AppDbContext context) : base(context)
     { }
 
-    public async ValueTask<CountryViewModel> HandleAsync(GetCountryViewModel query)
+    public async ValueTask<CountryViewModel?> HandleAsync(GetCountryViewModel query)
     {
         var result = await Queryable
             .Where(x => x.Id.Equals(query.Id))

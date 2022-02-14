@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using FluentValidation.Results;
 using ScheduleService.Application.CommandValidator.Validators.Countries;
-using ScheduleService.Domain.Command.Commands.Countries;
+using ScheduleService.Domain.CommandHandler.Commands.Countries;
 using System;
 using System.Linq;
 using Xunit;

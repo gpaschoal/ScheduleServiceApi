@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Moq;
 using ScheduleService.Application.CommandHandler.Handlers.States;
-using ScheduleService.Domain.Command.Commands.States;
+using ScheduleService.Domain.CommandHandler.Commands.States;
 using ScheduleService.Domain.CommandHandler.Repositories.States;
 using ScheduleService.Domain.Core.Entities;
 using System;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using ScheduleService.Domain.Command.Commands;
+using ScheduleService.Domain.CommandHandler.Commands;
 using ScheduleService.Domain.Repository;
 using ScheduleService.Presentation.Api.Controllers.Base;
 

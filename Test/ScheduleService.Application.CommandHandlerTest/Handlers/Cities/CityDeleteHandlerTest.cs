@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Moq;
 using ScheduleService.Application.CommandHandler.Handlers.Cities;
-using ScheduleService.Domain.Command.Commands.Cities;
+using ScheduleService.Domain.CommandHandler.Commands.Cities;
 using ScheduleService.Domain.CommandHandler.Repositories.Cities;
 using System;
 using System.Threading;

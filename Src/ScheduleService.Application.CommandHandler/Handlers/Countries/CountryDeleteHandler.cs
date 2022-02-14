@@ -1,7 +1,7 @@
 ﻿using ScheduleService.Application.CommandValidator.Validators.Countries;
 using ScheduleService.Application.Shared;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Domain.Command.Commands.Countries;
+using ScheduleService.Domain.CommandHandler.Commands.Countries;
 using ScheduleService.Domain.CommandHandler.Handlers;
 using ScheduleService.Domain.CommandHandler.Handlers.Countries;
 using ScheduleService.Domain.CommandHandler.Repositories.Countries;

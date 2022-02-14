@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using ScheduleService.Application.Shared.Resources;
-using ScheduleService.Domain.Command.Commands.States;
+using ScheduleService.Domain.CommandHandler.Commands.States;
 
 namespace ScheduleService.Application.CommandValidator.Validators.States;
 

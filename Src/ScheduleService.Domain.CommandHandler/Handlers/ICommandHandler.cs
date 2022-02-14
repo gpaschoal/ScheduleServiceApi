@@ -1,4 +1,4 @@
-﻿using ScheduleService.Domain.Command.Commands;
+﻿using ScheduleService.Domain.CommandHandler.Commands;
 
 namespace ScheduleService.Domain.CommandHandler.Handlers;
 

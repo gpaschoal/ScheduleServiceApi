@@ -3,7 +3,7 @@ using Moq;
 using ScheduleService.Application.CommandHandler.Handlers.Users;
 using ScheduleService.Application.CommandHandler.Services;
 using ScheduleService.Application.CommandHandler.Services.Responses;
-using ScheduleService.Domain.Command.Commands.Users;
+using ScheduleService.Domain.CommandHandler.Commands.Users;
 using ScheduleService.Domain.CommandHandler.Repositories.Users;
 using ScheduleService.Domain.Core.Entities;
 using System;

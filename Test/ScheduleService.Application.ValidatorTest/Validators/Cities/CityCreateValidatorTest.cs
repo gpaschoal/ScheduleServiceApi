@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using FluentValidation.Results;
 using ScheduleService.Application.CommandValidator.Validators.Cities;
-using ScheduleService.Domain.Command.Commands.Cities;
+using ScheduleService.Domain.CommandHandler.Commands.Cities;
 using System.Linq;
 using Xunit;
 

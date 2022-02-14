@@ -1,5 +1,5 @@
 ﻿using ScheduleService.Application.Shared;
-using ScheduleService.Domain.Command.Commands.Cities;
+using ScheduleService.Domain.CommandHandler.Commands.Cities;
 
 namespace ScheduleService.Domain.CommandHandler.Handlers.Cities;
 

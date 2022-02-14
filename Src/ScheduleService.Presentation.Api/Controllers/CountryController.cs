@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ScheduleService.Domain.Command.Commands.Countries;
-using ScheduleService.Domain.Command.Queries.Countries;
+using ScheduleService.Domain.CommandHandler.Commands.Countries;
 using ScheduleService.Domain.CommandHandler.Handlers.Countries;
 using ScheduleService.Domain.Core.Policies;
 using ScheduleService.Domain.QueryHandler.Handlers.Countries;
+using ScheduleService.Domain.QueryHandler.Queries.Countries;
 using ScheduleService.Presentation.Api.Controllers.Base;
 
 namespace ScheduleService.Presentation.Api.Controllers;

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using ScheduleService.Application.Shared;
-using ScheduleService.Domain.Command.Commands;
+using ScheduleService.Domain.CommandHandler.Commands;
 
 namespace ScheduleService.Domain.CommandHandler.Handlers;
 public abstract class CommandHandler<TRequest, TResponse> : ICommandHandler<TRequest, TResponse>

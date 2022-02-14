@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Moq;
 using ScheduleService.Application.CommandHandler.Handlers.Countries;
-using ScheduleService.Domain.Command.Commands.Countries;
+using ScheduleService.Domain.CommandHandler.Commands.Countries;
 using ScheduleService.Domain.CommandHandler.Repositories.Countries;
 using ScheduleService.Domain.Core.Entities;
 using System.Linq;

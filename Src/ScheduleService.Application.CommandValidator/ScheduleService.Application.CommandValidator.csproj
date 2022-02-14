@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ScheduleService.Application.Shared\ScheduleService.Application.Shared.csproj" />
-    <ProjectReference Include="..\ScheduleService.Domain.Command\ScheduleService.Domain.Command.csproj" />
+    <ProjectReference Include="..\ScheduleService.Domain.CommandHandler\ScheduleService.Domain.CommandHandler.csproj" />
   </ItemGroup>
 
 </Project>

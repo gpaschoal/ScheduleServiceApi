@@ -1,4 +1,4 @@
-﻿using ScheduleService.Domain.Command.Queries;
+﻿using ScheduleService.Domain.QueryHandler.Queries;
 
 namespace ScheduleService.Domain.QueryHandler.Handlers;
 
