@@ -2,4 +2,5 @@
 
 public class RolePolicyDeleteCommand : ICommandExecution
 {
+    public Guid Id { get; set; }
 }
